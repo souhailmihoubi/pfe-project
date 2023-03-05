@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
-    public InputField createInput;
-    public InputField joinInput;
+    public TMP_InputField createInput;
+    public TMP_InputField joinInput;
+
+    public int x = 0;
 
     /*public GameObject lobbyPanel;
     public GameObject roomPanel, envPanel,spawn;
@@ -34,21 +37,32 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         base.OnJoinRandomFailed(returnCode, message);
         //no room available
-        PhotonNetwork.CreateRoom("random room name",new Photon.Realtime.RoomOptions { MaxPlayers = 4 });
+        PhotonNetwork.CreateRoom("random room name",new Photon.Realtime.RoomOptions { MaxPlayers = 4 , IsOpen = false});
     }
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("Master : " + PhotonNetwork.IsMasterClient + "| Players in room : " + PhotonNetwork.CurrentRoom.PlayerCount);
-        PhotonNetwork.LoadLevel("waiting");
+        x = PhotonNetwork.CurrentRoom.PlayerCount;
 
-       /* lobbyPanel.SetActive(false);
-        roomPanel.SetActive(true);
-        envPanel.SetActive(true);
-        spawn.SetActive(true);
-        roomName.text = PhotonNetwork.CurrentRoom.Name + " IS YOUR ROOM";*/
+        Debug.Log("Master : " + PhotonNetwork.IsMasterClient + "| Players in room : " + x);
+
+        PhotonNetwork.LoadLevel("Waiting");
+
+        
+
+        /* lobbyPanel.SetActive(false);
+         roomPanel.SetActive(true);
+         envPanel.SetActive(true);
+         spawn.SetActive(true);
+         roomName.text = PhotonNetwork.CurrentRoom.Name + " IS YOUR ROOM";*/
     }
 
-    
+    public int GetX()
+    {
+        return x ;
+    }
+
+
+
 
 }

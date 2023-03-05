@@ -8,7 +8,7 @@ using Photon.Realtime;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
-    public Text buttonText;
+  //  public Text buttonText;
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -16,7 +16,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public void OnClickConnect()
     {
-        buttonText.text = "Starting...";
+      //  buttonText.text = "Starting...";
         PhotonNetwork.OfflineMode = false; //true would fake an online connection
         PhotonNetwork.NickName = "Player Name";  //after login zidou
         //PhotonNetwork.AutomaticallySyncScene = true; //to call PhotonNetwork.loadLevel()
@@ -32,6 +32,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to The master!");
-        SceneManager.LoadScene("Lobby");
+       // SceneManager.LoadScene("Lobby");
     }
 }
