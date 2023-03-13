@@ -18,13 +18,13 @@ public class SpawnPlayers : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
+       PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
 
         //AddCharacter(0);
 
     }
 
-    void AddCharacter(int whichCharacter)
+    public void AddCharacter(int whichCharacter)
     {
          characterValue = whichCharacter;
 
