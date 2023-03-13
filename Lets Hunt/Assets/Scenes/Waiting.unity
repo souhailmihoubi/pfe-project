@@ -288,6 +288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCountText: {fileID: 1588044311}
+  x: 2
 --- !u!4 &347588023
 Transform:
   m_ObjectHideFlags: 0
