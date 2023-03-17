@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -44,4 +44,4 @@ public class SetupHealthBar : MonoBehaviour
         //transform.LookAt(Camera.main.transform);
       //  transform.Rotate(0, 0, 0);
     }
-}
+}*/

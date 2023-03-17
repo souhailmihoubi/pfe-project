@@ -164,7 +164,6 @@ GameObject:
   - component: {fileID: 1957328840}
   - component: {fileID: 1957328839}
   - component: {fileID: 1957328838}
-  - component: {fileID: 1957328841}
   - component: {fileID: 2118633332}
   m_Layer: 0
   m_Name: Health Bar Canvas
@@ -257,21 +256,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1957328841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1957328836}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cefe88be70fcf844ebdc947814c48ba3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foregroundImage: {fileID: 373404844}
-  updateSpeedSeconds: 0.2
-  healthTxt: {fileID: 2066939995}
 --- !u!1183024399 &2118633332
 LookAtConstraint:
   m_ObjectHideFlags: 0
@@ -357,7 +341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -896,7 +880,6 @@ GameObject:
   - component: {fileID: 2490754617844929095}
   - component: {fileID: 3788353706070547472}
   - component: {fileID: 9217825303027836195}
-  - component: {fileID: 553807811}
   - component: {fileID: 1318939271}
   m_Layer: 0
   m_Name: man-golf
@@ -1023,9 +1006,9 @@ MonoBehaviour:
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
     SynchronizeEnabled: 1
-    InterpolateOption: 1
+    InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 5
+    InterpolateLerpSpeed: 10
   m_ScaleModel:
     SynchronizeEnabled: 1
     InterpolateOption: 0
@@ -1122,7 +1105,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 143
---- !u!114 &553807811
+  currentHealth: 143
+  healthText: {fileID: 2066939995}
+  healthFill: {fileID: 373404844}
+--- !u!114 &1318939271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1131,28 +1117,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6269469178099433891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cefe88be70fcf844ebdc947814c48ba3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foregroundImage: {fileID: 373404844}
-  updateSpeedSeconds: 0.5
-  healthTxt: {fileID: 2066939995}
---- !u!114 &1318939271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269469178099433891}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff823acd35848bc44a84ce0aa79dcfde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foregroundImage: {fileID: 0}
-  LvlCount: {fileID: 0}
-  updateSpeedSeconds: 0.5
-  maxPoints: 100
+  maxXP: 100
+  currentXP: 0
+  currentLevel: 1
+  levelText: {fileID: 0}
+  xpFill: {fileID: 0}
 --- !u!1 &6476152806632128180
 GameObject:
   m_ObjectHideFlags: 0

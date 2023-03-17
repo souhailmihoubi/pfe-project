@@ -2,53 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Timer : MonoBehaviour
+public class Timer : MonoBehaviourPunCallbacks
 {
-    
-
     [SerializeField] private Image uiFill;
     [SerializeField] private TextMeshProUGUI uiText;
 
-    public int Duration;
-
-    private int remainingDuration;
-
-    private bool Pause;
+    public int duration = 60;
+    private float startTime;
 
     private void Start()
     {
-        Being(Duration);
-    }
-
-    private void Being(int Second)
-    {
-        remainingDuration = Second;
-        StartCoroutine(UpdateTimer());
+        if (PhotonNetwork.IsMasterClient)
+        {
+            startTime = (float)PhotonNetwork.Time;
+            photonView.RPC("SyncStartTime", RpcTarget.OthersBuffered, startTime);
+            StartCoroutine(UpdateTimer());
+        }
     }
 
     private IEnumerator UpdateTimer()
     {
-        while(remainingDuration >= 0)
-        {   
-                uiText.text = $"{remainingDuration / 60:00}:{remainingDuration % 60:00}";
-                uiFill.fillAmount = Mathf.InverseLerp(0, Duration, remainingDuration);
-                remainingDuration--;
-                if(remainingDuration <= Duration * 0.25f)
-                {
-                    uiFill.color = Color.red;
-                    uiText.color = Color.red;
-                }
-                yield return new WaitForSeconds(1f);
+        while (true)
+        {
+            float timePassed = (float)PhotonNetwork.Time - startTime;
+            int remainingDuration = Mathf.Max(0, duration - (int)timePassed);
+
+            uiText.text = $"{remainingDuration / 60:00}:{remainingDuration % 60:00}";
+            uiFill.fillAmount = Mathf.InverseLerp(0, duration, remainingDuration);
+
+            if (remainingDuration <= 0)
+            {
+                break;
+            }
+
+            yield return null;
         }
+
         OnEnd();
     }
 
     private void OnEnd()
     {
-        //End Time , if want Do something
-        print("End");
+        // End Time , if want Do something
+        Debug.Log("End");
+    }
+
+    [PunRPC]
+    private void SyncStartTime(float startTime)
+    {
+        this.startTime = startTime;
+        StartCoroutine(UpdateTimer());
     }
 }

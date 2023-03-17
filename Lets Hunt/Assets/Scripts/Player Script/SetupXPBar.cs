@@ -1,4 +1,99 @@
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using UnityEngine.UI;
+using TMPro;
+
+public class SetupXPBar : MonoBehaviourPunCallbacks
+{
+    public int maxXP = 100;
+    [SerializeField] private int currentXP = 0;
+    [SerializeField] private int currentLevel = 1;
+
+    public TextMeshProUGUI levelText;
+    public Image xpFill;
+
+
+    private void Start()
+    {
+        UpdateUI();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("XP"))
+        {
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("XP") && photonView.IsMine)
+        {
+            currentXP += 10;
+
+            if (currentXP >= maxXP)
+            {
+                currentXP = currentXP - maxXP;
+                currentLevel++;
+            }
+
+            UpdateUI();
+            
+        }
+    }
+
+    private void UpdateUI()
+    {
+        if (levelText == null)
+        {
+            levelText = GameObject.Find("level count").GetComponent<TextMeshProUGUI>();
+        }
+
+        if (xpFill == null)
+        {
+            xpFill = GameObject.Find("Xp Bar fill").GetComponent<Image>();
+        }
+
+        if (levelText != null)
+        {
+            levelText.text = $"Level: {currentLevel}";
+        }
+
+        if (xpFill != null)
+        {
+            xpFill.fillAmount = (float)currentXP / (float)maxXP;
+        }
+    }
+
+   /* [PunRPC]
+    private void UpdateXP(int newXP, int newLevel)
+    {
+        currentXP = newXP;
+        currentLevel = newLevel;
+        UpdateUI();
+    }*/
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentXP);
+            stream.SendNext(currentLevel);
+        }
+        else
+        {
+            currentXP = (int)stream.ReceiveNext();
+            currentLevel = (int)stream.ReceiveNext();
+            UpdateUI();
+        }
+    }
+}
+
+
+
+
+/*using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -91,4 +186,4 @@ public class SetupXPBar : MonoBehaviour
        
     }
 
-}
+}*/
