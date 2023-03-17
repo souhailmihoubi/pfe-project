@@ -15,6 +15,8 @@ public class SetupXPBar : MonoBehaviourPunCallbacks
     public TextMeshProUGUI levelText;
     public Image xpFill;
 
+    public LevelUpScript levelUpScript;
+
 
     private void Start()
     {
@@ -36,6 +38,7 @@ public class SetupXPBar : MonoBehaviourPunCallbacks
             {
                 currentXP = currentXP - maxXP;
                 currentLevel++;
+                levelUpScript.LevelUp();
             }
 
             UpdateUI();

@@ -14,7 +14,7 @@ public class ControllerScript : MonoBehaviour
     [SerializeField] private AnimatorController _animatorController;
 
 
-    [SerializeField] private float speed;
+     public float speed;
     [SerializeField] private float rotateSpeed;
 
     private Vector3 moveVector;
@@ -26,6 +26,11 @@ public class ControllerScript : MonoBehaviour
 
 
     PhotonView view;
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
 
     private void Start()
     {
@@ -50,8 +55,7 @@ public class ControllerScript : MonoBehaviour
         
         if (view.IsMine)
         {
-            
-          
+         
             moveVector = Vector3.zero;
             moveVector.x = joystick.Horizontal * speed * Time.deltaTime;
             moveVector.z = joystick.Vertical * speed * Time.deltaTime;
@@ -65,7 +69,6 @@ public class ControllerScript : MonoBehaviour
             else if (joystick.Horizontal == 0 && joystick.Vertical == 0)
             {
                 _animatorController.StopRun();
-
                 _animatorController.PlayIdle();
             }
 
@@ -74,7 +77,9 @@ public class ControllerScript : MonoBehaviour
         }
 
 
-        _rigidbody.MovePosition(_rigidbody.position + moveVector);
+
+
+        //_rigidbody.MovePosition(_rigidbody.position + moveVector);
     }
 
    

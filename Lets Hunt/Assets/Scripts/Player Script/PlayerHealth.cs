@@ -14,11 +14,24 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
     public TextMeshProUGUI healthText;
     public Image healthFill;
 
+    private bool isHealing = false;
+    private Coroutine healingCoroutine = null;
 
     private void Start()
     {
         currentHealth = maxHealth;
         UpdateUI();
+    }
+
+    private void Update()
+    {
+        if (photonView.IsMine)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                TakeDamage(10);
+            }
+        }
     }
 
     public void TakeDamage(float damage)
@@ -40,27 +53,59 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
         photonView.RPC("UpdateHealth", RpcTarget.Others, currentHealth);
     }
 
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if(photonView.IsMine)
+        if (other.CompareTag("Heal"))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            isHealing = true;
+
+            if (healingCoroutine == null)
             {
-                TakeDamage(10);
+                healingCoroutine = StartCoroutine(HealingCoroutine());
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Heal"))
+        {
+            isHealing = false;
+
+            if (healingCoroutine != null)
+            {
+                StopCoroutine(healingCoroutine);
+                healingCoroutine = null;
+            }
+        }
+    }
+
+    private IEnumerator HealingCoroutine()
+    {
+        while (isHealing)
+        {
+            currentHealth += 10f;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            UpdateUI();
+
+            yield return new WaitForSeconds(1f);
         }
     }
 
     private void Die()
     {
-        // handle player death here
+        // Kif ymout
+        Debug.Log("Die");
     }
 
     private void UpdateUI()
     {
         if (healthText != null)
         {
-            healthText.text = $"{currentHealth}";
+            healthText.text = $"{Mathf.FloorToInt(currentHealth)}";
         }
 
         if (healthFill != null)
@@ -89,71 +134,3 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 }
-
-
-
-
-/*using System;
-using UnityEngine;
-using Photon.Pun;
-
-public class PlayerHealth : MonoBehaviour
-{
-
-    [SerializeField] private int maxHealth = 100;
-    private int currentHealth;
-
-    public event Action<float> OnHealthPctChange = delegate { };
-
-    SetupHealthBar text;
-
-    PhotonView view;
-
-    private void Start()
-    {
-        view = GetComponent<PhotonView>();
-        text = GetComponent<SetupHealthBar>();
-    }
-
-    private void OnEnable()
-    {
-        currentHealth = maxHealth;
-    }
-
-    public void ModifyHealth(int amount)
-    {
-        currentHealth += amount;
-
-        float currentHealthPct = (float) currentHealth / (float) maxHealth;
-
-        OnHealthPctChange(currentHealthPct);
-    }
-
-    private void Update()
-    {
-        if (view.IsMine)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                ModifyHealth(-10);
-            }
-            //  Debug.Log(currentHealth);
-            text.healthTxt.SetText(currentHealth.ToString());
-        }
-       
-    }
-
-    public virtual void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(currentHealth);
-        }
-        else if(stream.IsReading)
-        {
-            currentHealth = (int) stream.ReceiveNext();
-        }
-    }
-
-
-}*/
