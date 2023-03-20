@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,15 @@ public class LevelUpScript : MonoBehaviour
 
     Button[] leftButtons, rightButtons;
 
-    ControllerScript controllerScript;
+    
 
     private void Start()
     {
-        // Initialize the arrays with 3 elements each
+
         leftButtons = new Button[3];
         rightButtons = new Button[3];
 
-        // Find the button components
+
         atkSpeed = GameObject.Find("atk speed").GetComponent<Button>();
         damage = GameObject.Find("damage").GetComponent<Button>();
         range = GameObject.Find("Range").GetComponent<Button>();
@@ -28,7 +29,7 @@ public class LevelUpScript : MonoBehaviour
         speed = GameObject.Find("speed").GetComponent<Button>();
         xp = GameObject.Find("xp").GetComponent<Button>();
 
-        // Add the button components to the arrays using the [] operator
+        
         leftButtons[0] = xp;
         leftButtons[1] = health;
         leftButtons[2] = speed;
@@ -38,8 +39,8 @@ public class LevelUpScript : MonoBehaviour
         rightButtons[2] = range;
 
         ShutDown();
+        ButtonOnClick();
 
-        controllerScript = FindObjectOfType<ControllerScript>();
 
     }
 
@@ -59,7 +60,6 @@ public class LevelUpScript : MonoBehaviour
         leftButton.onClick.AddListener(() => { leftButton.gameObject.SetActive(false); rightButton.gameObject.SetActive(false); });
         rightButton.onClick.AddListener(() => { rightButton.gameObject.SetActive(false); leftButton.gameObject.SetActive(false); });
         
-        StartCoroutine(DisableLevelUpCanvas());
     }
 
     public void OnAtkSpeedButtonClick()
@@ -69,22 +69,38 @@ public class LevelUpScript : MonoBehaviour
 
     public void OnDamageButtonClick()
     {
-        // Handle the damage button click
+        // change player damage
     }
 
     public void OnRangeButtonClick()
     {
-        // Handle the range button click
-    }
+        // Get the current player's Photon ID
+        int playerID = PhotonNetwork.LocalPlayer.ActorNumber;
+
+        // Find the current player's "rangeIndicator" object using their Photon ID
+        GameObject playerRangeIndicator = GameObject.Find("rangeIndicator"); 
+        Debug.Log(playerRangeIndicator);
+
+        //Transform range = GameObject.Find("rangeIndicator").GetComponent<Transform>(); 
+        Vector3 currentScale = playerRangeIndicator.transform.localScale;
+        playerRangeIndicator.transform.localScale = new Vector3(currentScale.x + 200f, currentScale.y + 200f, currentScale.z);
+    
+
+}
 
     public void OnHealthButtonClick()
     {
-        // Handle the health button click
+        PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+        playerHealth.maxHealth += 20f;
+        playerHealth.currentHealth += 20f;
+        playerHealth.UpdateUI();
     }
 
     public void OnSpeedButtonClick()
     {
-        controllerScript.speed += 0.2f;
+        ControllerScript controllerScript = GetComponent<ControllerScript>();
+        controllerScript.speed += 0.3f;
+        Debug.Log("speed : " + controllerScript.speed);
     }
 
     public void OnXPButtonClick()
@@ -96,21 +112,31 @@ public class LevelUpScript : MonoBehaviour
 
     private void ShutDown()
     {
-        atkSpeed.gameObject.SetActive(false);
-        speed.gameObject.SetActive(false);
-        range.gameObject.SetActive(false);
-        damage.gameObject.SetActive(false);
-        xp.gameObject.SetActive(false);
-        health.gameObject.SetActive(false);
+        foreach (Button button in leftButtons)
+        {
+            button.gameObject.SetActive(false);
+        }
+        foreach (Button button in rightButtons)
+        {
+            button.gameObject.SetActive(false);
+        }
+
     }
 
 
-    private IEnumerator DisableLevelUpCanvas()
+
+    void ButtonOnClick()
     {
-        yield return new WaitForSeconds(5f);
+        atkSpeed.onClick.AddListener(OnAtkSpeedButtonClick);
+        speed.onClick.AddListener(OnSpeedButtonClick);
+        range.onClick.AddListener(OnRangeButtonClick);
+        damage.onClick.AddListener(OnDamageButtonClick);
+        xp.onClick.AddListener(OnXPButtonClick);
+        health.onClick.AddListener(OnHealthButtonClick);
     }
 
-   
+
+
 
 }
 

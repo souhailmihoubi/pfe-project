@@ -19,18 +19,7 @@ public class ControllerScript : MonoBehaviour
 
     private Vector3 moveVector;
 
-
-
-
-
-
-
     PhotonView view;
-
-    public void SetSpeed(float speed)
-    {
-        this.speed = speed;
-    }
 
     private void Start()
     {

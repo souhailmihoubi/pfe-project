@@ -27,4 +27,14 @@ public class AnimatorController : MonoBehaviour
     {
         _animator.SetBool("Run", false);
     }
+
+    public void PlayAttack()
+    {
+        print("attacked");
+    }
+
+    public void StopAttack()
+    {
+        print("stoped");
+    }
 }

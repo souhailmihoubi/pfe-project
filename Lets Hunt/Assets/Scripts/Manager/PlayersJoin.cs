@@ -3,10 +3,10 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 
-public class PlayersJoin : MonoBehaviour
+public class PlayersJoin : MonoBehaviourPunCallbacks
 {
     public TextMeshProUGUI playerCountText;
-    public int x;
+    public int x = 4; // update x to maximum number of players allowed in a room
 
     private void Update()
     {
@@ -20,9 +20,9 @@ public class PlayersJoin : MonoBehaviour
             int playerCount = currentRoom.PlayerCount;
 
             // Display the player count in the text object
-            playerCountText.text = playerCount + " / 4";
+            playerCountText.text = playerCount + " / " + x;
 
-            if(playerCount == x)
+            if (playerCount == x)
             {
                 PhotonNetwork.LoadLevel("map1");
             }

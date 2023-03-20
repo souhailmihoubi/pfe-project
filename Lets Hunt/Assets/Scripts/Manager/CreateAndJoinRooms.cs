@@ -11,12 +11,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public TMP_InputField createInput;
     public TMP_InputField joinInput;
 
-    public int x = 0;
-
-    /*public GameObject lobbyPanel;
-    public GameObject roomPanel, envPanel,spawn;
-    public Text roomName;*/
-
+    public byte x = 4; // initialize x to maximum number of players allowed in a room
 
     public void CreateRoom()
     {
@@ -38,33 +33,14 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         base.OnJoinRandomFailed(returnCode, message);
 
         //no room available
-        
-        PhotonNetwork.CreateRoom("random room name",new Photon.Realtime.RoomOptions { MaxPlayers = 4 , IsOpen = true});
+
+        PhotonNetwork.CreateRoom("random room name", new Photon.Realtime.RoomOptions { MaxPlayers = x, IsOpen = true });
     }
 
     public override void OnJoinedRoom()
     {
-      //  x = PhotonNetwork.CurrentRoom.PlayerCount;
-
         //Debug.Log("Master : " + PhotonNetwork.IsMasterClient + "| Players in room : " + x);
 
         PhotonNetwork.LoadLevel("map1");
-
-        
-
-        /* lobbyPanel.SetActive(false);
-         roomPanel.SetActive(true);
-         envPanel.SetActive(true);
-         spawn.SetActive(true);
-         roomName.text = PhotonNetwork.CurrentRoom.Name + " IS YOUR ROOM";*/
     }
-
-    public int GetX()
-    {
-        return x ;
-    }
-
-
-
-
 }

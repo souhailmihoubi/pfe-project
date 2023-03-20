@@ -341,7 +341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: 323
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -882,6 +882,8 @@ GameObject:
   - component: {fileID: 9217825303027836195}
   - component: {fileID: 1318939271}
   - component: {fileID: -945684506829328364}
+  - component: {fileID: 2086392305}
+  - component: {fileID: 7944524627546388800}
   m_Layer: 0
   m_Name: man-golf
   m_TagString: Player
@@ -979,7 +981,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 2925827017700408754}
   - {fileID: 1147639411394340981}
-  sceneViewId: 0
+  sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &2925827017700408754
@@ -1085,13 +1087,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6269469178099433891}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3476696d60aebf24e8a1277b2a127083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorController: {fileID: 7829530480912265602}
-  speed: 0.2
+  speed: 0.6
   rotateSpeed: 20
 --- !u!114 &9217825303027836195
 MonoBehaviour:
@@ -1105,10 +1107,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef48b8fe1377634fb4cb00fe843d6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 143
-  currentHealth: 120
+  maxHealth: 100
+  currentHealth: 100
   healthText: {fileID: 2066939995}
   healthFill: {fileID: 373404844}
+  updateSpeedSeconds: 0.5
 --- !u!114 &1318939271
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1124,9 +1127,8 @@ MonoBehaviour:
   maxXP: 100
   currentXP: 0
   currentLevel: 1
-  levelText: {fileID: 0}
-  xpFill: {fileID: 0}
   levelUpScript: {fileID: -945684506829328364}
+  updateSpeedSeconds: 0.5
 --- !u!114 &-945684506829328364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1139,6 +1141,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f100864896e96f4ea693c67eccf4bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2086392305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269469178099433891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05bd95a05475484da91fa136074208b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 1518450808797085917}
+  _animatorController: {fileID: 7829530480912265602}
+  _moveSpeed: 3
+  isMoving: 0
+--- !u!114 &7944524627546388800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6269469178099433891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8dddd63dc5d7ce43a776ba41a2d9fc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animatorController: {fileID: 7829530480912265602}
 --- !u!1 &6476152806632128180
 GameObject:
   m_ObjectHideFlags: 0

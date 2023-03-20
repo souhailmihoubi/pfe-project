@@ -9,7 +9,8 @@ using TMPro;
 public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 {
     public float maxHealth = 100f;
-    [SerializeField] private float currentHealth;
+
+    public float currentHealth;
 
     public TextMeshProUGUI healthText;
     public Image healthFill;
@@ -17,22 +18,29 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
     private bool isHealing = false;
     private Coroutine healingCoroutine = null;
 
+    [SerializeField]
+    private float updateSpeedSeconds = 0.5f;
+
+    private Button btn;
+
     private void Start()
     {
+        btn = GameObject.Find("hit").GetComponent<Button>();
         currentHealth = maxHealth;
         UpdateUI();
-    }
 
-    private void Update()
-    {
         if (photonView.IsMine)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                TakeDamage(10);
-            }
+            btn.onClick.AddListener(ButtonOnClick);
         }
     }
+
+    void ButtonOnClick()
+    {
+        TakeDamage(10);
+    }
+
+   
 
     public void TakeDamage(float damage)
     {
@@ -50,8 +58,75 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         UpdateUI();
+
         photonView.RPC("UpdateHealth", RpcTarget.Others, currentHealth);
+
+    
     }
+
+
+
+    private void Die()
+    {
+        // Kif ymout
+        Debug.Log("Die");
+    }
+
+    public void UpdateUI()
+    {
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
+        if (healthText != null)
+        {
+            healthText.text = $"{Mathf.FloorToInt(currentHealth)}";
+        }
+
+        if (healthFill != null)
+        {
+            StartCoroutine(ChangeToPct(currentHealth / maxHealth)); 
+        }
+    }
+
+    [PunRPC]
+    private void UpdateHealth(float newHealth)
+    {
+        currentHealth = newHealth;
+        UpdateUI();
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(currentHealth);
+        }
+        else
+        {
+            currentHealth = (float)stream.ReceiveNext();
+            UpdateUI();
+        }
+    }
+
+    //----------FOR SMOOTH ANIMATION-----------
+
+    public IEnumerator ChangeToPct(float pct)
+    {
+        float preChangePct = healthFill.fillAmount;
+        float elapsed = 0f;
+
+        while (elapsed < updateSpeedSeconds)
+        {
+            elapsed += Time.deltaTime;
+            healthFill.fillAmount = Mathf.Lerp(preChangePct, pct, elapsed / updateSpeedSeconds);
+            yield return null;
+        }
+
+        healthFill.fillAmount = pct;
+    }
+
+    //----------HEALING SPOT--------------
 
     private void OnTriggerEnter(Collider other)
     {
@@ -91,46 +166,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
             }
             UpdateUI();
 
-            yield return new WaitForSeconds(1f);
-        }
-    }
-
-    private void Die()
-    {
-        // Kif ymout
-        Debug.Log("Die");
-    }
-
-    private void UpdateUI()
-    {
-        if (healthText != null)
-        {
-            healthText.text = $"{Mathf.FloorToInt(currentHealth)}";
-        }
-
-        if (healthFill != null)
-        {
-            healthFill.fillAmount = currentHealth / maxHealth;
-        }
-    }
-
-    [PunRPC]
-    private void UpdateHealth(float newHealth)
-    {
-        currentHealth = newHealth;
-        UpdateUI();
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(currentHealth);
-        }
-        else
-        {
-            currentHealth = (float)stream.ReceiveNext();
-            UpdateUI();
+            yield return new WaitForSeconds(2f);
         }
     }
 }
