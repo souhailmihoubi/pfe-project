@@ -48,8 +48,8 @@ public class LevelUpScript : MonoBehaviour
     {
 
 
-         Button leftButton = leftButtons[Random.Range(0, 2)];
-         Button rightButton = rightButtons[Random.Range(0, 2)];
+        Button leftButton = leftButtons[1]; //leftButtons[Random.Range(0, 2)];
+        Button rightButton = rightButtons[2];             //rightButtons[Random.Range(0, 2)];
 
          Debug.Log(leftButton.name + " " + rightButton.name);
 

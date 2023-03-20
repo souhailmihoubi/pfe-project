@@ -981,7 +981,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 2925827017700408754}
   - {fileID: 1147639411394340981}
-  sceneViewId: 2
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &2925827017700408754
@@ -1169,6 +1169,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dddd63dc5d7ce43a776ba41a2d9fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 2
+  attackDamage: 10
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attackSpeed: 2
   _animatorController: {fileID: 7829530480912265602}
 --- !u!1 &6476152806632128180
 GameObject:

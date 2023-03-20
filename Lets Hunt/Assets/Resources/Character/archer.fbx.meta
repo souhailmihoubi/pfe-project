@@ -1,0 +1,152 @@
+fileFormatVersion: 2
+guid: 84ca2fcd55674ea4184dcb1043583b98
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'Hips' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: archer(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cube.002
+      parentName: archer(Clone)
+      position: {x: -0.028508646, y: 0.9241002, z: -0.19963615}
+      rotation: {x: -0.738342, y: 7.096022e-18, z: -7.096022e-18, w: 0.6744265}
+      scale: {x: 8.530572, y: 8.530572, z: 8.530572}
+    - name: Cube.003
+      parentName: archer(Clone)
+      position: {x: -0.025640232, y: 0.9241002, z: -0.19697915}
+      rotation: {x: -0.738342, y: 7.096022e-18, z: -7.096022e-18, w: 0.6744265}
+      scale: {x: 8.530572, y: 8.530572, z: 8.530572}
+    - name: Plane.002
+      parentName: archer(Clone)
+      position: {x: -0.028516276, y: 0.9233465, z: -0.19691081}
+      rotation: {x: -0.738342, y: 7.096022e-18, z: -7.096022e-18, w: 0.6744265}
+      scale: {x: 8.530572, y: 8.530572, z: 8.530572}
+    - name: Plane.003
+      parentName: archer(Clone)
+      position: {x: -0.030120356, y: 0.91465145, z: -0.19735706}
+      rotation: {x: -0.738342, y: 7.096022e-18, z: -7.096022e-18, w: 0.6744265}
+      scale: {x: 8.530572, y: 8.530572, z: 8.530572}
+    - name: BODY.001
+      parentName: archer(Clone)
+      position: {x: -0.030390484, y: -0.061699875, z: -0.16638315}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Cylinder.001
+      parentName: archer(Clone)
+      position: {x: 0.12691475, y: 0.3917162, z: -0.18508758}
+      rotation: {x: -0.7220391, y: 0.17210908, z: 0.32721332, w: 0.5847815}
+      scale: {x: 4.179965, y: 4.179965, z: 1.8836756}
+    - name: Cube.001
+      parentName: archer(Clone)
+      position: {x: -0.11800379, y: 0.042575322, z: -0.1249837}
+      rotation: {x: -0.50717753, y: 0.4927179, z: 0.49272004, w: 0.50717545}
+      scale: {x: 28.071512, y: 11.297388, z: 15.572015}
+    - name: Cube.004
+      parentName: archer(Clone)
+      position: {x: 0.05392249, y: 0.042575322, z: -0.1249837}
+      rotation: {x: -0.50717753, y: 0.4927179, z: 0.49272004, w: 0.50717545}
+      scale: {x: 28.071512, y: 11.297388, z: 15.572015}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 3
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

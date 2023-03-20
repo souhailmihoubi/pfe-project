@@ -30,11 +30,11 @@ public class AnimatorController : MonoBehaviour
 
     public void PlayAttack()
     {
-        print("attacked");
+        _animator.SetBool("Attack", true);
     }
 
     public void StopAttack()
     {
-        print("stoped");
+        _animator.SetBool("Attack", false);
     }
 }

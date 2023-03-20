@@ -7,11 +7,12 @@ TagManager:
   - XP
   - 'Player 2 '
   - Heal
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 
