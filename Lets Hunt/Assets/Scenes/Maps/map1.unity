@@ -492,6 +492,7 @@ GameObject:
   - component: {fileID: 71191743}
   - component: {fileID: 71191742}
   - component: {fileID: 71191741}
+  - component: {fileID: 71191744}
   m_Layer: 3
   m_Name: enemy (1)
   m_TagString: Enemy
@@ -578,6 +579,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71191739}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &71191744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71191739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd0fe4664f99724f9a0d73f5f7c6bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  currentHealth: 0
 --- !u!4 &97207180 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3431312957595676038, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
@@ -3577,6 +3592,7 @@ GameObject:
   - component: {fileID: 1206640773}
   - component: {fileID: 1206640772}
   - component: {fileID: 1206640771}
+  - component: {fileID: 1206640774}
   m_Layer: 3
   m_Name: enemy
   m_TagString: Enemy
@@ -3663,6 +3679,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206640769}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1206640774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206640769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdd0fe4664f99724f9a0d73f5f7c6bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  currentHealth: 0
 --- !u!1 &1226419203
 GameObject:
   m_ObjectHideFlags: 0
@@ -4771,8 +4801,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596334866}
-  m_LocalRotation: {x: 0.0075865826, y: 0.9882432, z: 0.14390658, w: -0.051075157}
-  m_LocalPosition: {x: 57.706913, y: 5.924713, z: 75.09813}
+  m_LocalRotation: {x: 0.34804758, y: -0.010791075, z: -0.0038731152, w: -0.9374068}
+  m_LocalPosition: {x: 55.55, y: -4.0699997, z: 61.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5413,8 +5443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71430abf9461761448b2b9552d1aee77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 6303585481674807422, guid: a2062b2da4cff80409e85af80de4cf26, type: 3}
-  animator: {fileID: 779450257280129214, guid: a2062b2da4cff80409e85af80de4cf26, type: 3}
+  playerPrefab: {fileID: 2194281256130776493, guid: cd565a495af5e6a4694aa64ec56d902b, type: 3}
+  animator: {fileID: 4888757816798776685, guid: cd565a495af5e6a4694aa64ec56d902b, type: 3}
   minX: 55
   minY: 75
   maxX: 56

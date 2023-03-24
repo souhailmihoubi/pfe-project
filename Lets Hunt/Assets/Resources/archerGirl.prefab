@@ -2279,6 +2279,7 @@ GameObject:
   - component: {fileID: 5152690751368224939}
   - component: {fileID: 3708102804744079106}
   - component: {fileID: 6231192210834337582}
+  - component: {fileID: 1380355071}
   m_Layer: 0
   m_Name: archerGirl
   m_TagString: Untagged
@@ -2323,7 +2324,7 @@ Animator:
   m_GameObject: {fileID: 6303585481674807422}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8148af7bcc6e1554c82fdc6a9f5e2ad6, type: 3}
-  m_Controller: {fileID: 9100000, guid: 566f921f503cbd44b807a5039a907be6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5229a5e3c45db3e44b40fc20b96707aa, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2360,9 +2361,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.20691097
-  m_Height: 1.2436506
+  m_Height: 1.154133
   m_Direction: 1
-  m_Center: {x: -0.022332951, y: 0.5374308, z: 0}
+  m_Center: {x: -0.022332951, y: 0.5821896, z: 0}
 --- !u!114 &4595074516657893538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2403,7 +2404,7 @@ MonoBehaviour:
   m_PositionModel:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
-    TeleportIfDistanceGreaterThan: 3
+    TeleportIfDistanceGreaterThan: 10
     InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 1
@@ -2413,9 +2414,9 @@ MonoBehaviour:
     ExtrapolateNumberOfStoredPositions: 1
   m_RotationModel:
     SynchronizeEnabled: 1
-    InterpolateOption: 1
+    InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 5
+    InterpolateLerpSpeed: 10
   m_ScaleModel:
     SynchronizeEnabled: 1
     InterpolateOption: 0
@@ -2529,13 +2530,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8dddd63dc5d7ce43a776ba41a2d9fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 2
+  attackRange: 3
   attackDamage: 10
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
-  attackSpeed: 2
   _animatorController: {fileID: 44192404161013005}
+  attackCooldown: 2
+  speed: 1
+  isAttacking: 0
 --- !u!114 &5152690751368224939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2581,6 +2584,19 @@ MonoBehaviour:
   arrowSpawnPoint: {fileID: 3340479976585642088}
   arrowSpeed: 10
   cooldown: 1
+--- !u!114 &1380355071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303585481674807422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5681245d65524204490764dd79ed562c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRange: {x: 300, y: 300, z: 1.3156}
 --- !u!1 &6348218897883909003
 GameObject:
   m_ObjectHideFlags: 0
@@ -3628,11 +3644,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9120312196602681995, guid: 2e696c1b2400b9c4495acb9980157dbf, type: 3}
       propertyPath: m_LocalScale.x
-      value: 171.60002
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 9120312196602681995, guid: 2e696c1b2400b9c4495acb9980157dbf, type: 3}
       propertyPath: m_LocalScale.y
-      value: 171.59999
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 9120312196602681995, guid: 2e696c1b2400b9c4495acb9980157dbf, type: 3}
       propertyPath: m_LocalScale.z

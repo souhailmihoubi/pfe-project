@@ -42,6 +42,7 @@ public class PlayerMove : MonoBehaviour
             {
                 transform.rotation = Quaternion.LookRotation(new Vector3(_joystick.Horizontal, 0, _joystick.Vertical));
                 _animatorController.PlayRun();
+
                 isMoving = true;
             }
             else

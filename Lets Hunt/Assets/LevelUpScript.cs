@@ -13,10 +13,14 @@ public class LevelUpScript : MonoBehaviour
 
     Button[] leftButtons, rightButtons;
 
-    
+    PhotonView photonView;
+
+
+
 
     private void Start()
     {
+        photonView = GetComponent<PhotonView>();
 
         leftButtons = new Button[3];
         rightButtons = new Button[3];
@@ -72,21 +76,24 @@ public class LevelUpScript : MonoBehaviour
         // change player damage
     }
 
-    public void OnRangeButtonClick()
-    {
-        // Get the current player's Photon ID
-        int playerID = PhotonNetwork.LocalPlayer.ActorNumber;
+     public void OnRangeButtonClick()
+     {
+       PlayerRange playerRange = GetComponent<PlayerRange>();
 
-        // Find the current player's "rangeIndicator" object using their Photon ID
-        GameObject playerRangeIndicator = GameObject.Find("rangeIndicator"); 
-        Debug.Log(playerRangeIndicator);
+        playerRange.ChangeRange(100, 100);
+        playerRange.UpdateUI();
 
-        //Transform range = GameObject.Find("rangeIndicator").GetComponent<Transform>(); 
-        Vector3 currentScale = playerRangeIndicator.transform.localScale;
-        playerRangeIndicator.transform.localScale = new Vector3(currentScale.x + 200f, currentScale.y + 200f, currentScale.z);
-    
+       PlayerAttack pa = GetComponent<PlayerAttack>();
 
-}
+        pa.attackRange += 1f;
+
+        photonView.RPC("UpdateRange", RpcTarget.OthersBuffered, playerRange.currentRange);
+
+
+    }
+
+   
+   
 
     public void OnHealthButtonClick()
     {
@@ -94,7 +101,10 @@ public class LevelUpScript : MonoBehaviour
         playerHealth.maxHealth += 20f;
         playerHealth.currentHealth += 20f;
         playerHealth.UpdateUI();
+
+        photonView.RPC("UpdateHealth", RpcTarget.OthersBuffered, playerHealth.currentHealth);
     }
+
 
     public void OnSpeedButtonClick()
     {
