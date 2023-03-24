@@ -878,7 +878,6 @@ GameObject:
   - component: {fileID: 3696587281897578709}
   - component: {fileID: 7829530480912265602}
   - component: {fileID: 2490754617844929095}
-  - component: {fileID: 3788353706070547472}
   - component: {fileID: 9217825303027836195}
   - component: {fileID: 1318939271}
   - component: {fileID: -945684506829328364}
@@ -1080,21 +1079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72181ed07d980a44d861c97a362d67d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3788353706070547472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6269469178099433891}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3476696d60aebf24e8a1277b2a127083, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animatorController: {fileID: 7829530480912265602}
-  speed: 0.6
-  rotateSpeed: 20
 --- !u!114 &9217825303027836195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,8 +1158,10 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
-  attackSpeed: 2
   _animatorController: {fileID: 7829530480912265602}
+  attackCooldown: 2
+  speed: 1
+  isAttacking: 0
 --- !u!1 &6476152806632128180
 GameObject:
   m_ObjectHideFlags: 0

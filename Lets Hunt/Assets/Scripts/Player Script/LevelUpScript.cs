@@ -108,9 +108,7 @@ public class LevelUpScript : MonoBehaviour
 
     public void OnSpeedButtonClick()
     {
-        ControllerScript controllerScript = GetComponent<ControllerScript>();
-        controllerScript.speed += 0.3f;
-        Debug.Log("speed : " + controllerScript.speed);
+       //
     }
 
     public void OnXPButtonClick()
