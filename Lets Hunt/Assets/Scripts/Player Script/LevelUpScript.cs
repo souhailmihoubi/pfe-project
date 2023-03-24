@@ -26,14 +26,38 @@ public class LevelUpScript : MonoBehaviour
         rightButtons = new Button[3];
 
 
-        atkSpeed = GameObject.Find("atk speed").GetComponent<Button>();
-        damage = GameObject.Find("damage").GetComponent<Button>();
-        range = GameObject.Find("Range").GetComponent<Button>();
-        health = GameObject.Find("healthh").GetComponent<Button>();
-        speed = GameObject.Find("speed").GetComponent<Button>();
-        xp = GameObject.Find("xp").GetComponent<Button>();
+        GameObject[] buttons = GameObject.FindGameObjectsWithTag("LevelUp");
+        foreach (GameObject button in buttons)
+        {
+            Button buttonComponent = button.GetComponent<Button>();
+            if (buttonComponent != null)
+            {
+                // Set the Button component for each button game object
+                switch (button.name)
+                {
+                    case "atk speed":
+                        atkSpeed = buttonComponent;
+                        break;
+                    case "damage":
+                        damage = buttonComponent;
+                        break;
+                    case "Range":
+                        range = buttonComponent;
+                        break;
+                    case "healthh":
+                        health = buttonComponent;
+                        break;
+                    case "speed":
+                        speed = buttonComponent;
+                        break;
+                    case "xp":
+                        xp = buttonComponent;
+                        break;
+                }
+            }
+        }
 
-        
+
         leftButtons[0] = xp;
         leftButtons[1] = health;
         leftButtons[2] = speed;
@@ -42,7 +66,9 @@ public class LevelUpScript : MonoBehaviour
         rightButtons[1] = damage;
         rightButtons[2] = range;
 
+
         ShutDown();
+    
         ButtonOnClick();
 
 
@@ -51,8 +77,8 @@ public class LevelUpScript : MonoBehaviour
     public void LevelUp()
     {
 
-
-        Button leftButton = leftButtons[1]; //leftButtons[Random.Range(0, 2)];
+        
+        Button leftButton = leftButtons[2]; //leftButtons[Random.Range(0, 2)];
         Button rightButton = rightButtons[2];             //rightButtons[Random.Range(0, 2)];
 
          Debug.Log(leftButton.name + " " + rightButton.name);
@@ -108,7 +134,11 @@ public class LevelUpScript : MonoBehaviour
 
     public void OnSpeedButtonClick()
     {
-       //
+        PlayerMove playerMove = GetComponent<PlayerMove>();
+        if (playerMove != null)
+        {
+            playerMove.IncreaseSpeed(1.5f);
+        }
     }
 
     public void OnXPButtonClick()
@@ -120,28 +150,37 @@ public class LevelUpScript : MonoBehaviour
 
     private void ShutDown()
     {
-        foreach (Button button in leftButtons)
+        if (photonView.IsMine)
         {
-            button.gameObject.SetActive(false);
+            foreach (Button button in leftButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
+            foreach (Button button in rightButtons)
+            {
+                button.gameObject.SetActive(false);
+            }
         }
-        foreach (Button button in rightButtons)
-        {
-            button.gameObject.SetActive(false);
-        }
-
     }
 
 
 
     void ButtonOnClick()
     {
-        atkSpeed.onClick.AddListener(OnAtkSpeedButtonClick);
-        speed.onClick.AddListener(OnSpeedButtonClick);
-        range.onClick.AddListener(OnRangeButtonClick);
-        damage.onClick.AddListener(OnDamageButtonClick);
-        xp.onClick.AddListener(OnXPButtonClick);
-        health.onClick.AddListener(OnHealthButtonClick);
+        if (atkSpeed != null)
+            atkSpeed.onClick.AddListener(OnAtkSpeedButtonClick);
+        if (speed != null)
+            speed.onClick.AddListener(OnSpeedButtonClick);
+        if (range != null)
+            range.onClick.AddListener(OnRangeButtonClick);
+        if (damage != null)
+            damage.onClick.AddListener(OnDamageButtonClick);
+        if (xp != null)
+            xp.onClick.AddListener(OnXPButtonClick);
+        if (health != null)
+            health.onClick.AddListener(OnHealthButtonClick);
     }
+
 
 
 

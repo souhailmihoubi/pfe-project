@@ -8,6 +8,7 @@ TagManager:
   - 'Player 2 '
   - Heal
   - Enemy
+  - LevelUp
   layers:
   - Default
   - TransparentFX

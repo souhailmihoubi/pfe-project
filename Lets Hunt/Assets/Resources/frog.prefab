@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 9026738250799129196}
   m_Layer: 0
   m_Name: frog
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -768,7 +768,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2194281256130776493}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.53974134
   m_Height: 3.3556938
@@ -955,7 +955,7 @@ MonoBehaviour:
   maxXP: 100
   currentXP: 0
   currentLevel: 1
-  levelUpScript: {fileID: 0}
+  levelUpScript: {fileID: 7429048816832743168}
   updateSpeedSeconds: 0.5
 --- !u!114 &2179782667706323462
 MonoBehaviour:
@@ -3482,6 +3482,25 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 032429e50730ede4887b92fd7567a201, type: 3}
   m_PrefabInstance: {fileID: 1536249915089135689}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1842169031974556952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 032429e50730ede4887b92fd7567a201, type: 3}
+  m_PrefabInstance: {fileID: 1536249915089135689}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &2535112140815571336
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842169031974556952}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.0016492815
+  m_Height: 0.02084847
+  m_Direction: 2
+  m_Center: {x: 0, y: -0.00014223422, z: 0.005776988}
 --- !u!1001 &6842677073525473363
 PrefabInstance:
   m_ObjectHideFlags: 0

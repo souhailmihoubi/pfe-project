@@ -8,7 +8,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
-    
+
     private FixedJoystick _joystick;
 
     [SerializeField] private AnimatorController _animatorController;
@@ -22,7 +22,6 @@ public class PlayerMove : MonoBehaviour
     private void Start()
     {
         view = GetComponent<PhotonView>();
-
     }
 
     private void Awake()
@@ -30,7 +29,20 @@ public class PlayerMove : MonoBehaviour
         _joystick = FindObjectOfType<FixedJoystick>();
     }
 
+    public void IncreaseSpeed(float amount)
+    {
+        _moveSpeed += amount;
+        if (view.IsMine)
+        {
+            view.RPC("UpdateMoveSpeed", RpcTarget.AllBuffered, _moveSpeed);
+        }
+    }
 
+    [PunRPC]
+    private void UpdateMoveSpeed(float newSpeed)
+    {
+        _moveSpeed = newSpeed;
+    }
 
     void FixedUpdate()
     {

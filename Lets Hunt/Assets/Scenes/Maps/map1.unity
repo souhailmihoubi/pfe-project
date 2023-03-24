@@ -785,6 +785,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4387545324593492150, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
+      propertyPath: m_TagString
+      value: LevelUp
+      objectReference: {fileID: 0}
     - target: {fileID: 4431864633406603147, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -845,6 +849,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4943851006290484878, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
+      propertyPath: m_TagString
+      value: LevelUp
+      objectReference: {fileID: 0}
     - target: {fileID: 6163309706212111655, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_Name
       value: healthh
@@ -852,6 +860,10 @@ PrefabInstance:
     - target: {fileID: 6163309706212111655, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163309706212111655, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
+      propertyPath: m_TagString
+      value: LevelUp
       objectReference: {fileID: 0}
     - target: {fileID: 6341686768817199748, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_SizeDelta.x
@@ -929,6 +941,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7149304254090414957, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
+      propertyPath: m_TagString
+      value: LevelUp
+      objectReference: {fileID: 0}
     - target: {fileID: 7298623796011960778, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -941,9 +957,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8475968046422031334, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
+      propertyPath: m_TagString
+      value: LevelUp
+      objectReference: {fileID: 0}
     - target: {fileID: 9055265192956950846, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9055265192956950846, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
+      propertyPath: m_TagString
+      value: LevelUp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
@@ -2720,8 +2744,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830130680}
-  m_LocalRotation: {x: 0.34804758, y: -0.010791075, z: -0.0038731152, w: -0.9374068}
-  m_LocalPosition: {x: -1.8346443, y: -15.616287, z: -21.626534}
+  m_LocalRotation: {x: -0.0065955915, y: 0.93250746, z: 0.36063138, w: 0.018203918}
+  m_LocalPosition: {x: -1.3572235, y: -9.468355, z: -3.886963}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
