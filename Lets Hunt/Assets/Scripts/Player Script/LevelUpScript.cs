@@ -1,8 +1,4 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +10,6 @@ public class LevelUpScript : MonoBehaviour
     Button[] leftButtons, rightButtons;
 
     PhotonView photonView;
-
-
 
 
     private void Start()
@@ -77,14 +71,13 @@ public class LevelUpScript : MonoBehaviour
     public void LevelUp()
     {
 
-        
-        Button leftButton = leftButtons[2]; //leftButtons[Random.Range(0, 2)];
-        Button rightButton = rightButtons[2];             //rightButtons[Random.Range(0, 2)];
+        Button leftButton = leftButtons[2];  //leftButtons[Random.Range(0, 2)];
+        Button rightButton = rightButtons[1];//rightButtons[Random.Range(0, 2)];
 
-         Debug.Log(leftButton.name + " " + rightButton.name);
+        //Debug.Log(leftButton.name + " " + rightButton.name);
 
-         leftButton.gameObject.SetActive(true);
-         rightButton.gameObject.SetActive(true);
+        leftButton.gameObject.SetActive(true);
+        rightButton.gameObject.SetActive(true);
        
 
         leftButton.onClick.AddListener(() => { leftButton.gameObject.SetActive(false); rightButton.gameObject.SetActive(false); });
@@ -94,15 +87,36 @@ public class LevelUpScript : MonoBehaviour
 
     public void OnAtkSpeedButtonClick()
     {
-        // Handle the atk speed button click
+        // Attack Speed
+
+        PlayerAttack playerAttack = GetComponent<PlayerAttack>();
+        if (playerAttack != null)
+        {
+            playerAttack.IncreaseAtkSpeed();
+        }
+
+        // Sync Animation
+
+        Animator animator = GetComponent<Animator>();
+        if (animator != null)
+        {
+            float currentSpeed = animator.GetFloat("AttackSpeed");
+            float newSpeed = currentSpeed + 0.75f;
+            animator.SetFloat("AttackSpeed", newSpeed);
+        }
     }
 
     public void OnDamageButtonClick()
     {
-        // change player damage
+        PlayerAttack playerAttack = GetComponent<PlayerAttack>();
+        if (playerAttack != null)
+        {
+            playerAttack.IncreaseDamage(5f);
+        }
+
     }
 
-     public void OnRangeButtonClick()
+    public void OnRangeButtonClick()
      {
        PlayerRange playerRange = GetComponent<PlayerRange>();
 
@@ -118,9 +132,6 @@ public class LevelUpScript : MonoBehaviour
 
     }
 
-   
-   
-
     public void OnHealthButtonClick()
     {
         PlayerHealth playerHealth = GetComponent<PlayerHealth>();
@@ -130,7 +141,6 @@ public class LevelUpScript : MonoBehaviour
 
         photonView.RPC("UpdateHealth", RpcTarget.OthersBuffered, playerHealth.currentHealth);
     }
-
 
     public void OnSpeedButtonClick()
     {

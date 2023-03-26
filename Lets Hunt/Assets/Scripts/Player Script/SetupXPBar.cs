@@ -41,6 +41,7 @@ public class SetupXPBar : MonoBehaviourPunCallbacks
             {
                 currentXP = currentXP - maxXP;
                 currentLevel++;
+
                 levelUpScript.LevelUp();
             }
 

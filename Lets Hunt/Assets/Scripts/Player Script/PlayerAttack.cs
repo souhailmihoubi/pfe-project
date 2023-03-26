@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,12 @@ public class PlayerAttack : MonoBehaviour
 
     public bool isAttacking = false;
 
+    PhotonView view;
+
+    private void Start()
+    {
+        view = GetComponent<PhotonView>();
+    }
     private void Awake()
     {
         playerMove = GetComponent<PlayerMove>();
@@ -134,5 +141,35 @@ public class PlayerAttack : MonoBehaviour
                 yield return null;
             }
         }
+    }
+
+    public void IncreaseDamage(float amount)
+    {
+        attackDamage += amount;
+        if (view.IsMine)
+        {
+            view.RPC("UpdateDamage", RpcTarget.AllBuffered, attackDamage);
+        }
+    }
+
+    [PunRPC]
+    private void UpdateDamage(float newDamage)
+    {
+        attackDamage = newDamage;
+    }
+
+    public void IncreaseAtkSpeed()
+    {
+        attackCooldown = attackCooldown * 0.75f;
+        if (view.IsMine)
+        {
+            view.RPC("UpdateAtkSpeed", RpcTarget.AllBuffered, attackCooldown);
+        }
+    }
+
+    [PunRPC]
+    private void UpdateAtkSpeed(float newSpeed)
+    {
+        attackCooldown = newSpeed;
     }
 }
