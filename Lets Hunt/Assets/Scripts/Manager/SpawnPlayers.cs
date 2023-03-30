@@ -1,46 +1,112 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
 using System.IO;
+using UnityEngine;
 
-public class SpawnPlayers : MonoBehaviour
+public class SpawnPlayers : MonoBehaviourPunCallbacks
 {
-    public GameObject playerPrefab;
-    public Animator animator;
+    private GameObject playerPrefab;
+    private Animator animator;
+
     public float minX, minY, maxX, maxY;
-    public int characterValue = 0;
+
+    Vector3 randomPosition;
+
+    private int characterValue;
+
+    private bool playerSpawned = false;
+
+    public void Start()
+    {
+        animator = GetComponent<Animator>();
+
+        randomPosition = new Vector3(Random.Range(minX, maxX), 11.486f, Random.Range(minY, maxY));
+
+        characterValue = PlayerPrefs.GetInt("SelectedCharacterIndex");
+    }
+
+    public void Update()
+    {
+        if (PhotonNetwork.InRoom && !playerSpawned)
+        {
+            AddCharacter(characterValue);
+
+            playerSpawned = true;
+        }
+    }
+
+    public void AddCharacter(int whichCharacter)
+    {
+        print("spawn");
+
+        if (whichCharacter == 0)
+        {
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "frog"), randomPosition, Quaternion.identity);
+        }
+        else if (whichCharacter == 1)
+        {
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "bomber"), randomPosition, Quaternion.identity);
+        }
+        else if (whichCharacter == 2)
+        {
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "archerGirl"), randomPosition, Quaternion.identity);
+        }
+
+        animator = playerPrefab.GetComponent<Animator>();
+    }
+}
+
+
+
+
+
+
+/*using Photon.Pun;
+using System.IO;
+using UnityEngine;
+
+public class SpawnPlayers : MonoBehaviourPunCallbacks
+{
+    private GameObject playerPrefab;
+    private Animator animator;
+
+    public float minX, minY, maxX, maxY;
+
+    Vector3 randomPosition;
+
+    private int characterValue;
 
 
     public void Start()
     {
-        Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 11.486f, Random.Range(minY, maxY));
-
         animator = GetComponent<Animator>();
 
-       PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
+        randomPosition = new Vector3(Random.Range(minX, maxX), 11.486f, Random.Range(minY, maxY));
 
-        //AddCharacter(0);
+        characterValue = PlayerPrefs.GetInt("SelectedCharacterIndex");
+
+        AddCharacter(characterValue);
 
     }
 
     public void AddCharacter(int whichCharacter)
     {
-         characterValue = whichCharacter;
 
-        Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 11.486f, Random.Range(minY, maxY));
+        if (whichCharacter == 0)
+        {
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "frog"), randomPosition, Quaternion.identity);
+        }
+        else if (whichCharacter == 1)
+        {
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "bomber"), randomPosition, Quaternion.identity);
+        }
+        else if (whichCharacter == 2)
+        {
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "archerGirl"), randomPosition, Quaternion.identity);
+        }
 
-        playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "man-golf"), randomPosition, Quaternion.identity); //instantiate the player accross the network
-        
-        playerPrefab.transform.parent = transform;
-        
+        //playerPrefab.transform.parent = transform;
+
         animator = playerPrefab.GetComponent<Animator>();
+
     }
-
-
-
-
-
-
-
-}
+}*/

@@ -146,6 +146,7 @@ public class PlayerAttack : MonoBehaviour
     public void IncreaseDamage(float amount)
     {
         attackDamage += amount;
+
         if (view.IsMine)
         {
             view.RPC("UpdateDamage", RpcTarget.AllBuffered, attackDamage);

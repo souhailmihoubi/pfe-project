@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: e0d0aee4b8f53404c89b69878c66b11f, type: 2}
 --- !u!4 &8536680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5516019953427803510, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
@@ -137,7 +137,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 857307344255211123, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 857307344255211123, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -183,6 +183,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 857307344255211135, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 857307344255211135, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 857307344255211135, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
 --- !u!1 &37386130
@@ -201,8 +213,8 @@ GameObject:
   m_Name: stone_brick (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &37386131
 Transform:
@@ -299,8 +311,8 @@ GameObject:
   m_Name: crate (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &56512060
 Transform:
@@ -398,8 +410,8 @@ GameObject:
   m_Name: stone_brick (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &66882542
 Transform:
@@ -493,12 +505,13 @@ GameObject:
   - component: {fileID: 71191742}
   - component: {fileID: 71191741}
   - component: {fileID: 71191744}
+  - component: {fileID: 71191745}
   m_Layer: 3
   m_Name: enemy (1)
   m_TagString: Enemy
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &71191740
 Transform:
@@ -513,7 +526,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1258224107}
-  m_RootOrder: 23
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &71191741
 CapsuleCollider:
@@ -591,8 +604,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd0fe4664f99724f9a0d73f5f7c6bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
+  startingHealth: 10
   currentHealth: 0
+  animator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
+  coinPrefab: {fileID: 5262009865782563152, guid: f742613421c3964468a64a2af9a0c175, type: 3}
+  numCoinsToSpawn: 1
+--- !u!114 &71191745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71191739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 4
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &97207180 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3431312957595676038, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
@@ -692,6 +730,10 @@ PrefabInstance:
     - target: {fileID: 708775667181952157, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_Name
       value: Lvl Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 708775667181952157, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1617983537993849745, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -986,8 +1028,8 @@ GameObject:
   m_Name: Crown (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &132244880
 Transform:
@@ -1068,7 +1110,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 857307344255211123, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 857307344255211123, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1114,6 +1156,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 857307344255211135, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 857307344255211135, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 857307344255211135, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b59c5e0234e3bdb40be4353d01c3efea, type: 3}
 --- !u!1001 &142763789
@@ -1127,9 +1181,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 399460559728427395, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 399460559728427395, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 399460559728427395, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 399460559728427399, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 399460559728427399, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1194,8 +1260,8 @@ GameObject:
   m_Name: rock_pillar (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &230643141
 Transform:
@@ -1287,9 +1353,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 399460559728427395, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 399460559728427395, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 399460559728427395, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 399460559728427399, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 399460559728427399, guid: ac972ded183e5c343b1b2aa424a091b5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1354,8 +1432,8 @@ GameObject:
   m_Name: crate (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &310699755
 Transform:
@@ -1458,8 +1536,8 @@ GameObject:
   m_Name: crate (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &374737482
 Transform:
@@ -1557,8 +1635,8 @@ GameObject:
   m_Name: crate (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &377314789
 Transform:
@@ -1665,8 +1743,8 @@ GameObject:
   m_Name: stone_brick (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &450585836
 Transform:
@@ -1753,8 +1831,8 @@ GameObject:
   m_Name: stone_brick (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &490407242
 Transform:
@@ -1837,8 +1915,8 @@ GameObject:
   m_Name: rock_pillar (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &491745966
 Transform:
@@ -2022,7 +2100,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4482621030324341131, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4482621030324341131, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2068,6 +2146,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 4482621030324341135, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482621030324341135, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482621030324341135, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
 --- !u!4 &589052025 stripped
@@ -2090,8 +2180,8 @@ GameObject:
   m_Name: Icosphere.027 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &595183896
 Transform:
@@ -2167,7 +2257,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5516019953427803510, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5516019953427803510, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2213,6 +2303,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f
       objectReference: {fileID: 0}
+    - target: {fileID: 5516019953427803514, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5516019953427803514, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5516019953427803514, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
 --- !u!1 &603675255
@@ -2231,8 +2333,8 @@ GameObject:
   m_Name: crate (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &603675256
 Transform:
@@ -2330,8 +2432,8 @@ GameObject:
   m_Name: stone_brick (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &609106485
 Transform:
@@ -2527,8 +2629,8 @@ GameObject:
   m_Name: stone_brick (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &749295267
 Transform:
@@ -2628,7 +2730,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4482621030324341131, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4482621030324341131, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2673,6 +2775,18 @@ PrefabInstance:
     - target: {fileID: 4482621030324341135, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
       propertyPath: m_Name
       value: f (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482621030324341135, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482621030324341135, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482621030324341135, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 969c3fd9e4562c1469ea4300ac93bb98, type: 3}
@@ -2744,8 +2858,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830130680}
-  m_LocalRotation: {x: 0.054770432, y: 0.92303014, z: 0.3536761, w: -0.14116964}
-  m_LocalPosition: {x: -2.578907, y: -5.1849213, z: -6.397087}
+  m_LocalRotation: {x: -0.38022533, y: 0.5857716, z: 0.3611417, w: 0.617962}
+  m_LocalPosition: {x: -10.556591, y: -18.919224, z: -10.624435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2782,8 +2896,8 @@ GameObject:
   m_Name: stone_brick (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &860120197
 Transform:
@@ -3079,6 +3193,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: boy-beach
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 26c0169bc82d13a4c8398fc5e51b4594, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 26c0169bc82d13a4c8398fc5e51b4594, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26c0169bc82d13a4c8398fc5e51b4594, type: 3}
 --- !u!1001 &1030082033
@@ -3090,7 +3212,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3431312957595676038, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3431312957595676038, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3136,6 +3258,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3431312957595676058, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431312957595676058, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431312957595676058, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
 --- !u!1 &1079684497
@@ -3154,8 +3288,8 @@ GameObject:
   m_Name: rock_pillar (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1079684498
 Transform:
@@ -3251,8 +3385,8 @@ GameObject:
   m_Name: Icosphere.026 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1104999467
 Transform:
@@ -3333,7 +3467,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8543332532247556506, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8543332532247556506, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3379,6 +3513,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8543332532247556582, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543332532247556582, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543332532247556582, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
 --- !u!1 &1144881566
@@ -3396,8 +3542,8 @@ GameObject:
   m_Name: Stone_3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1144881567
 Transform:
@@ -3478,7 +3624,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3431312957595676038, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 3431312957595676038, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3524,6 +3670,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 3431312957595676058, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431312957595676058, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3431312957595676058, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47151b2ab2238c04db4508cf6e1c8402, type: 3}
 --- !u!224 &1204674841 stripped
@@ -3544,12 +3702,13 @@ GameObject:
   - component: {fileID: 1206640772}
   - component: {fileID: 1206640771}
   - component: {fileID: 1206640774}
+  - component: {fileID: 1206640775}
   m_Layer: 3
   m_Name: enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1206640770
 Transform:
@@ -3564,7 +3723,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1258224107}
-  m_RootOrder: 22
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1206640771
 CapsuleCollider:
@@ -3642,8 +3801,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd0fe4664f99724f9a0d73f5f7c6bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
+  startingHealth: 10
   currentHealth: 0
+  animator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
+  coinPrefab: {fileID: 5262009865782563152, guid: f742613421c3964468a64a2af9a0c175, type: 3}
+  numCoinsToSpawn: 1
+--- !u!114 &1206640775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206640769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 5
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1226419203
 GameObject:
   m_ObjectHideFlags: 0
@@ -3659,8 +3843,8 @@ GameObject:
   m_Name: Cube.006 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1226419204
 Transform:
@@ -3727,6 +3911,100 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1226419203}
   m_Mesh: {fileID: -2228417370725966487, guid: 3d68b85525ffed1499c6b23ecefbd5a4, type: 3}
+--- !u!1 &1231789046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1231789047}
+  - component: {fileID: 1231789048}
+  - component: {fileID: 1231789049}
+  m_Layer: 0
+  m_Name: EnemySpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1231789047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231789046}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.53, y: 0, z: 2.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1258224107}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1231789048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231789046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb4e6afc88c17df4bb8cd8d73e390a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level1Enemies:
+  - {fileID: 196697611209335388, guid: 003ffe2e26da33241986e379dea83315, type: 3}
+  - {fileID: 1730108145899448342, guid: db9820c80a58bbb448d48183ff0fca6c, type: 3}
+  - {fileID: 4982189069421450820, guid: 2924c71405a55f0449e9ac94b3209877, type: 3}
+  - {fileID: 1274217695610545334, guid: 78c5b46de9b89264390038e0da4272f4, type: 3}
+  - {fileID: 8068872305367483399, guid: 8223c752a9d220247b8c93d19a7fc031, type: 3}
+  level2Enemies:
+  - {fileID: 2013448548464532468, guid: 51b4aa99a462fed43a5bf28a8b70b958, type: 3}
+  - {fileID: 3019443232837131988, guid: 75c885332a55d0c4e9a886a2374e62a6, type: 3}
+  - {fileID: 2470072229391453903, guid: e312dc6fec1e7cd4396908a68dda7e29, type: 3}
+  - {fileID: 8417330310602314225, guid: cda159fbae2fc774199348a35df0520f, type: 3}
+  - {fileID: 6086430273022977985, guid: efedfe75d51648642a687812a2492c8b, type: 3}
+  - {fileID: 7317394347316912450, guid: 3d8165b1bcf27864e9f6c5c1c7186701, type: 3}
+  level3Enemies:
+  - {fileID: 8447018275376623916, guid: 8316c78e1852ce44d8cde920c1c51367, type: 3}
+  - {fileID: 8195076954544512444, guid: 9dec30d232a73aa41a2aa27e7363605c, type: 3}
+  - {fileID: 8992765846657963910, guid: c1ae99679944e404b8bdcb75d7405a43, type: 3}
+  - {fileID: 3359781518568219812, guid: 7bc10d2eb3b14ad418509290a032169a, type: 3}
+  - {fileID: 1300342873632802416, guid: 419656afde1d2c149993e334c8d3d8be, type: 3}
+  spawnInterval: 5
+  level1Duration: 10
+  level2Duration: 1
+  level3Duration: 1
+  minX: 45
+  minZ: 60
+  maxX: 68
+  maxZ: 84
+--- !u!114 &1231789049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231789046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 2
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1258224106
 GameObject:
   m_ObjectHideFlags: 0
@@ -3756,6 +4034,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1770397881}
+  - {fileID: 1231789047}
   - {fileID: 755498427}
   - {fileID: 1451846424}
   - {fileID: 909656277}
@@ -3793,9 +4072,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 8534101607562922208, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534101607562922208, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534101607562922208, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8534101607562922212, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8534101607562922212, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3848,7 +4139,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5859860170198306762, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5859860170198306762, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3894,6 +4185,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5859860170198306766, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859860170198306766, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859860170198306766, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
 --- !u!4 &1354108169 stripped
@@ -3908,9 +4211,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 942698403}
     m_Modifications:
+    - target: {fileID: 100000, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: b544816461f324e56a39767fdeb5b114, type: 3}
       propertyPath: m_Name
       value: Water4Advanced
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: b544816461f324e56a39767fdeb5b114, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: b544816461f324e56a39767fdeb5b114, type: 3}
       propertyPath: m_RootOrder
@@ -3986,8 +4321,8 @@ GameObject:
   m_Name: stone_brick (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1395829872
 Transform:
@@ -4140,8 +4475,8 @@ GameObject:
   m_Name: Trunk (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1446415933
 Transform:
@@ -4233,8 +4568,8 @@ GameObject:
   m_Name: stone_brick (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1490658780
 Transform:
@@ -4455,7 +4790,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8349997574454279758, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8349997574454279758, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4501,6 +4836,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8349997574454279762, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349997574454279762, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349997574454279762, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
 --- !u!1 &1581340305
@@ -4519,8 +4866,8 @@ GameObject:
   m_Name: stone_brick (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1581340306
 Transform:
@@ -4616,8 +4963,8 @@ GameObject:
   m_Name: stone_brick (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1594833845
 Transform:
@@ -4752,8 +5099,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596334866}
-  m_LocalRotation: {x: 0.34804758, y: -0.010791075, z: -0.0038731152, w: -0.9374068}
-  m_LocalPosition: {x: 55.55, y: -4.0699997, z: 61.96}
+  m_LocalRotation: {x: -0.042247456, y: 0.03483285, z: 0.0021586665, w: 0.9984975}
+  m_LocalPosition: {x: 3.5528984, y: 0.8261757, z: -38.06048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4785,9 +5132,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 8080640451630837912, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080640451630837912, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080640451630837912, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8080640451630837924, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8080640451630837924, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4847,8 +5206,8 @@ GameObject:
   m_Name: stone_brick (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1702094414
 Transform:
@@ -4945,8 +5304,8 @@ GameObject:
   m_Name: stone_flat.003 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1734695332
 Transform:
@@ -5042,8 +5401,8 @@ GameObject:
   m_Name: Stone (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1737007407
 Transform:
@@ -5153,6 +5512,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Movement Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 249959894536035011, guid: 52e666960dc13a0459c253a024d28115, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 249959894536035015, guid: 52e666960dc13a0459c253a024d28115, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5250,6 +5613,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBasicDaytime
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9485b0c79d11e2e4d0007da98d76c639, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 9485b0c79d11e2e4d0007da98d76c639, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 9485b0c79d11e2e4d0007da98d76c639, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -5319,9 +5690,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 1705857907022837841, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705857907022837841, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705857907022837841, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1705857907022837869, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 1705857907022837869, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5375,6 +5758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1770397881}
   - component: {fileID: 1770397880}
+  - component: {fileID: 1770397882}
   m_Layer: 0
   m_Name: SpawnPlayers
   m_TagString: Untagged
@@ -5394,13 +5778,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71430abf9461761448b2b9552d1aee77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 6303585481674807422, guid: a2062b2da4cff80409e85af80de4cf26, type: 3}
-  animator: {fileID: 779450257280129214, guid: a2062b2da4cff80409e85af80de4cf26, type: 3}
   minX: 55
   minY: 75
   maxX: 56
   maxY: 75
-  characterValue: 0
 --- !u!4 &1770397881
 Transform:
   m_ObjectHideFlags: 0
@@ -5416,6 +5797,28 @@ Transform:
   m_Father: {fileID: 1258224107}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1770397882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770397879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &1773195585 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8534101607562922212, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
@@ -5442,8 +5845,8 @@ GameObject:
   m_Name: stone_brick (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1782500959
 Transform:
@@ -5591,6 +5994,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 5516019953427803514, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5516019953427803514, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e100b260fb777d54da86625cd2f947a9, type: 3}
 --- !u!1001 &1820906789
@@ -5604,9 +6015,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8534101607562922208, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534101607562922208, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534101607562922208, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8534101607562922212, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8534101607562922212, guid: 3ef48aa668d36924c94644c3b692f00d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5670,8 +6093,8 @@ GameObject:
   m_Name: stone_brick (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1851097762
 Transform:
@@ -5900,8 +6323,8 @@ GameObject:
   m_Name: stone_brick (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1893594615
 Transform:
@@ -5991,7 +6414,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8543332532247556506, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8543332532247556506, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6037,6 +6460,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 8543332532247556582, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543332532247556582, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8543332532247556582, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eb576ebedc28f343af2879448bf7405, type: 3}
 --- !u!1001 &1932393903
@@ -6048,7 +6483,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8349997574454279758, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8349997574454279758, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6094,6 +6529,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8349997574454279762, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349997574454279762, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349997574454279762, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 01cd704dcdb629242b8f12b173d77a47, type: 3}
 --- !u!1 &1944816463
@@ -6111,8 +6558,8 @@ GameObject:
   m_Name: stone_brick (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1944816464
 Transform:
@@ -6252,8 +6699,8 @@ GameObject:
   m_Name: crate (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1949836302
 Transform:
@@ -6346,9 +6793,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1705857907022837841, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705857907022837841, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1705857907022837841, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1705857907022837869, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1705857907022837869, guid: 38ebfe4cb0bc01048b3efe8f680fd5c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6413,8 +6872,8 @@ GameObject:
   m_Name: stone_brick (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2043104023
 Transform:
@@ -6511,8 +6970,8 @@ GameObject:
   m_Name: rock_pillar (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2067081008
 Transform:
@@ -6604,9 +7063,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: f (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8080640451630837912, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080640451630837912, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080640451630837912, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8080640451630837924, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8080640451630837924, guid: 5de2a18260b2a5640bfa298f5f32950c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6659,7 +7130,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5859860170198306762, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5859860170198306762, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6704,6 +7175,18 @@ PrefabInstance:
     - target: {fileID: 5859860170198306766, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
       propertyPath: m_Name
       value: f (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859860170198306766, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859860170198306766, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5859860170198306766, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0afa57c2b25c33c4e8f450677c8dbf36, type: 3}
@@ -6858,8 +7341,8 @@ GameObject:
   m_Name: egypt_stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &30287944229134847
 Transform:
@@ -6891,8 +7374,8 @@ GameObject:
   m_Name: Crown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &144042830625568330
 GameObject:
@@ -6909,8 +7392,8 @@ GameObject:
   m_Name: Circle.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &155229468414492744
 Transform:
@@ -6993,8 +7476,8 @@ GameObject:
   m_Name: Cube.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &258585240651019279
 Transform:
@@ -7026,8 +7509,8 @@ GameObject:
   m_Name: Cube.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &309434064391048121
 MeshRenderer:
@@ -7103,8 +7586,8 @@ GameObject:
   m_Name: trenches_wood.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &369633139000982585
 GameObject:
@@ -7122,8 +7605,8 @@ GameObject:
   m_Name: stone_flat.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &410500621760588580
 GameObject:
@@ -7140,8 +7623,8 @@ GameObject:
   m_Name: Icosphere.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &419191443749426289
 MeshFilter:
@@ -7341,8 +7824,8 @@ GameObject:
   m_Name: trenches_wood.022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &538457117303674686
 Transform:
@@ -7375,8 +7858,8 @@ GameObject:
   m_Name: tree_old.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &613056658586995154
 MeshRenderer:
@@ -7475,8 +7958,8 @@ GameObject:
   m_Name: tree_dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &777971714282487915
 Transform:
@@ -7691,8 +8174,8 @@ GameObject:
   m_Name: Cube.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &939173615045077785
 Transform:
@@ -7753,8 +8236,8 @@ GameObject:
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &1047501824563583418
 MeshRenderer:
@@ -7895,8 +8378,8 @@ GameObject:
   m_Name: tree_beech.027
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1212713143720167983
 GameObject:
@@ -7914,8 +8397,8 @@ GameObject:
   m_Name: trenches_wood.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &1254884836181862784
 MeshRenderer:
@@ -7984,8 +8467,8 @@ GameObject:
   m_Name: cave_skull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1284846567568489561
 GameObject:
@@ -8002,8 +8485,8 @@ GameObject:
   m_Name: windmill_western_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1332164341882887479
 GameObject:
@@ -8020,8 +8503,8 @@ GameObject:
   m_Name: Cube.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &1360999337997754413
 MeshFilter:
@@ -8047,8 +8530,8 @@ GameObject:
   m_Name: trenches_wood.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &1391832502734387457
 MeshRenderer:
@@ -8122,8 +8605,8 @@ GameObject:
   m_Name: Cube.023
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1425612563748302796
 GameObject:
@@ -8140,8 +8623,8 @@ GameObject:
   m_Name: Icosphere.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &1435128240745267816
 MeshFilter:
@@ -8190,8 +8673,8 @@ GameObject:
   m_Name: trenches_wood.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1465495023536260462
 Transform:
@@ -8275,8 +8758,8 @@ GameObject:
   m_Name: Low poly stylised goat scull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &1525927648921048674
 MeshRenderer:
@@ -8336,8 +8819,8 @@ GameObject:
   m_Name: trenches_wood.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &1548911111604310921
 MeshFilter:
@@ -8362,8 +8845,8 @@ GameObject:
   m_Name: Cube.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &1580772710752005964
 MeshFilter:
@@ -8497,8 +8980,8 @@ GameObject:
   m_Name: trenches_wood.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &1698524903212547262
 MeshRenderer:
@@ -8624,8 +9107,8 @@ GameObject:
   m_Name: 04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1746621715917513681
 GameObject:
@@ -8642,8 +9125,8 @@ GameObject:
   m_Name: Icosphere.026
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &1760362414951253503
 MeshRenderer:
@@ -8761,8 +9244,8 @@ GameObject:
   m_Name: house_egypt_small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &1838662330186512351
 MeshFilter:
@@ -8803,8 +9286,8 @@ GameObject:
   m_Name: tree_old.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1856809444346161981
 Transform:
@@ -8886,8 +9369,8 @@ GameObject:
   m_Name: Cube.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &1935440968075653729
 GameObject:
@@ -8905,8 +9388,8 @@ GameObject:
   m_Name: trenches_wood.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1988110306888433783
 Transform:
@@ -9268,8 +9751,8 @@ GameObject:
   m_Name: 05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &2286120506360668486
 MeshFilter:
@@ -9317,8 +9800,8 @@ GameObject:
   m_Name: Circle.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &2339300794320689235
 MeshRenderer:
@@ -9378,8 +9861,8 @@ GameObject:
   m_Name: torche.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &2409871534566756216
 MeshFilter:
@@ -9434,8 +9917,8 @@ GameObject:
   m_Name: trenches_wood.037
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2467331340059117883
 Transform:
@@ -9510,8 +9993,8 @@ GameObject:
   m_Name: tree_beech.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &2480381077267787851
 GameObject:
@@ -9757,8 +10240,8 @@ GameObject:
   m_Name: Cube.020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2599277947960660247
 Transform:
@@ -10282,8 +10765,8 @@ GameObject:
   m_Name: trenches_wood.030
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &3015778102911318428
 MeshFilter:
@@ -10348,8 +10831,8 @@ GameObject:
   m_Name: tree_beech.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &3261041458918340742
 MeshRenderer:
@@ -10493,8 +10976,8 @@ GameObject:
   m_Name: RED TREE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3359832064067531465
 Transform:
@@ -10542,8 +11025,8 @@ GameObject:
   m_Name: trenches_wood.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &3409620692751014900
 GameObject:
@@ -10561,8 +11044,8 @@ GameObject:
   m_Name: crater_big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &3430874462961100152
 MeshFilter:
@@ -10588,8 +11071,8 @@ GameObject:
   m_Name: trenches_wood.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &3471216672983497137
 MeshRenderer:
@@ -10692,8 +11175,8 @@ GameObject:
   m_Name: tree_beech.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &3537760971276887996
 GameObject:
@@ -10711,8 +11194,8 @@ GameObject:
   m_Name: tree_old.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3538532116750127405
 Transform:
@@ -10763,8 +11246,8 @@ GameObject:
   m_Name: Cube.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3578160483865270653
 Transform:
@@ -10871,8 +11354,8 @@ GameObject:
   m_Name: Cube.022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &3735835546568671446
 MeshRenderer:
@@ -11011,8 +11494,8 @@ GameObject:
   m_Name: Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &3818780920384210001
 MeshRenderer:
@@ -11182,8 +11665,8 @@ GameObject:
   m_Name: tree_beech.022
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3870304437487087675
 Transform:
@@ -11224,8 +11707,8 @@ GameObject:
   m_Name: trenches_wood.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1001 &3959357977034608872
 PrefabInstance:
@@ -11282,6 +11765,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heal Spot
       objectReference: {fileID: 0}
+    - target: {fileID: 3959357977410562494, guid: 5c16dfc4e1ca45040b09dd3811155434, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959357977410562494, guid: 5c16dfc4e1ca45040b09dd3811155434, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c16dfc4e1ca45040b09dd3811155434, type: 3}
 --- !u!33 &3977575310867452793
@@ -11307,8 +11798,8 @@ GameObject:
   m_Name: Cube.021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &4033205818696915441
 MeshRenderer:
@@ -11446,7 +11937,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1284846567568489561}
   m_LocalRotation: {x: 2.6645353e-15, y: 0.9939751, z: 7.1054274e-15, w: -0.10960665}
-  m_LocalPosition: {x: 1.68, y: -99.8, z: 20.66}
+  m_LocalPosition: {x: 1.68, y: -99.8, z: 20.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -11468,8 +11959,8 @@ GameObject:
   m_Name: Icosphere.029
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &4119028686104286436
 Transform:
@@ -11765,8 +12256,8 @@ GameObject:
   m_Name: tree_beech.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &4374891652541895181
 MeshFilter:
@@ -12017,8 +12508,8 @@ GameObject:
   m_Name: trenches_wood.023
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &4502005603108056528
 MeshRenderer:
@@ -12078,8 +12569,8 @@ GameObject:
   m_Name: Cube.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &4517680516837693372
 MeshFilter:
@@ -12278,8 +12769,8 @@ GameObject:
   m_Name: Circle.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &4664553948427320662
 MeshFilter:
@@ -12305,8 +12796,8 @@ GameObject:
   m_Name: stone_flat.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &4694560438841680031
 MeshFilter:
@@ -12332,8 +12823,8 @@ GameObject:
   m_Name: trenches_wood.039
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &4718325363526261134
 MeshRenderer:
@@ -12450,8 +12941,8 @@ GameObject:
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &4783810228577214815
 MeshFilter:
@@ -12477,8 +12968,8 @@ GameObject:
   m_Name: tree_beech.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &4815260413891681028
 MeshRenderer:
@@ -12552,8 +13043,8 @@ GameObject:
   m_Name: Cube.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &4857648182139419252
 GameObject:
@@ -12596,8 +13087,8 @@ GameObject:
   m_Name: LP Stone B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &4926664419577651768
 MeshCollider:
@@ -12637,8 +13128,8 @@ GameObject:
   m_Name: trenches_wood.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &4940672088895116190
 MeshFilter:
@@ -12695,8 +13186,8 @@ GameObject:
   m_Name: bridge_medieval_stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &5138559340989673216
 GameObject:
@@ -12745,8 +13236,8 @@ GameObject:
   m_Name: rock_sharp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &5181021971787508138
 MeshCollider:
@@ -12850,8 +13341,8 @@ GameObject:
   m_Name: rock_pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &5290984957850051627
 MeshFilter:
@@ -12885,8 +13376,8 @@ GameObject:
   m_Name: tree_beech.026
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5334538950324267126
 Transform:
@@ -12949,8 +13440,8 @@ GameObject:
   m_Name: Icosphere.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &5426881460591762923
 MeshFilter:
@@ -13134,8 +13625,8 @@ GameObject:
   m_Name: Cube.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5523377681757961362
 Transform:
@@ -13276,8 +13767,8 @@ GameObject:
   m_Name: trenches_wood.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &5633153604836810616
 MeshFilter:
@@ -13303,8 +13794,8 @@ GameObject:
   m_Name: tree_old.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &5663646378734941302
 MeshFilter:
@@ -13330,8 +13821,8 @@ GameObject:
   m_Name: trenches_wood.020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5668941424916073978
 Transform:
@@ -13372,8 +13863,8 @@ GameObject:
   m_Name: trenches_wood.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &5702952354017726154
 MeshRenderer:
@@ -13469,8 +13960,8 @@ GameObject:
   m_Name: Icosphere.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &5724318390360978464
 GameObject:
@@ -13487,8 +13978,8 @@ GameObject:
   m_Name: 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &5732686346925791834
 MeshFilter:
@@ -13724,8 +14215,8 @@ GameObject:
   m_Name: windmill_westen_tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &5944333249794824942
 Transform:
@@ -13858,8 +14349,8 @@ GameObject:
   m_Name: Stone_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &6029032337749135400
 MeshFilter:
@@ -13899,8 +14390,8 @@ GameObject:
   m_Name: trenches_wood.024
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6050676108163769714
 Transform:
@@ -13933,8 +14424,8 @@ GameObject:
   m_Name: torche
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &6051237391081384256
 MeshCollider:
@@ -14124,8 +14615,8 @@ GameObject:
   m_Name: Icosphere.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &6296119118684264258
 GameObject:
@@ -14142,8 +14633,8 @@ GameObject:
   m_Name: 03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6339319210820438046
 Transform:
@@ -14191,8 +14682,8 @@ GameObject:
   m_Name: guidepost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6375158475126619092
 Transform:
@@ -14296,8 +14787,8 @@ GameObject:
   m_Name: trenches_wood.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &6466934131840325689
 MeshCollider:
@@ -14385,8 +14876,8 @@ GameObject:
   m_Name: windmill_western_propeller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &6534661588089684395
 MeshRenderer:
@@ -14503,8 +14994,8 @@ GameObject:
   m_Name: palm_big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &6632261233340303389
 MeshCollider:
@@ -14925,8 +15416,8 @@ GameObject:
   m_Name: trenches_wood.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6923917319639592766
 Transform:
@@ -15023,8 +15514,8 @@ GameObject:
   m_Name: 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7000555725446673025
 Transform:
@@ -15169,8 +15660,8 @@ GameObject:
   m_Name: crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &7137364426367293782
 MeshCollider:
@@ -15384,8 +15875,8 @@ GameObject:
   m_Name: stone_flat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &7315688046907013229
 GameObject:
@@ -15403,8 +15894,8 @@ GameObject:
   m_Name: trenches_wood.036
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7335643842224303581
 Transform:
@@ -15516,8 +16007,8 @@ GameObject:
   m_Name: tree_beech.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &7391615667972684511
 GameObject:
@@ -15626,8 +16117,8 @@ GameObject:
   m_Name: Icosphere.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &7487066536313205030
 GameObject:
@@ -15645,8 +16136,8 @@ GameObject:
   m_Name: well
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &7492726836443272919
 GameObject:
@@ -15663,8 +16154,8 @@ GameObject:
   m_Name: Circle.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7508153691896626466
 Transform:
@@ -16019,8 +16510,8 @@ GameObject:
   m_Name: tree_beech.025
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &7739041060388021693
 MeshCollider:
@@ -16081,8 +16572,8 @@ GameObject:
   m_Name: trenches_wood.038
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &7748584127280578357
 MeshCollider:
@@ -16113,8 +16604,8 @@ GameObject:
   m_Name: 06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &7781512974813463793
 MeshRenderer:
@@ -16263,8 +16754,8 @@ GameObject:
   m_Name: Icosphere.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &7837629322425003726
 MeshFilter:
@@ -16423,8 +16914,8 @@ GameObject:
   m_Name: trenches_wood.029
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &7940956462274275759
 MeshCollider:
@@ -16477,8 +16968,8 @@ GameObject:
   m_Name: Cube.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &7992061731875623584
 MeshRenderer:
@@ -16686,8 +17177,8 @@ GameObject:
   m_Name: tree_old.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &8023650488964878570
 MeshCollider:
@@ -16719,8 +17210,8 @@ GameObject:
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &8046168004862183798
 MeshCollider:
@@ -16752,8 +17243,8 @@ GameObject:
   m_Name: house_egypt_big
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &8099441745575343980
 MeshCollider:
@@ -16784,8 +17275,8 @@ GameObject:
   m_Name: Stone_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &8146670045742805530
 GameObject:
@@ -16802,8 +17293,8 @@ GameObject:
   m_Name: Cube.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &8193477252698318786
 MeshRenderer:
@@ -16864,8 +17355,8 @@ GameObject:
   m_Name: stone_flat.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &8237169334415467587
 GameObject:
@@ -16882,8 +17373,8 @@ GameObject:
   m_Name: Cube.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8291490207130799633
 Transform:
@@ -16929,8 +17420,8 @@ GameObject:
   m_Name: Icosphere.027
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8323954684203636639
 Transform:
@@ -17458,8 +17949,8 @@ GameObject:
   m_Name: tree_old.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &8649632413226857914
 MeshCollider:
@@ -17491,8 +17982,8 @@ GameObject:
   m_Name: trenches_wood.021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &8694471348676807781
 MeshCollider:
@@ -17524,8 +18015,8 @@ GameObject:
   m_Name: RED TREE.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &8712819906891139489
 MeshCollider:
@@ -17565,8 +18056,8 @@ GameObject:
   m_Name: stone_round
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &8779225144993511691
 MeshCollider:
@@ -17830,7 +18321,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5085283350867183395, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
       propertyPath: duration
-      value: 180
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5533360787547951812, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
       propertyPath: sceneViewId
@@ -17839,6 +18330,10 @@ PrefabInstance:
     - target: {fileID: 8987532309018534761, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
       propertyPath: m_Name
       value: Timer Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8987532309018534761, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8987532309018534765, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
       propertyPath: m_Pivot.x
@@ -18014,8 +18509,8 @@ GameObject:
   m_Name: rock_pillar.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &9057901471325748703
 MeshCollider:
@@ -18230,8 +18725,8 @@ GameObject:
   m_Name: stone_brick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &9139416779540031350
 MeshCollider:
@@ -18263,8 +18758,8 @@ GameObject:
   m_Name: tree_beech.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!64 &9150242283051610322
 MeshCollider:
@@ -18295,8 +18790,8 @@ GameObject:
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &9190234123619588800
 MeshFilter:
