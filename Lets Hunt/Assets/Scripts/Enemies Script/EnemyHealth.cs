@@ -8,17 +8,23 @@ public class EnemyHealth : MonoBehaviourPunCallbacks
 {
     public float startingHealth;
     public float currentHealth;
-    public Animator animator;
+    public Animator coinAnimator;
+    public Animator xpAnimator;
 
     // The coin prefab to spawn
     public GameObject coinPrefab;
 
+    public GameObject xpPrefab;
+
+
     // The number of coins to spawn
-    public int numCoinsToSpawn = 3;
+    //public int numCoinsToSpawn = 3;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        coinAnimator = GetComponent<Animator>();
+        xpAnimator = GetComponent<Animator>();
+
 
         currentHealth = startingHealth;
     }
@@ -26,27 +32,26 @@ public class EnemyHealth : MonoBehaviourPunCallbacks
     public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
+
         Debug.Log(currentHealth.ToString());
+
         if (currentHealth <= 0f)
         {
-            // Spawn coins at the position where the monster died
-            for (int i = 0; i < numCoinsToSpawn; i++)
-            {
-                // Generate a random position within a sphere
-                Vector3 randomPos = UnityEngine.Random.insideUnitSphere * 0.5f;
+                Vector3 randomPos = UnityEngine.Random.insideUnitSphere * 1f;
 
-                // Set the coin's position to the enemy's position plus the random position
                 Vector3 coinPos = transform.position + randomPos;
 
-                // Spawn the coin at the position
+                Vector3 xpPos = transform.position;
+
+
                 GameObject coin = PhotonNetwork.Instantiate(coinPrefab.name, coinPos, Quaternion.identity);
-                // You can add any additional functionality to the spawned coins here
-                animator = coinPrefab.GetComponent<Animator>();
 
-            }
+                GameObject xp = PhotonNetwork.Instantiate(xpPrefab.name, xpPos, Quaternion.identity);
 
-            PhotonNetwork.Destroy(gameObject);
-            //Play death animation
+                coinAnimator = coinPrefab.GetComponent<Animator>();
+                xpAnimator = xpPrefab.GetComponent<Animator>();
+
+                PhotonNetwork.Destroy(gameObject);
         }
     }
 }

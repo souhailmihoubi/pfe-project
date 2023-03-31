@@ -70,6 +70,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         //Debug.Log("Master : " + PhotonNetwork.IsMasterClient + "| Players in room : " + x);
 
-        PhotonNetwork.LoadLevel("nature");
+        PhotonNetwork.LoadLevel("city");
     }
 }
