@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,15 +8,19 @@ public class CharacterSelection : MonoBehaviour
     public Button[] characterButtons;
     private int selectedCharacterIndex = 0;
 
+    [SerializeField] private Button select;
+    [SerializeField] private Button buy;
+    [SerializeField] private TextMeshProUGUI price;
+
+    [SerializeField] private int[] hunterPrices;
+
     public Button saveButton;
 
     private void Start()
     {
-        // Set the first character as the default selection
-        characters[selectedCharacterIndex].SetActive(true);
-        characterButtons[selectedCharacterIndex].interactable = false;
+        selectedCharacterIndex = SaveManager.instance.currentHunter;
 
-        // Add a click listener to each character button
+        SelectCharacter(selectedCharacterIndex);
         
         for (int i = 0; i < characterButtons.Length; i++)
         {
@@ -23,32 +28,52 @@ public class CharacterSelection : MonoBehaviour
             characterButtons[i].onClick.AddListener(() => SelectCharacter(index));
         }
 
-        saveButton.onClick.AddListener(() => SaveSelectedCharacterIndex());
+        saveButton.onClick.AddListener(() => SaveSelectedCharacter());
 
     }
 
     private void SelectCharacter(int index)
     {
-        // Disable the current character and enable the selected character
         characters[selectedCharacterIndex].SetActive(false);
         characterButtons[selectedCharacterIndex].interactable = true;
         selectedCharacterIndex = index;
         characters[selectedCharacterIndex].SetActive(true);
         characterButtons[selectedCharacterIndex].interactable = false;
 
-        Debug.Log(selectedCharacterIndex);
+        UpdateUI();
 
-        // Instantiate the selected character on the network
-        //PhotonNetwork.Instantiate(characters[selectedCharacterIndex].name, Vector3.zero, Quaternion.identity);
     }
 
-    private void SaveSelectedCharacterIndex()
+    private void UpdateUI()
     {
-        // Save the selected character index to a variable or player preference
-        int savedIndex = selectedCharacterIndex;
+        if (SaveManager.instance.huntersUnlocked[selectedCharacterIndex])
+        {
+            select.gameObject.SetActive(true);
+            buy.gameObject.SetActive(false);
+        }
+        else
+        {
+            select.gameObject.SetActive(false);
+            buy.gameObject.SetActive(true);
+            price.text = hunterPrices[selectedCharacterIndex].ToString();
 
-        PlayerPrefs.SetInt("SelectedCharacterIndex", savedIndex);
+            //Check if we have enough money!
 
-        Debug.Log("Selected character index saved: " + savedIndex);
+            buy.interactable = (SaveManager.instance.coins >= hunterPrices[selectedCharacterIndex]);
+        }
+    }
+
+    private void SaveSelectedCharacter()
+    {
+        SaveManager.instance.currentHunter = selectedCharacterIndex;
+        SaveManager.instance.Save();
+    }
+
+    public void BuyHunter()
+    {
+        SaveManager.instance.coins -= hunterPrices[selectedCharacterIndex];
+        SaveManager.instance.huntersUnlocked[selectedCharacterIndex] = true;
+        SaveManager.instance.Save();
+        UpdateUI();
     }
 }

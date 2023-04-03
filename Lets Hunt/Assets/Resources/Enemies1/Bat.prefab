@@ -915,6 +915,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 123
   currentHealth: 0
+  healthText: {fileID: 5920653099113559287}
+  healthFill: {fileID: 6359963510240501631}
+  updateSpeedSeconds: 0.5
   coinAnimator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   xpAnimator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   coinPrefab: {fileID: 5262009865782563152, guid: f742613421c3964468a64a2af9a0c175, type: 3}
@@ -931,11 +934,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922cc37ac7cf7544bb6bb12581212757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 6
   attack_Distance: 2
   alert_attack_Distance: 8
   follow_Distance: 15
   enemy_CurrentState: 0
-  waitAttackTime: 1
+  move_Speed: 1
+  walk_Speed: 0.5
+  waitAttackTime: 4
 --- !u!114 &5337929122759477401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -943,7 +949,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 196697611209335388}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b0aeef4ae287434588899d7774fe5d8, type: 3}
   m_Name: 

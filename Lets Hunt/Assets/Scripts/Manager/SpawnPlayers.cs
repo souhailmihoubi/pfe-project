@@ -19,9 +19,9 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
     {
         animator = GetComponent<Animator>();
 
-        randomPosition = new Vector3(Random.Range(minX, maxX), 11.486f, Random.Range(minY, maxY));
+        randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minY, maxY));
 
-        characterValue = PlayerPrefs.GetInt("SelectedCharacterIndex");
+        characterValue = SaveManager.instance.currentHunter;
     }
 
     public void Update()
@@ -54,59 +54,3 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
         animator = playerPrefab.GetComponent<Animator>();
     }
 }
-
-
-
-
-
-
-/*using Photon.Pun;
-using System.IO;
-using UnityEngine;
-
-public class SpawnPlayers : MonoBehaviourPunCallbacks
-{
-    private GameObject playerPrefab;
-    private Animator animator;
-
-    public float minX, minY, maxX, maxY;
-
-    Vector3 randomPosition;
-
-    private int characterValue;
-
-
-    public void Start()
-    {
-        animator = GetComponent<Animator>();
-
-        randomPosition = new Vector3(Random.Range(minX, maxX), 11.486f, Random.Range(minY, maxY));
-
-        characterValue = PlayerPrefs.GetInt("SelectedCharacterIndex");
-
-        AddCharacter(characterValue);
-
-    }
-
-    public void AddCharacter(int whichCharacter)
-    {
-
-        if (whichCharacter == 0)
-        {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "frog"), randomPosition, Quaternion.identity);
-        }
-        else if (whichCharacter == 1)
-        {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "bomber"), randomPosition, Quaternion.identity);
-        }
-        else if (whichCharacter == 2)
-        {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "archerGirl"), randomPosition, Quaternion.identity);
-        }
-
-        //playerPrefab.transform.parent = transform;
-
-        animator = playerPrefab.GetComponent<Animator>();
-
-    }
-}*/

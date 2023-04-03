@@ -69,17 +69,8 @@ public class Timer : MonoBehaviourPunCallbacks
     }
     public override void OnLeftRoom()
     {
-        // Find the GameManager instance
-        GameManager gameManager = FindObjectOfType<GameManager>();
-
-        // Update the coin balance text in the main menu
-        if (gameManager != null)
-        {
-            gameManager.UpdateCoinBalanceText(gameManager.coinBalance);
-        }
 
         SceneManager.LoadScene("MainMenu");
-
         
     }
 

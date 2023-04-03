@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +23,7 @@ public class EnemyHealth : MonoBehaviourPunCallbacks
     void Start()
     {
         coinAnimator = GetComponent<Animator>();
+
         xpAnimator = GetComponent<Animator>();
 
 
@@ -37,7 +38,9 @@ public class EnemyHealth : MonoBehaviourPunCallbacks
 
         if (currentHealth <= 0f)
         {
-                Vector3 randomPos = UnityEngine.Random.insideUnitSphere * 1f;
+                Vector3 randomPos0 = UnityEngine.Random.insideUnitSphere * 1f;
+
+                Vector3 randomPos = new Vector3(randomPos0.x, 0, randomPos0.z);
 
                 Vector3 coinPos = transform.position + randomPos;
 
@@ -49,17 +52,14 @@ public class EnemyHealth : MonoBehaviourPunCallbacks
                 GameObject xp = PhotonNetwork.Instantiate(xpPrefab.name, xpPos, Quaternion.identity);
 
                 coinAnimator = coinPrefab.GetComponent<Animator>();
+
                 xpAnimator = xpPrefab.GetComponent<Animator>();
 
                 PhotonNetwork.Destroy(gameObject);
         }
     }
-}
-
-
-
-
-/*using Photon.Pun;
+}*/
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -78,8 +78,22 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     private float updateSpeedSeconds = 0.5f;
 
+    public Animator coinAnimator;
+    public Animator xpAnimator;
+
+    // The coin prefab to spawn
+    public GameObject coinPrefab;
+
+    public GameObject xpPrefab;
+
+    PhotonView photonView;
+
     void Start()
     {
+        photonView = GetComponent<PhotonView>();
+        coinAnimator = GetComponent<Animator>();
+        xpAnimator = GetComponent<Animator>();
+
         currentHealth = startingHealth;
         UpdateUI();
     }
@@ -92,13 +106,30 @@ public class EnemyHealth : MonoBehaviour
         if (currentHealth <= 0f)
         {
             currentHealth = 0f;
-            Destroy(gameObject);
-            //Play death animation
+
+                Vector3 randomPos0 = UnityEngine.Random.insideUnitSphere * 1f;
+
+                Vector3 randomPos = new Vector3(randomPos0.x, 0, randomPos0.z);
+
+                Vector3 coinPos = transform.position + randomPos;
+
+                Vector3 xpPos = transform.position;
+
+
+                GameObject coin = PhotonNetwork.Instantiate(coinPrefab.name, coinPos, Quaternion.identity);
+
+                GameObject xp = PhotonNetwork.Instantiate(xpPrefab.name, xpPos, Quaternion.identity);
+
+                coinAnimator = coinPrefab.GetComponent<Animator>();
+
+                xpAnimator = xpPrefab.GetComponent<Animator>();
+
+                PhotonNetwork.Destroy(gameObject);
         }
 
         UpdateUI();
 
-        //photonView.RPC("UpdateHealth", RpcTarget.Others, currentHealth);
+        photonView.RPC("UpdateHealth", RpcTarget.Others, currentHealth);
 
     }
 
@@ -155,4 +186,4 @@ public class EnemyHealth : MonoBehaviour
             UpdateUI();
         }
     }
-}*/
+}

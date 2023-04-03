@@ -36,7 +36,7 @@ public class EnemySpawn : MonoBehaviour
         {
             spawnTimer = 0.0f;
 
-            Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 11.486f, Random.Range(minZ, maxZ));
+            Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
 
             GameObject enemyPrefab = null;
             switch (level)

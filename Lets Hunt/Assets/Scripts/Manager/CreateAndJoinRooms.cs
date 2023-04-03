@@ -15,14 +15,10 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public List<string> roomIds = new List<string>();   // a list to store generated room IDs
 
-
     public void CreateRoom()
     {
-
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
         string roomId = "";
-
         bool idExists = true;
 
         while (idExists)
@@ -34,16 +30,27 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
             }
             idExists = roomIds.Contains(roomId);
         }
+
         roomIds.Add(roomId);
 
-        PhotonNetwork.CreateRoom(roomId, new Photon.Realtime.RoomOptions { MaxPlayers = x, IsOpen = false });
+        var roomOptions = new Photon.Realtime.RoomOptions
+        {
+            MaxPlayers = x,
+            IsOpen = false,
+            CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() {
+            { "Map", SaveManager.instance.currentMap }
+        },
+            CustomRoomPropertiesForLobby = new[] { "Map" }
+        };
+
+        PhotonNetwork.CreateRoom(roomId, roomOptions);
 
         PlayerPrefs.SetString("roomId", roomId);
         PlayerPrefs.SetInt("friends", 1);
 
-
         print("Room ID: " + roomId);
     }
+
 
     public void JoinRoom()
     {
@@ -68,8 +75,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        //Debug.Log("Master : " + PhotonNetwork.IsMasterClient + "| Players in room : " + x);
-
-        PhotonNetwork.LoadLevel("city");
+       
+        PhotonNetwork.LoadLevel("waiting");
+ 
     }
 }

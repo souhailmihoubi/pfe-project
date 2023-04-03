@@ -14,7 +14,10 @@ public class PlayerAttack : MonoBehaviour
     public float attackCooldown = 2f;
     private float lastAttackTime = 0f;
 
+
     PlayerMove playerMove;
+
+    EnemyHealth enemyHealth;
 
     //------Rotation Variables------
     public float speed = 1f;
@@ -41,7 +44,9 @@ public class PlayerAttack : MonoBehaviour
         {
             // Detect enemies within attack range
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+
             float closestDistance = float.MaxValue;
+
             EnemyHealth closestEnemy = null;
 
             foreach (Collider hitCollider in hitColliders)
@@ -50,8 +55,8 @@ public class PlayerAttack : MonoBehaviour
                 {
                     if (playerMove.isMoving == false)
                     {
-                        // Rotate player towards closest enemy
                         Vector3 direction = (hitCollider.transform.position - transform.position).normalized;
+
                         StartRotating();
 
                         float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
@@ -71,6 +76,12 @@ public class PlayerAttack : MonoBehaviour
                 closestEnemy.TakeDamage(attackDamage);
                 _animatorController.PlayAttack();
                 isAttacking = true;
+                if(closestEnemy.currentHealth <= 0)
+                {
+                    _animatorController.StopAttack();
+                }
+
+           
 
 
                 if (playerMove.isMoving == true)
@@ -101,8 +112,6 @@ public class PlayerAttack : MonoBehaviour
 
         LookCoroutine = StartCoroutine(LookAt());
     }
-
-
 
     private IEnumerator LookAt()
     {

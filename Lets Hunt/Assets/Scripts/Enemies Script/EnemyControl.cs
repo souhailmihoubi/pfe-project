@@ -16,6 +16,7 @@ public enum EnemyState
 
 public class EnemyControl : MonoBehaviour
 {
+    [SerializeField] private float damageAmount = 5f;
     [SerializeField] private float attack_Distance = 2f;
     [SerializeField] private float alert_attack_Distance = 8f;
     [SerializeField] private float follow_Distance = 15f;
@@ -27,21 +28,25 @@ public class EnemyControl : MonoBehaviour
     private EnemyState enemy_LastState = EnemyState.IDLE;
 
     private Transform playerTarget;
+
     private Vector3 initialPostion;
 
-    private float move_Speed = 3f;
-    private float walk_Speed = 2f;
+    [SerializeField] private float move_Speed = 2f;
+    [SerializeField] private float walk_Speed = 1f;
 
-    private CharacterController charController;
+
     private Vector3 whereToMove = Vector3.zero;
 
     //attack variables
     private float currentAttackTime;
+
     [SerializeField] private float waitAttackTime = 1f;
 
     private Animator anim;
     private bool finished_Animation = true;
     private bool finished_Movement = true;
+
+    PlayerHealth playerHealth;
 
     //Navigation variables
     private NavMeshAgent navAgent;
@@ -53,8 +58,10 @@ public class EnemyControl : MonoBehaviour
     void Awake()
     {
         playerTarget = GameObject.FindWithTag("Player").transform;
+
+        playerHealth = playerTarget.GetComponent<PlayerHealth>();
+
         navAgent = GetComponent<NavMeshAgent>();
-        charController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
 
         initialPostion = transform.position;
@@ -66,12 +73,7 @@ public class EnemyControl : MonoBehaviour
 
     void Update()
     {
-        //IF Health is <= 0 we will set the state of death
-        if (enemyHealth.currentHealth <= 0)
-        {
-            enemy_CurrentState = EnemyState.DEATH;
-        }
-
+       
         if (enemy_CurrentState != EnemyState.DEATH)
         {
             enemy_CurrentState = SetEnemyState(enemy_CurrentState, enemy_LastState, enemyToPlayerDistance);
@@ -94,19 +96,7 @@ public class EnemyControl : MonoBehaviour
         }
         else
         {
-            anim.SetBool("Die", true);
-
-            charController.enabled = false;
-
             navAgent.enabled = false;
-
-            if (!anim.IsInTransition(0) && anim.GetCurrentAnimatorStateInfo(0).IsName("Die")
-            && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
-            {
-
-                Destroy(this.gameObject, 1f);
-
-            }
         }
     }
 
@@ -170,6 +160,7 @@ public class EnemyControl : MonoBehaviour
         else if (curState == EnemyState.ATTACK)
         {
             anim.SetBool("Run", false);
+
             whereToMove.Set(0f, 0f, 0f);
 
             navAgent.SetDestination(transform.position);
@@ -181,6 +172,8 @@ public class EnemyControl : MonoBehaviour
                 
                 anim.SetBool("Attack", true);
 
+                playerHealth.TakeDamage(damageAmount);
+
                 finished_Animation = false;
 
                 currentAttackTime = 0f;
@@ -188,6 +181,7 @@ public class EnemyControl : MonoBehaviour
             else
             {
                 anim.SetBool("Attack", false);
+
                 currentAttackTime += Time.deltaTime;
             }
         }
@@ -232,11 +226,11 @@ public class EnemyControl : MonoBehaviour
 
     }
 
-   /*void OnDrawGizmosSelected()
+   void OnDrawGizmosSelected()
     {
         // Draw attack range gizmo in scene view
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, attack_Distance);
-    }*/
+    }
 }
 

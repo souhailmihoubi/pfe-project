@@ -19,7 +19,9 @@ public class EnemyAttack : MonoBehaviour
     void Awake()
     {
         playerTarget = GameObject.FindWithTag("Player").transform;
+
         anim = GetComponent<Animator>();
+
         playerHealth = playerTarget.GetComponent<PlayerHealth>();
     }
 
@@ -66,13 +68,20 @@ public class EnemyAttack : MonoBehaviour
             {
                 playerHealth.TakeDamage(damageAmount);
 
-                if (playerHealth.currentHealth <= 0)
-                {
-                    Destroy(gameObject, 3f);
-                }
+                anim.SetBool("Attack", true);
+
+                print("enemy attacking");
+
             }
         }
     }
+
+   /* void OnDrawGizmosSelected()
+    {
+        // Draw attack range gizmo in scene view
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, damageDistance);
+    }*/
 
     //----------------
 
