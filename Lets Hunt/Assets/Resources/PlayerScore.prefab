@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 279.73, y: 45.992}
+  m_AnchoredPosition: {x: -30.058, y: 0}
+  m_SizeDelta: {x: 275.455, y: 45.992}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1513588679611757233
 CanvasRenderer:
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: {fileID: 8276141431792530303}
   killsText: {fileID: 8276141432309061754}
+  playerKills: {fileID: 0}
 --- !u!1 &8276141431792530273
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +197,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Souhail
+  m_text: Player Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -259,7 +260,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 38.906677, y: 0, z: -20.57302, w: 0}
+  m_margin: {x: -39.723038, y: 0, z: -54.116325, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -300,7 +301,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 75, y: -0}
+  m_AnchoredPosition: {x: 39, y: -0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8276141432309061753

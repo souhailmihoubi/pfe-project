@@ -19476,6 +19476,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5481540170469807714, guid: deea305407db1cd4e8a535e2bf523ee6, type: 3}
+--- !u!114 &1782834264 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1368759211100266674, guid: b76710d3482391a4a935177573bde104, type: 3}
+  m_PrefabInstance: {fileID: 1368759211809244394}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1786608638 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -391268320553695201, guid: deea305407db1cd4e8a535e2bf523ee6, type: 3}
@@ -21123,6 +21134,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8545447256379345787, guid: 384709da75398d544b0f2f224ed7ab46, type: 3}
+--- !u!114 &1935307375 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1368759211520259717, guid: b76710d3482391a4a935177573bde104, type: 3}
+  m_PrefabInstance: {fileID: 1368759211809244394}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1942094467 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6603916019775632963, guid: deea305407db1cd4e8a535e2bf523ee6, type: 3}
@@ -23504,6 +23526,74 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347639321}
     m_Modifications:
+    - target: {fileID: 1368759210586413144, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759210586413144, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759210586413144, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 285.54102
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759210586413144, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -405
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211100266674, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211100266684, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_Name
+      value: playerKills
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211100266684, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_TagString
+      value: playerKills
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211520259717, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_text
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211520259719, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_TagString
+      value: coinsCollected
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211637603955, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211637603955, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211637603955, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 279.78198
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211637603955, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 325.70898
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211637603955, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -165
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211637603955, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -447
+      objectReference: {fileID: 0}
+    - target: {fileID: 1368759211637603959, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: kills
+      value: 
+      objectReference: {fileID: 1782834264}
+    - target: {fileID: 1368759211637603959, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: coinsCollected
+      value: 
+      objectReference: {fileID: 1935307375}
     - target: {fileID: 4601286530229966217, guid: b76710d3482391a4a935177573bde104, type: 3}
       propertyPath: m_Pivot.x
       value: 0

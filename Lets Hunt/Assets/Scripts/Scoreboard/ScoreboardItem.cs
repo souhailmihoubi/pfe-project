@@ -12,8 +12,14 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
     [SerializeField] TextMeshProUGUI playerName;
     [SerializeField] TextMeshProUGUI killsText;
 
+    [SerializeField] TextMeshProUGUI playerKills;
+
     Player player;
 
+    private void Start()
+    {
+        playerKills = GameObject.FindGameObjectWithTag("playerKills").GetComponentInParent<TextMeshProUGUI>();
+    }
     public void Initialize(Player player)
     {
         playerName.text = player.NickName;
@@ -28,6 +34,8 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
         if(player.CustomProperties.TryGetValue("kills",out object kills))
         {
             killsText.text = kills.ToString();
+
+            playerKills.text = kills.ToString();
         }
     }
 

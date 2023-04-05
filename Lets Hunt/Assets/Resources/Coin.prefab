@@ -156,3 +156,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 5
   coinsCollected: 0
+  coins: {fileID: 0}
