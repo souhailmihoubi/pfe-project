@@ -2275,11 +2275,10 @@ GameObject:
   - component: {fileID: 6394538101388588471}
   - component: {fileID: 44192404161013005}
   - component: {fileID: 5834262359594711824}
-  - component: {fileID: 495577497290377479}
+  - component: {fileID: 9196619998684240456}
   - component: {fileID: 5152690751368224939}
   - component: {fileID: 3708102804744079106}
   - component: {fileID: 1380355071}
-  - component: {fileID: 9196619998684240456}
   - component: {fileID: 3023061716598880477}
   m_Layer: 0
   m_Name: archerGirl
@@ -2465,6 +2464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d3cb0bd96e56e47b55c5bfa3ebfa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kills: 0
 --- !u!114 &6632672315773636185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2522,16 +2522,16 @@ MonoBehaviour:
   healthText: {fileID: 7602717239213081905}
   healthFill: {fileID: 7802160363209946118}
   updateSpeedSeconds: 0.5
---- !u!114 &495577497290377479
+--- !u!114 &9196619998684240456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6303585481674807422}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8dddd63dc5d7ce43a776ba41a2d9fc3, type: 3}
+  m_Script: {fileID: 11500000, guid: cfc5693a00ba92e43bd58f42315a7ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 3
@@ -2541,7 +2541,7 @@ MonoBehaviour:
     m_Bits: 8
   _animatorController: {fileID: 44192404161013005}
   attackCooldown: 2
-  speed: 100
+  speed: 1
   isAttacking: 0
 --- !u!114 &5152690751368224939
 MonoBehaviour:
@@ -2585,27 +2585,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRange: {x: 300, y: 300, z: 1.3156}
---- !u!114 &9196619998684240456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303585481674807422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfc5693a00ba92e43bd58f42315a7ed1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRange: 3
-  attackDamage: 10
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  _animatorController: {fileID: 44192404161013005}
-  attackCooldown: 2
-  speed: 1
-  isAttacking: 0
 --- !u!114 &3023061716598880477
 MonoBehaviour:
   m_ObjectHideFlags: 0

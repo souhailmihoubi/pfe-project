@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using TMPro;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
@@ -66,17 +66,32 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         base.OnJoinRandomFailed(returnCode, message);
 
-        //no room available
-
         PhotonNetwork.CreateRoom("random_room", new Photon.Realtime.RoomOptions { MaxPlayers = x, IsOpen = true });
 
         PlayerPrefs.SetInt("friends", 0);
     }
 
+    public override void OnConnectedToMaster()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+    }
+
     public override void OnJoinedRoom()
     {
-       
-        PhotonNetwork.LoadLevel("waiting");
- 
+
+            int selectedMap = SaveManager.instance.currentMap;
+
+            if(selectedMap == 0)
+            {
+                PhotonNetwork.LoadLevel("nature");
+
+            }
+            else  
+
+            if (selectedMap == 1)
+            {
+                PhotonNetwork.LoadLevel("city");
+            }
     }
 }

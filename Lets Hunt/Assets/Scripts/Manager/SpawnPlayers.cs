@@ -6,10 +6,9 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 {
     private GameObject playerPrefab;
     private Animator animator;
+    [SerializeField] private Transform[] spawnPoints;
 
-    public float minX, minY, maxX, maxY;
-
-    Vector3 randomPosition;
+    private int spawnPoint;
 
     private int characterValue;
 
@@ -19,9 +18,16 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
     {
         animator = GetComponent<Animator>();
 
-        randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minY, maxY));
-
         characterValue = SaveManager.instance.currentHunter;
+
+        spawnPoint = PlayerPrefs.GetInt("spawnPoints",0);
+
+        if(spawnPoint > 4)
+        {
+            PlayerPrefs.SetInt("spawnPoints", 0);
+
+        }
+
     }
 
     public void Update()
@@ -36,21 +42,24 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 
     public void AddCharacter(int whichCharacter)
     {
-        print("spawn");
 
         if (whichCharacter == 0)
         {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "frog"), randomPosition, Quaternion.identity);
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "frog"), spawnPoints[spawnPoint].position , Quaternion.identity); ; ;
         }
         else if (whichCharacter == 1)
         {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "bomber"), randomPosition, Quaternion.identity);
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "bomber"), spawnPoints[spawnPoint].position, Quaternion.identity);
         }
         else if (whichCharacter == 2)
         {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "archerGirl"), randomPosition, Quaternion.identity);
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "archerGirl"), spawnPoints[spawnPoint].position, Quaternion.identity);
         }
 
         animator = playerPrefab.GetComponent<Animator>();
+
+        PlayerPrefs.SetInt("spawnPoints", spawnPoint++);
+
+
     }
 }

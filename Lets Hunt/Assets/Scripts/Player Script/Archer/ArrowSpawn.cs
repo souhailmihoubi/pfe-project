@@ -21,11 +21,16 @@ public class ArrowSpawn : MonoBehaviour
         if (arrowPrefab != null && arrowSpawnPosition != null && enemy != null)
         {
             GameObject arrow = Instantiate(arrowPrefab, arrowSpawnPosition.position, arrowSpawnPosition.rotation);
+
             arrow.transform.LookAt(enemy);
+
             Rigidbody arrowRigidbody = arrow.GetComponent<Rigidbody>();
+
             if (arrowRigidbody != null)
             {
                 arrowRigidbody.AddForce(arrow.transform.forward * 500f);
+
+
             }
             if (view.IsMine)
             {
@@ -55,7 +60,7 @@ public class ArrowSpawn : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             triggered = true;
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }

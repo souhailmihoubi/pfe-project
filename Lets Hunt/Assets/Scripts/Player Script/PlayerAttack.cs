@@ -2,6 +2,8 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
 
     PlayerMove playerMove;
 
+
     EnemyHealth enemyHealth;
 
     //------Rotation Variables------
@@ -26,10 +29,14 @@ public class PlayerAttack : MonoBehaviour
     public bool isAttacking = false;
 
     PhotonView view;
+    PlayerItem playerItem;
+
+
 
     private void Start()
     {
         view = GetComponent<PhotonView>();
+        playerItem = GetComponent<PlayerItem>();
     }
     private void Awake()
     {
@@ -79,6 +86,9 @@ public class PlayerAttack : MonoBehaviour
                 if(closestEnemy.currentHealth <= 0)
                 {
                     _animatorController.StopAttack();
+
+                    
+                    playerItem.GetKill();
                 }
 
            
@@ -182,4 +192,8 @@ public class PlayerAttack : MonoBehaviour
     {
         attackCooldown = newSpeed;
     }
+
+
+   
+    
 }

@@ -124,13 +124,19 @@ public class EnemyHealth : MonoBehaviour
 
                 xpAnimator = xpPrefab.GetComponent<Animator>();
 
-                PhotonNetwork.Destroy(gameObject);
+                photonView.RPC("DestroyEnemy", RpcTarget.AllBuffered);
         }
 
         UpdateUI();
 
         photonView.RPC("UpdateHealth", RpcTarget.Others, currentHealth);
 
+    }
+
+    [PunRPC]
+    private void DestroyEnemy()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 
     public void UpdateUI()
@@ -168,10 +174,12 @@ public class EnemyHealth : MonoBehaviour
     }
 
     [PunRPC]
-    private void UpdateHealth(float newHealth)
+    private void UpdateHealth(float newHealth, PhotonMessageInfo info)
     {
         currentHealth = newHealth;
+
         UpdateUI();
+
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

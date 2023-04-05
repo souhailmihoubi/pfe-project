@@ -25,20 +25,12 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Start()
     {
-        btn = GameObject.Find("hit").GetComponent<Button>();
         currentHealth = maxHealth;
         UpdateUI();
-
-        if (photonView.IsMine)
-        {
-            btn.onClick.AddListener(ButtonOnClick);
-        }
+        photonView.RPC("UpdateHealth", RpcTarget.Others, currentHealth);
     }
 
-    void ButtonOnClick()
-    {
-        TakeDamage(10);
-    }
+
 
    
 

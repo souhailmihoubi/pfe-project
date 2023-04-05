@@ -8,7 +8,7 @@ public class AddMoney : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            SaveManager.instance.coins += 100;
+            SaveManager.instance.coins += 10;
             SaveManager.instance.Save();
         }
         else if (Input.GetKeyDown(KeyCode.Z))

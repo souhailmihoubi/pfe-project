@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class ArcherAttack : MonoBehaviour
 {
@@ -23,10 +24,15 @@ public class ArcherAttack : MonoBehaviour
     public bool isAttacking = false;
 
     PhotonView view;
+    PlayerItem playerItem;
+
+
+
 
     private void Start()
     {
         view = GetComponent<PhotonView>();
+        playerItem = GetComponent<PlayerItem>();
     }
     private void Awake()
     {
@@ -87,6 +93,16 @@ public class ArcherAttack : MonoBehaviour
                 {
                     _animatorController.StopAttack();
                     isAttacking = false;
+                }
+
+                if (closestEnemy.currentHealth <= 0)
+                {
+                    _animatorController.StopAttack();
+
+
+                    playerItem.GetKill();
+
+
                 }
             }
 
@@ -175,4 +191,6 @@ public class ArcherAttack : MonoBehaviour
     {
         attackCooldown = newSpeed;
     }
+
+   
 }

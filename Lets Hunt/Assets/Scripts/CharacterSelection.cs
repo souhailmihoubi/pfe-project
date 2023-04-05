@@ -13,6 +13,8 @@ public class CharacterSelection : MonoBehaviour
     [SerializeField] private TextMeshProUGUI price;
 
     [SerializeField] private int[] hunterPrices;
+    [SerializeField] private GameObject[] locks;
+    [SerializeField] private GameObject charLocks;
 
     public Button saveButton;
 
@@ -50,13 +52,16 @@ public class CharacterSelection : MonoBehaviour
         {
             select.gameObject.SetActive(true);
             buy.gameObject.SetActive(false);
+            locks[selectedCharacterIndex].SetActive(false);
+            charLocks.SetActive(false);
         }
         else
         {
             select.gameObject.SetActive(false);
             buy.gameObject.SetActive(true);
             price.text = hunterPrices[selectedCharacterIndex].ToString();
-
+            locks[selectedCharacterIndex].SetActive(true);
+            charLocks.SetActive(true);
             //Check if we have enough money!
 
             buy.interactable = (SaveManager.instance.coins >= hunterPrices[selectedCharacterIndex]);

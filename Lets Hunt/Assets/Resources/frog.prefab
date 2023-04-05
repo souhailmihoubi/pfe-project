@@ -978,6 +978,7 @@ MonoBehaviour:
   attackCooldown: 2
   speed: 1
   isAttacking: 0
+  kills: 0
 --- !u!114 &9026738250799129196
 MonoBehaviour:
   m_ObjectHideFlags: 0
