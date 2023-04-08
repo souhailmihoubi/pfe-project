@@ -37,10 +37,12 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         {
             MaxPlayers = x,
             IsOpen = false,
-            CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() {
+           /*CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() 
+           {
             { "Map", SaveManager.instance.currentMap }
-        },
-            CustomRoomPropertiesForLobby = new[] { "Map" }
+           },*/
+
+            //CustomRoomPropertiesForLobby = new[] { "Map" }
         };
 
         PhotonNetwork.CreateRoom(roomId, roomOptions);
@@ -73,7 +75,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
+      //  PhotonNetwork.AutomaticallySyncScene = true;
 
     }
 

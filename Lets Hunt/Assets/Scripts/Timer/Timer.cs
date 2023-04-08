@@ -12,17 +12,22 @@ public class Timer : MonoBehaviourPunCallbacks
     [SerializeField] private Image uiFill;
     [SerializeField] private TextMeshProUGUI uiText;
 
-    public GameObject movement, timer, lvl, winLoss;
+    public GameObject movement, timer, lvl;
     public int duration = 60;
     private float startTime;
 
+    PhotonView photonView;
+
     private void Start()
     {
+        photonView = GetComponent<PhotonView>();
         
         if (PhotonNetwork.IsMasterClient)
         {
             startTime = (float)PhotonNetwork.Time;
+
             photonView.RPC("SyncStartTime", RpcTarget.OthersBuffered, startTime);
+
             StartCoroutine(UpdateTimer());
 
         }
@@ -33,6 +38,7 @@ public class Timer : MonoBehaviourPunCallbacks
         while (true)
         {
             float timePassed = (float)PhotonNetwork.Time - startTime;
+
             int remainingDuration = Mathf.Max(0, duration - (int)timePassed);
 
             uiText.text = $"{remainingDuration / 60:00}:{remainingDuration % 60:00}";

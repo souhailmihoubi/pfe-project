@@ -21,10 +21,11 @@ public class GrenadeSpawn : MonoBehaviour
     if (grenadePrefab != null && grenadeSpawnPosition != null)
     {
             GameObject grenade = Instantiate(grenadePrefab, grenadeSpawnPosition.position, grenadeSpawnPosition.rotation);
-            //grenade.transform.LookAt(enemy);
 
             Debug.Log("Throw");
+            
             GrenadeScript grenadeScript = grenade.GetComponent<GrenadeScript>();
+            
             grenadeScript.ReleaseMe();
 
             // Pass the velocity of the grenade to the SpawngrenadeRPC method
@@ -39,24 +40,12 @@ public class GrenadeSpawn : MonoBehaviour
 
 
     [PunRPC]
-    private void SpawngrenadeRPC(Vector3 position, Quaternion rotation, Vector3 velocity)
+    private void SpawngrenadeRPC(Vector3 position, Quaternion rotation)
     {
         if (grenadePrefab != null && grenadeSpawnPosition != null)
         {
             GameObject grenade = Instantiate(grenadePrefab, position, rotation);
-       //     grenade.transform.LookAt(enemyPosition);
-
-    
         }
     }
 
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            triggered = true;
-           // Destroy(gameObject);
-        }
-    }
 }

@@ -61,6 +61,7 @@ MonoBehaviour:
   - OnGrenadeReleased
   - SpawngrenadeRPC
   - RPC_GetKill
+  - RPC_UpdateCrownImage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

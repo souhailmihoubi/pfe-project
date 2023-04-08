@@ -35,7 +35,7 @@ public class SetupXPBar : MonoBehaviourPunCallbacks
 
         if (other.gameObject.CompareTag("XP") && photonView.IsMine)
         {
-            currentXP += 10;
+            currentXP += 30;
 
             if (currentXP >= maxXP)
             {

@@ -46,3 +46,5 @@ public class Scoreboard : MonoBehaviourPunCallbacks
         RemoveScoreboardItem(otherPlayer);
     }
 }
+
+

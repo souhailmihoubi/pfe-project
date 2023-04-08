@@ -88,6 +88,8 @@ public class EnemyHealth : MonoBehaviour
 
     PhotonView photonView;
 
+    public bool enemyDead = false;
+
     void Start()
     {
         photonView = GetComponent<PhotonView>();
@@ -95,6 +97,7 @@ public class EnemyHealth : MonoBehaviour
         xpAnimator = GetComponent<Animator>();
 
         currentHealth = startingHealth;
+
         UpdateUI();
     }
 
@@ -107,24 +110,9 @@ public class EnemyHealth : MonoBehaviour
         {
             currentHealth = 0f;
 
-                Vector3 randomPos0 = UnityEngine.Random.insideUnitSphere * 1f;
+            enemyDead = true;
 
-                Vector3 randomPos = new Vector3(randomPos0.x, 0, randomPos0.z);
-
-                Vector3 coinPos = transform.position + randomPos;
-
-                Vector3 xpPos = transform.position;
-
-
-                GameObject coin = PhotonNetwork.Instantiate(coinPrefab.name, coinPos, Quaternion.identity);
-
-                GameObject xp = PhotonNetwork.Instantiate(xpPrefab.name, xpPos, Quaternion.identity);
-
-                coinAnimator = coinPrefab.GetComponent<Animator>();
-
-                xpAnimator = xpPrefab.GetComponent<Animator>();
-
-                photonView.RPC("DestroyEnemy", RpcTarget.AllBuffered);
+            photonView.RPC("DestroyEnemy", RpcTarget.AllBuffered);
         }
 
         UpdateUI();
@@ -133,9 +121,31 @@ public class EnemyHealth : MonoBehaviour
 
     }
 
+    public void SpawnCoinsXP()
+    {
+        Vector3 randomPos0 = UnityEngine.Random.insideUnitSphere * 1f;
+
+        Vector3 randomPos = new Vector3(randomPos0.x, 0.15f, randomPos0.z);
+
+        Vector3 coinPos = transform.position + randomPos;
+
+        Vector3 xpPos = transform.position;
+
+
+        GameObject coin = PhotonNetwork.Instantiate(coinPrefab.name, coinPos, Quaternion.identity);
+
+        GameObject xp = PhotonNetwork.Instantiate(xpPrefab.name, xpPos, Quaternion.identity);
+
+        coinAnimator = coinPrefab.GetComponent<Animator>();
+
+        xpAnimator = xpPrefab.GetComponent<Animator>();
+
+    }
+
     [PunRPC]
     private void DestroyEnemy()
     {
+        SpawnCoinsXP();
         PhotonNetwork.Destroy(gameObject);
     }
 

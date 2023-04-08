@@ -1,3 +1,4 @@
+using GG.Infrastructure.Utils.Swipe;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,8 +7,13 @@ using UnityEngine;
 public class ArrowSpawn : MonoBehaviour
 {
     public GameObject arrowPrefab;
-    public bool triggered = false; 
+    public bool triggered = false;
     public Transform arrowSpawnPosition;
+
+    Vector3 _direction;
+
+    public float arrowSpeed = 20f;
+
 
     PhotonView view;
 
@@ -16,28 +22,31 @@ public class ArrowSpawn : MonoBehaviour
         view = GetComponent<PhotonView>();
     }
 
-    public void SpawnArrow(Transform enemy)
+    public void SetTarget(Transform enemy)
     {
-        if (arrowPrefab != null && arrowSpawnPosition != null && enemy != null)
-        {
-            GameObject arrow = Instantiate(arrowPrefab, arrowSpawnPosition.position, arrowSpawnPosition.rotation);
+        Debug.Log("taget set");
 
-            arrow.transform.LookAt(enemy);
+         _direction = (enemy.position - transform.position).normalized;
+
+        transform.LookAt(enemy);
+    }
+
+    public void SpawnArrow()
+    {
+
+            GameObject arrow = Instantiate(arrowPrefab, arrowSpawnPosition.position, arrowSpawnPosition.rotation);
 
             Rigidbody arrowRigidbody = arrow.GetComponent<Rigidbody>();
 
-            if (arrowRigidbody != null)
-            {
-                arrowRigidbody.AddForce(arrow.transform.forward * 500f);
+            arrowRigidbody.AddForce(_direction * arrowSpeed, ForceMode.VelocityChange);
 
 
-            }
-            if (view.IsMine)
+            //Destroy(gameObject, 4f);
+
+           /* if (view.IsMine)
             {
                 view.RPC("SpawnArrowRPC", RpcTarget.Others, arrowSpawnPosition.position, arrowSpawnPosition.rotation, enemy.position);
-            }
-           
-        }
+            }*/
     }
 
     [PunRPC]
@@ -47,11 +56,6 @@ public class ArrowSpawn : MonoBehaviour
         {
             GameObject arrow = Instantiate(arrowPrefab, position, rotation);
             arrow.transform.LookAt(enemyPosition);
-            Rigidbody arrowRigidbody = arrow.GetComponent<Rigidbody>();
-            if (arrowRigidbody != null)
-            {
-                arrowRigidbody.AddForce(arrow.transform.forward * 500f);
-            }
         }
     }
 

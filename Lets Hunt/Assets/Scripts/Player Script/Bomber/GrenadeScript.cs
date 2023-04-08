@@ -5,12 +5,9 @@ public class GrenadeScript : MonoBehaviourPun, IPunObservable
 {
     public GameObject parentBone;
     public Rigidbody rigid;
-    private Vector3 lastPos;
-    private Vector3 curVel;
 
     private bool isReleased = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         if (photonView.IsMine)
@@ -20,19 +17,8 @@ public class GrenadeScript : MonoBehaviourPun, IPunObservable
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (photonView.IsMine && isReleased)
-        {
-            // Perform any necessary updates to the state of the grenade
-            // on the local client
-        }
-    }
-
     public void ReleaseMe()
     {
-        print("med");
         transform.parent = null;
         rigid.useGravity = true;
         transform.rotation = parentBone.transform.rotation;

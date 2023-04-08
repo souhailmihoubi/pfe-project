@@ -2182,14 +2182,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5942092984973149656}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.487, y: 0.746, z: -0.023}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.141, y: 0.731, z: 0.007}
   m_LocalScale: {x: 0.3, y: 3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6643096653160579780}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6106525765005261605
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,6 +2543,9 @@ MonoBehaviour:
   attackCooldown: 2
   speed: 1
   isAttacking: 0
+  preformArrowAttack: 1
+  arrowPrefab: {fileID: 1892282335434615718, guid: 7bfdfad6db797a141ab3301df17a05fa, type: 3}
+  arrowSpawnPoint: {fileID: 3340479976585642088}
 --- !u!114 &5152690751368224939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2592,7 +2595,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6303585481674807422}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 110c3acd18520234d833957c57cd668d, type: 3}
   m_Name: 
@@ -2600,6 +2603,7 @@ MonoBehaviour:
   arrowPrefab: {fileID: 1892282335434615718, guid: 7bfdfad6db797a141ab3301df17a05fa, type: 3}
   triggered: 0
   arrowSpawnPosition: {fileID: 3340479976585642088}
+  arrowSpeed: 5
 --- !u!1 &6348218897883909003
 GameObject:
   m_ObjectHideFlags: 0

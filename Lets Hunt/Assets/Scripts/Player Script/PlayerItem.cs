@@ -6,9 +6,7 @@ using Photon.Realtime;
 using System.Linq;
 using System.IO;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
-
-
-
+using UnityEngine.UI;
 
 public class PlayerItem : MonoBehaviour
 {
@@ -16,6 +14,7 @@ public class PlayerItem : MonoBehaviour
 
     public int kills;
 
+ 
 
     private void Awake()
     {
@@ -31,9 +30,6 @@ public class PlayerItem : MonoBehaviour
     void RPC_GetKill()
     {
         kills++;
-
-
-
         Hashtable hash = new Hashtable();
         hash.Add("kills", kills);
 
@@ -44,4 +40,5 @@ public class PlayerItem : MonoBehaviour
     {
         return FindObjectsOfType<PlayerItem>().SingleOrDefault(x => x.photonView.Owner == player);
     }
+
 }

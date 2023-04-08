@@ -12,6 +12,7 @@ TagManager:
   - CoinText
   - playerKills
   - coinsCollected
+  - crown
   layers:
   - Default
   - TransparentFX

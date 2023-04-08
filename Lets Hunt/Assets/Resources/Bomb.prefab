@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5206516512554375071}
   - component: {fileID: 4693842461122068628}
   - component: {fileID: 3191335056974406378}
+  - component: {fileID: 7951409003914996889}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -129,3 +130,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentBone: {fileID: 1954799129562931615}
   rigid: {fileID: 4693842461122068628}
+--- !u!114 &7951409003914996889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954799129562931615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

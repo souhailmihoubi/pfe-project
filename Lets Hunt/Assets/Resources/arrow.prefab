@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 2785115712516849337}
   - component: {fileID: 90706076101249651}
   - component: {fileID: -2809252129606866123}
+  - component: {fileID: 1618731512388720575}
+  - component: {fileID: -1142090545800890708}
   m_Layer: 0
-  m_Name: new_arrow
+  m_Name: arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892282335434615718}
-  m_LocalRotation: {x: 1, y: -1.9106855e-15, z: -0.00000004371139, w: -0.00000004371139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.51202106, y: 0.0000029206276, z: 0.777256}
   m_LocalScale: {x: 0.007, y: 0.006777631, z: 0.055360213}
   m_ConstrainProportionsScale: 0
@@ -93,9 +95,42 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892282335434615718}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6b33926ca33ee549b8bcaf60ec6af49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arrowSpeed: 5
+  triggered: 0
+--- !u!136 &1618731512388720575
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892282335434615718}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 5.32
+  m_Height: 11.02
+  m_Direction: 2
+  m_Center: {x: 0.06923521, y: 0.10385311, z: -4.096549}
+--- !u!114 &-1142090545800890708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892282335434615718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f801e4d88442964b9826ae3017f0670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  target: {fileID: 0}
+  targetSet: 1
+  targetType: Enemy
+  velocity: 10
+  stopProjectile: 0

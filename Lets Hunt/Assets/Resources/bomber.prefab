@@ -1459,6 +1459,37 @@ Transform:
   m_Father: {fileID: 7953574086125839677}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2808229838181032002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4383318183089962533}
+  m_Layer: 0
+  m_Name: bombSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4383318183089962533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808229838181032002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.064, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8756262565331928899}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2819716771712617655
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,6 +2106,7 @@ Transform:
   - {fileID: 8121078344248226019}
   - {fileID: 2215107041678974855}
   - {fileID: 1516520754581924981}
+  - {fileID: 4383318183089962533}
   m_Father: {fileID: 4873611997010365731}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2359,7 +2391,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5832502282022930909}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.34366676, z: -0, w: 0.9390917}
   m_LocalPosition: {x: 0, y: 0, z: 0.04667155}
   m_LocalScale: {x: 0.022880001, y: 0.007626667, z: 0.007626667}
   m_ConstrainProportionsScale: 0
@@ -3788,7 +3820,6 @@ GameObject:
   - component: {fileID: 1945409162589834187}
   - component: {fileID: 4311362434465474139}
   - component: {fileID: 4776654515789911270}
-  - component: {fileID: -4002128352220583981}
   - component: {fileID: 1792932897504775442}
   m_Layer: 0
   m_Name: bomber
@@ -3907,7 +3938,6 @@ MonoBehaviour:
   - {fileID: 2397570816593972366}
   - {fileID: 1085786707020264778}
   - {fileID: 3623046722478984666}
-  - {fileID: -4002128352220583981}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3983,6 +4013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d3cb0bd96e56e47b55c5bfa3ebfa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kills: 0
 --- !u!114 &6016420226357531537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4103,21 +4134,6 @@ MonoBehaviour:
   attackCooldown: 2
   speed: 1
   isAttacking: 0
-  kills: 0
---- !u!114 &-4002128352220583981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7849980251958396378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a84c1214433f147b8d5415dfe63e0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBone: {fileID: 0}
-  rigid: {fileID: 0}
 --- !u!114 &1792932897504775442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4132,7 +4148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenadePrefab: {fileID: 1954799129562931615, guid: e78ac8b48c24bbc4da3d4816fec48523, type: 3}
   triggered: 0
-  grenadeSpawnPosition: {fileID: 0}
+  grenadeSpawnPosition: {fileID: 4383318183089962533}
 --- !u!1 &7953282565815325182
 GameObject:
   m_ObjectHideFlags: 0

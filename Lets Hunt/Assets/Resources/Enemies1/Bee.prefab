@@ -558,11 +558,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1730108145899877430}
   - component: {fileID: 1730108145906867158}
-  - component: {fileID: 8250709738174518394}
   - component: {fileID: 762839647743545010}
   - component: {fileID: 4747205543732520520}
   - component: {fileID: 8532170369728997599}
-  - component: {fileID: 4095465216791392734}
   - component: {fileID: -956262046159619609}
   - component: {fileID: -1094395161292519091}
   m_Layer: 3
@@ -621,24 +619,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!143 &8250709738174518394
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730108145899448342}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.55, z: 0}
 --- !u!195 &762839647743545010
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -648,7 +628,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1730108145899448342}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.97
+  m_Radius: 0.38
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -657,8 +637,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: -0.09
+  m_Height: 1.14
+  m_BaseOffset: -0.36
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &4747205543732520520
@@ -673,7 +653,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd0fe4664f99724f9a0d73f5f7c6bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 60
+  startingHealth: 20
   currentHealth: 0
   healthText: {fileID: 2360886670375814066}
   healthFill: {fileID: 5263666103653209044}
@@ -682,6 +662,7 @@ MonoBehaviour:
   xpAnimator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   coinPrefab: {fileID: 5262009865782563152, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   xpPrefab: {fileID: 1194177653417973902, guid: edff57fa1d4abb340b4f50d87246d543, type: 3}
+  enemyDead: 0
 --- !u!114 &8532170369728997599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,20 +683,6 @@ MonoBehaviour:
   move_Speed: 1
   walk_Speed: 0.5
   waitAttackTime: 4
---- !u!114 &4095465216791392734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1730108145899448342}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b0aeef4ae287434588899d7774fe5d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 5
-  damageDistance: 2
 --- !u!114 &-956262046159619609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,8 +716,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.62, y: 1.03, z: 0.99}
+  m_Center: {x: 0, y: 0.86, z: 0}
 --- !u!1 &1730108145899448344
 GameObject:
   m_ObjectHideFlags: 0

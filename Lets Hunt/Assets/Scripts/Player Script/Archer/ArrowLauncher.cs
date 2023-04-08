@@ -3,60 +3,43 @@ using Photon.Pun;
 
 public class ArrowLauncher : MonoBehaviourPunCallbacks
 {
-    public Rigidbody arrowPrefab;
-    public Transform arrowSpawnPoint;
-    public float arrowSpeed = 10f;
-    public float cooldown = 1f;
-    PlayerAttack playerAttack;
+    public float damage;
+    public float range;
+    public EnemyHealth target;
 
-    private bool canShoot = true;
+    public bool targetSet;
+    public string targetType;
+    public float velocity = 5f;
 
-    private void Start()
+    public bool stopProjectile;
+
+    public bool getKill = false;
+
+    private void Update()
     {
-        playerAttack = GetComponent<PlayerAttack>();
-    }
-
-    void Update()
-    {
-        if (photonView.IsMine && canShoot && Input.GetKeyDown("space"))
+        if (target)
         {
-            photonView.RPC("SpawnArrow", RpcTarget.AllViaServer);
-            canShoot = false;
-            Invoke("ResetCooldown", cooldown);
-        }
-    }
-
-    [PunRPC]
-    void SpawnArrow()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, playerAttack.attackRange);
-        float closestDistance = float.MaxValue;
-        Transform closestEnemy = null;
-
-        foreach (Collider hitCollider in hitColliders)
-        {
-            if (hitCollider.CompareTag("Enemy"))
+            if(target == null)
             {
-                float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
-                if (distance < closestDistance)
+                Destroy(gameObject);
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, velocity * Time.deltaTime);
+
+            if(!stopProjectile)
+            {
+                if (Vector3.Distance(transform.position, target.transform.position) <= 0.5f)
                 {
-                    closestEnemy = hitCollider.transform;
-                    closestDistance = distance;
+                    if(targetType == "Enemy")
+                    {
+                        target.GetComponent<EnemyHealth>().TakeDamage(damage);
+                        stopProjectile = true;
+                        Destroy(gameObject) ;
+                    }
+
                 }
             }
         }
-
-        if (closestEnemy != null)
-        {
-            Vector3 direction = closestEnemy.position - arrowSpawnPoint.position;
-            Rigidbody arrow = Instantiate(arrowPrefab, arrowSpawnPoint.position, Quaternion.LookRotation(direction));
-            arrow.AddForce(direction.normalized * arrowSpeed, ForceMode.Impulse);
-            Destroy(arrow.gameObject, 3f);
-        }
-    }
-
-    void ResetCooldown()
-    {
-        canShoot = true;
     }
 }
+

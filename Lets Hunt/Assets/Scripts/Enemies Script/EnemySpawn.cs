@@ -65,7 +65,6 @@ public class EnemySpawn : MonoBehaviour
         {
             levelTimer = 0.0f;
             level = 1;
-            print("Level 1 ");
             photonView.RPC("ChangeLevel", RpcTarget.All, level);
         }
         else if (levelTimer >= level2Duration && level == 1)
@@ -73,15 +72,11 @@ public class EnemySpawn : MonoBehaviour
             levelTimer = 0.0f;
             level = 2;
 
-            print("Level 2 ");
-
             photonView.RPC("ChangeLevel", RpcTarget.All, level);
         }
         else if (levelTimer >= level3Duration && level == 2)
         {
             levelTimer = 0.0f;
-
-            print("Level 3 ");
 
             photonView.RPC("DisableScript", RpcTarget.All);// disable this script on all players
 

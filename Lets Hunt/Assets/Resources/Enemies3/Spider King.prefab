@@ -1236,7 +1236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd0fe4664f99724f9a0d73f5f7c6bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 280
+  startingHealth: 20
   currentHealth: 0
   healthText: {fileID: 718762982389601448}
   healthFill: {fileID: 5018121385493664300}
@@ -1245,6 +1245,7 @@ MonoBehaviour:
   xpAnimator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   coinPrefab: {fileID: 5262009865782563152, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   xpPrefab: {fileID: 1194177653417973902, guid: edff57fa1d4abb340b4f50d87246d543, type: 3}
+  enemyDead: 0
 --- !u!114 &4384691047454633783
 MonoBehaviour:
   m_ObjectHideFlags: 0

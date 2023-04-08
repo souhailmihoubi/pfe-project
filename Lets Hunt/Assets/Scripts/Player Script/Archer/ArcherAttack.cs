@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
@@ -27,6 +28,11 @@ public class ArcherAttack : MonoBehaviour
     PlayerItem playerItem;
 
 
+    [Header("Arrow Attack Variabels")]
+    public bool preformArrowAttack = true;
+    public GameObject arrowPrefab;
+    public Transform arrowSpawnPoint;
+    EnemyHealth closestEnemy;
 
 
     private void Start()
@@ -42,13 +48,13 @@ public class ArcherAttack : MonoBehaviour
 
     void Update()
     {
-        // Check if enough time has elapsed since the last attack
         if (Time.time - lastAttackTime >= attackCooldown)
         {
-            // Detect enemies within attack range
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange);
+
             float closestDistance = float.MaxValue;
-            EnemyHealth closestEnemy = null;
+
+            closestEnemy = null;
 
             foreach (Collider hitCollider in hitColliders)
             {
@@ -59,8 +65,11 @@ public class ArcherAttack : MonoBehaviour
                         // Rotate player towards closest enemy
                         Vector3 direction = (hitCollider.transform.position - transform.position).normalized;
                         StartRotating();
+                        // Vector3 direction = (hitCollider.transform.position - transform.position).normalized;
+                        // transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 
                         float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+
                         if (distance < closestDistance)
                         {
                             closestEnemy = hitCollider.GetComponent<EnemyHealth>();
@@ -72,38 +81,13 @@ public class ArcherAttack : MonoBehaviour
             }
 
             // Attack the closest enemy
+
             if (closestEnemy != null)
             {
-                closestEnemy.TakeDamage(attackDamage);
-                _animatorController.PlayAttack();
-                isAttacking = true;
-
-                // Spawn arrow
-                ArrowSpawn arrowSpawn = GetComponent<ArrowSpawn>();
-                if (arrowSpawn != null)
-                {
-                    arrowSpawn.SpawnArrow(closestEnemy.transform);
-                    if (arrowSpawn.triggered)
+                    if (preformArrowAttack)
                     {
-                        closestEnemy.TakeDamage(attackDamage); 
-                    }
-                }
-
-                if (playerMove.isMoving == true)
-                {
-                    _animatorController.StopAttack();
-                    isAttacking = false;
-                }
-
-                if (closestEnemy.currentHealth <= 0)
-                {
-                    _animatorController.StopAttack();
-
-
-                    playerItem.GetKill();
-
-
-                }
+                        StartCoroutine(RangedAttackInterval());
+                    }  
             }
 
             // Reset attack timer
@@ -111,14 +95,50 @@ public class ArcherAttack : MonoBehaviour
         }
     }
 
-
-    void OnDrawGizmosSelected()
+    IEnumerator RangedAttackInterval()
     {
-        // Draw attack range gizmo in scene view
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        preformArrowAttack = false;
+        _animatorController.PlayAttack();
+
+        yield return new WaitForSeconds(attackCooldown / ((100 + attackCooldown) * 0.01f));
+
+        if (closestEnemy == null)
+        {
+            _animatorController.StopAttack();
+            preformArrowAttack = true;
+        }
+}
+    public void RangedAttack()
+    {
+        if (closestEnemy != null)
+        {
+            SpawnRangedProj("Enemy", closestEnemy);
+
+        }
+
+        preformArrowAttack = true;
     }
 
+    void SpawnRangedProj(string typeOfEnemy, EnemyHealth targetedEnemyObj)
+    {
+
+        Instantiate(arrowPrefab, arrowSpawnPoint.transform.position, Quaternion.identity);
+
+        if (typeOfEnemy == "Enemy")
+        {
+            arrowPrefab.GetComponent<ArrowLauncher>().damage = attackDamage;
+
+            //arrowPrefab.GetComponent<ArrowLauncher>().range = attackRange;
+
+            arrowPrefab.GetComponent<ArrowLauncher>().targetType = typeOfEnemy;
+
+            arrowPrefab.GetComponent<ArrowLauncher>().target = targetedEnemyObj;
+
+            arrowPrefab.GetComponent<ArrowLauncher>().targetSet = true;
+
+      
+        }
+    }
     public void StartRotating()
     {
         if (LookCoroutine != null)
@@ -160,6 +180,12 @@ public class ArcherAttack : MonoBehaviour
         }
     }
 
+    void OnDrawGizmosSelected()
+    {
+        // Draw attack range gizmo in scene view
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
 
     public void IncreaseDamage(float amount)
     {
@@ -192,5 +218,5 @@ public class ArcherAttack : MonoBehaviour
         attackCooldown = newSpeed;
     }
 
-   
+
 }

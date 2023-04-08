@@ -2142,7 +2142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd0fe4664f99724f9a0d73f5f7c6bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 170
+  startingHealth: 20
   currentHealth: 0
   healthText: {fileID: 986170214817168582}
   healthFill: {fileID: 986170214182831998}

@@ -7,13 +7,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private Rigidbody _rigidbody;
+    public Rigidbody _rigidbody;
 
     private FixedJoystick _joystick;
 
     [SerializeField] private AnimatorController _animatorController;
 
     [SerializeField] private float _moveSpeed;
+
 
     PhotonView view;
 
