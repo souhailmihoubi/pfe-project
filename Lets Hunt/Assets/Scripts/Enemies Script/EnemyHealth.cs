@@ -117,7 +117,7 @@ public class EnemyHealth : MonoBehaviour
 
         UpdateUI();
 
-        photonView.RPC("UpdateHealth", RpcTarget.Others, currentHealth);
+        photonView.RPC("UpdateHealth", RpcTarget.AllBuffered, currentHealth);
 
     }
 
@@ -145,8 +145,16 @@ public class EnemyHealth : MonoBehaviour
     [PunRPC]
     private void DestroyEnemy()
     {
+        Destroy(gameObject);
+       // SpawnCoinsXP();
+
+        //StartCoroutine(SpawnCoinsXPCoroutine());
+    }
+
+    private IEnumerator SpawnCoinsXPCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds
         SpawnCoinsXP();
-        PhotonNetwork.Destroy(gameObject);
     }
 
     public void UpdateUI()

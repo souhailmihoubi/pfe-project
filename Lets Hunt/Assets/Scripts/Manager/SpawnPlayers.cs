@@ -42,24 +42,26 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 
     public void AddCharacter(int whichCharacter)
     {
+        int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+
+        int spawnIndex = (actorNumber - 1) % spawnPoints.Length;
 
         if (whichCharacter == 0)
         {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "frog"), spawnPoints[spawnPoint].position , Quaternion.identity); ; ;
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "frog"), spawnPoints[spawnIndex].position, Quaternion.identity); ; ;
         }
         else if (whichCharacter == 1)
         {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "bomber"), spawnPoints[spawnPoint].position, Quaternion.identity);
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "bomber"), spawnPoints[spawnIndex].position, Quaternion.identity);
         }
         else if (whichCharacter == 2)
         {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "archerGirl"), spawnPoints[spawnPoint].position, Quaternion.identity);
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "archerGirl"), spawnPoints[spawnIndex].position, Quaternion.identity);
         }
 
         animator = playerPrefab.GetComponent<Animator>();
 
-        PlayerPrefs.SetInt("spawnPoints", spawnPoint++);
-
-
+        //PlayerPrefs.SetInt("spawnPoints", (spawnIndex + 1) % spawnPoints.Length);
     }
+
 }

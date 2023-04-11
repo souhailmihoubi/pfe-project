@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7142222868202739534}
   - component: {fileID: 5206516512554375071}
   - component: {fileID: 4693842461122068628}
-  - component: {fileID: 3191335056974406378}
   - component: {fileID: 7951409003914996889}
+  - component: {fileID: -52703799321038210}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 1954799129562931615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 111.718025, y: 0.720145, z: 150.76756}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.120000005, y: 0.120000005, z: 0.120000005}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -95,7 +95,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954799129562931615}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -116,20 +116,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3191335056974406378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1954799129562931615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6a84c1214433f147b8d5415dfe63e0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentBone: {fileID: 1954799129562931615}
-  rigid: {fileID: 4693842461122068628}
 --- !u!114 &7951409003914996889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +138,22 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-52703799321038210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954799129562931615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f801e4d88442964b9826ae3017f0670, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  range: 0
+  target: {fileID: 0}
+  targetSet: 1
+  targetType: Enemy
+  velocity: 5
+  stopProjectile: 0

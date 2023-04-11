@@ -2391,7 +2391,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5832502282022930909}
-  m_LocalRotation: {x: 0, y: -0.34366676, z: -0, w: 0.9390917}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.04667155}
   m_LocalScale: {x: 0.022880001, y: 0.007626667, z: 0.007626667}
   m_ConstrainProportionsScale: 0
@@ -3819,8 +3819,7 @@ GameObject:
   - component: {fileID: 5325324513244206569}
   - component: {fileID: 1945409162589834187}
   - component: {fileID: 4311362434465474139}
-  - component: {fileID: 4776654515789911270}
-  - component: {fileID: 1792932897504775442}
+  - component: {fileID: -7015273928089448591}
   m_Layer: 0
   m_Name: bomber
   m_TagString: Player
@@ -4113,7 +4112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRange: {x: 300, y: 300, z: 1.3156}
---- !u!114 &4776654515789911270
+--- !u!114 &-7015273928089448591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4122,7 +4121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7849980251958396378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62534c32e9c26e2478bb1ae5d3d75298, type: 3}
+  m_Script: {fileID: 11500000, guid: cfc5693a00ba92e43bd58f42315a7ed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
@@ -4134,21 +4133,9 @@ MonoBehaviour:
   attackCooldown: 2
   speed: 1
   isAttacking: 0
---- !u!114 &1792932897504775442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7849980251958396378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5003fbed42a6e1141b8dc41e83cae340, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  grenadePrefab: {fileID: 1954799129562931615, guid: e78ac8b48c24bbc4da3d4816fec48523, type: 3}
-  triggered: 0
-  grenadeSpawnPosition: {fileID: 4383318183089962533}
+  preformArrowAttack: 1
+  arrowPrefab: {fileID: 1954799129562931615, guid: e78ac8b48c24bbc4da3d4816fec48523, type: 3}
+  arrowSpawnPoint: {fileID: 4383318183089962533}
 --- !u!1 &7953282565815325182
 GameObject:
   m_ObjectHideFlags: 0

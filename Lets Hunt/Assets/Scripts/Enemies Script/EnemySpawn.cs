@@ -1,24 +1,29 @@
 using UnityEngine;
 using System.Collections;
 using Photon.Pun;
-using System.IO;
+using Photon.Realtime;
+using Photon.Pun.Demo.PunBasics;
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawn : MonoBehaviourPun
 {
     public GameObject[] level1Enemies;
     public GameObject[] level2Enemies;
     public GameObject[] level3Enemies;
+    public GameObject warningPrefab;
 
-    public float spawnInterval = 3f;
-    public float level1Duration = 60.0f;
-    public float level2Duration = 60.0f;
-    public float level3Duration = 60.0f;
+    public float[] topRight;
+    public float[] topLeft;
+    public float[] botRight;
+    public float[] botLeft;
 
-    private float spawnTimer = 0.0f;
-    private float levelTimer = 0.0f;
-    private int level = 0;
+    public float warningDuration = 3f;
 
-    public float minX, minZ, maxX, maxZ;
+    private float minX, minZ, maxX, maxZ;
+
+    Vector3 playerPosition;
+
+    private bool playerEnteredRange = false;
+
 
     PhotonView photonView;
 
@@ -26,122 +31,97 @@ public class EnemySpawn : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
     }
-
     void Update()
     {
-        spawnTimer += Time.deltaTime;
-        levelTimer += Time.deltaTime;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
-        if (spawnTimer >= spawnInterval)
+        
+
+        foreach (GameObject player in players)
         {
-            spawnTimer = 0.0f;
+
+             playerPosition = player.transform.position;
+
+             photonView.RPC("UpdatePosition", RpcTarget.AllBuffered, playerPosition);
+
+             // print (playerPosition);
+
+             if (CheckIfPlayerInRange(playerPosition, topRight) || CheckIfPlayerInRange(playerPosition, topLeft) ||
+                 CheckIfPlayerInRange(playerPosition, botRight) || CheckIfPlayerInRange(playerPosition, botLeft))
+             {
+                 if (!playerEnteredRange)
+                 {
+                     playerEnteredRange = true;
+                     StartCoroutine(SpawnEnemiesWithDelay());
+                     Debug.Log("aw d5al");
+                 }
+             }
+             else
+             {
+                 if (playerEnteredRange)
+                 {
+                     playerEnteredRange = false;
+                     StopCoroutine(SpawnEnemiesWithDelay());
+                     Debug.Log("aw 5raj");
+                 }
+             }
+        }
+    }
+
+    IEnumerator SpawnEnemiesWithDelay()
+    {
+        while (playerEnteredRange)
+        {
+            yield return new WaitForSeconds(5);
+
+            SpawnRandomEnemy();
+        }
+    }
+
+    void SpawnRandomEnemy()
+    {
+        GameObject warning = null;
+
+        for (int i = 0; i < 2; i++)
+        {
+            int randomIndex = Random.Range(0, level1Enemies.Length);
 
             Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
 
-            GameObject enemyPrefab = null;
-            switch (level)
-            {
-                case 0:
-                    enemyPrefab = level1Enemies[Random.Range(0, level1Enemies.Length)];
-                    PhotonNetwork.Instantiate(Path.Combine("Enemies1", enemyPrefab.name), randomPosition, Quaternion.identity);
+            warning = PhotonNetwork.Instantiate(warningPrefab.name, randomPosition, Quaternion.identity);
 
-                    break;
-                case 1:
-                    enemyPrefab = level2Enemies[Random.Range(0, level2Enemies.Length)];
-                    PhotonNetwork.Instantiate(Path.Combine("Enemies2", enemyPrefab.name), randomPosition, Quaternion.identity);
-
-                    break;
-                case 2:
-                    enemyPrefab = level3Enemies[Random.Range(0, level3Enemies.Length)];
-                    PhotonNetwork.Instantiate(Path.Combine("Enemies3", enemyPrefab.name), randomPosition, Quaternion.identity);
-
-                    break;
-            }
-
-
+            StartCoroutine(DestroyWarningPrefab(warning, 3f, level1Enemies[randomIndex], randomPosition));
         }
+    }
 
-        if (levelTimer >= level1Duration && level == 0)
+    bool CheckIfPlayerInRange(Vector3 playerPosition, float[] spotName)
+    {
+        minX = spotName[0];
+        maxX = spotName[1];
+        minZ = spotName[2];
+        maxZ = spotName[3];
+
+        if (playerPosition.x >= minX && playerPosition.x <= maxX && playerPosition.z >= minZ && playerPosition.z <= maxZ)
         {
-            levelTimer = 0.0f;
-            level = 1;
-            photonView.RPC("ChangeLevel", RpcTarget.All, level);
+            return true;
         }
-        else if (levelTimer >= level2Duration && level == 1)
+        else
         {
-            levelTimer = 0.0f;
-            level = 2;
-
-            photonView.RPC("ChangeLevel", RpcTarget.All, level);
+            return false;
         }
-        else if (levelTimer >= level3Duration && level == 2)
-        {
-            levelTimer = 0.0f;
+    }
 
-            photonView.RPC("DisableScript", RpcTarget.All);// disable this script on all players
+    IEnumerator DestroyWarningPrefab(GameObject warningPrefab, float delay, GameObject enemyPrefab, Vector3 randomPosition)
+    {
+        yield return new WaitForSeconds(delay);
 
-            enabled = false;  // disable this script on the local client
-        }
+        PhotonNetwork.Instantiate(enemyPrefab.name, randomPosition, Quaternion.identity);
+        PhotonNetwork.Destroy(warningPrefab);
     }
 
     [PunRPC]
-    void ChangeLevel(int newLevel)
+    void UpdatePosition(Vector3 newPosition)
     {
-        level = newLevel;
+        playerPosition = newPosition;
     }
-
-    [PunRPC]
-    void DisableScript()
-    {
-        enabled = false;
-    }
-
-
-    /*  void Update()
-      {
-          // update timers
-          spawnTimer += Time.deltaTime;
-          levelTimer += Time.deltaTime;
-
-          // check if it's time to spawn an enemy
-          if (spawnTimer >= spawnInterval)
-          {
-              spawnTimer = 0.0f;
-
-              GameObject enemyPrefab = null;
-              switch (level)
-              {
-                  case 0:
-                      enemyPrefab = level1Enemies[Random.Range(0, level1Enemies.Length)];
-                      break;
-                  case 1:
-                      enemyPrefab = level2Enemies[Random.Range(0, level2Enemies.Length)];
-                      break;
-                  case 2:
-                      enemyPrefab = level3Enemies[Random.Range(0, level3Enemies.Length)];
-                      break;
-              }
-
-              Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 11.486f, Random.Range(minZ, maxZ));
-
-              Instantiate(enemyPrefab, randomPosition, Quaternion.identity);
-          }
-
-          if (levelTimer >= level1Duration && level == 0)
-          {
-              levelTimer = 0.0f;
-              level = 1;
-          }
-          else if (levelTimer >= level2Duration && level == 1)
-          {
-              levelTimer = 0.0f;
-              level = 2;
-          }
-          else if (levelTimer >= level3Duration && level == 2)
-          {
-              levelTimer = 0.0f;
-
-              enabled = false;  // disable this script
-          }
-      }*/
 }

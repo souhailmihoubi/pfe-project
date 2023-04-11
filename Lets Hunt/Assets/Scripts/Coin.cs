@@ -17,20 +17,26 @@ public class Coin : MonoBehaviourPunCallbacks
       //  coins = GameObject.FindGameObjectWithTag("coinsCollected").GetComponentInParent<TextMeshProUGUI>();
     }
 
+    [PunRPC]
+    private void CollectCoin()
+    {
+        isCollected = true;
+
+        //hnee naamlou l animation w sound effect
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!isCollected && other.CompareTag("Player") && PhotonNetwork.IsConnected)
         {
-            isCollected = true;
+            photonView.RPC("CollectCoin", RpcTarget.AllBuffered);
 
             SaveManager.instance.coins += value;
+
             SaveManager.instance.Save();
-
-            //coinsCollected = int.Parse(coins.text) + value;
-
-          //  coins.text = coinsCollected.ToString();
 
             PhotonNetwork.Destroy(gameObject);
         }
     }
+
 }

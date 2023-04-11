@@ -27,7 +27,7 @@ public class GrenadeScript : MonoBehaviourPun, IPunObservable
         isReleased = true;
 
         // Notify other clients that the grenade has been released
-        photonView.RPC("OnGrenadeReleased", RpcTarget.Others);
+        //photonView.RPC("OnGrenadeReleased", RpcTarget.Others);
     }
 
     [PunRPC]

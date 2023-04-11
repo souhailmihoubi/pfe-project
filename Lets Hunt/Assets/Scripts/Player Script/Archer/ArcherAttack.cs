@@ -62,17 +62,18 @@ public class ArcherAttack : MonoBehaviour
                 {
                     if (playerMove.isMoving == false)
                     {
-                        // Rotate player towards closest enemy
                         Vector3 direction = (hitCollider.transform.position - transform.position).normalized;
+
                         StartRotating();
-                        // Vector3 direction = (hitCollider.transform.position - transform.position).normalized;
-                        // transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+
+                         //transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 
                         float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
 
                         if (distance < closestDistance)
                         {
                             closestEnemy = hitCollider.GetComponent<EnemyHealth>();
+
                             closestDistance = distance;
                         }
                     }
@@ -84,10 +85,13 @@ public class ArcherAttack : MonoBehaviour
 
             if (closestEnemy != null)
             {
+                if (Vector3.Distance(transform.position, closestEnemy.transform.position) <= attackRange)
+                {
                     if (preformArrowAttack)
                     {
                         StartCoroutine(RangedAttackInterval());
-                    }  
+                    }
+                }
             }
 
             // Reset attack timer
@@ -98,6 +102,7 @@ public class ArcherAttack : MonoBehaviour
     IEnumerator RangedAttackInterval()
     {
         preformArrowAttack = false;
+
         _animatorController.PlayAttack();
 
         yield return new WaitForSeconds(attackCooldown / ((100 + attackCooldown) * 0.01f));
@@ -107,13 +112,15 @@ public class ArcherAttack : MonoBehaviour
             _animatorController.StopAttack();
             preformArrowAttack = true;
         }
-}
+
+        
+
+    }
     public void RangedAttack()
     {
         if (closestEnemy != null)
         {
             SpawnRangedProj("Enemy", closestEnemy);
-
         }
 
         preformArrowAttack = true;
@@ -122,13 +129,9 @@ public class ArcherAttack : MonoBehaviour
     void SpawnRangedProj(string typeOfEnemy, EnemyHealth targetedEnemyObj)
     {
 
-        Instantiate(arrowPrefab, arrowSpawnPoint.transform.position, Quaternion.identity);
-
-        if (typeOfEnemy == "Enemy")
+        if ( typeOfEnemy == "Enemy" && targetedEnemyObj != null )
         {
             arrowPrefab.GetComponent<ArrowLauncher>().damage = attackDamage;
-
-            //arrowPrefab.GetComponent<ArrowLauncher>().range = attackRange;
 
             arrowPrefab.GetComponent<ArrowLauncher>().targetType = typeOfEnemy;
 
@@ -136,7 +139,7 @@ public class ArcherAttack : MonoBehaviour
 
             arrowPrefab.GetComponent<ArrowLauncher>().targetSet = true;
 
-      
+            Instantiate(arrowPrefab, arrowSpawnPoint.transform.position, Quaternion.identity);
         }
     }
     public void StartRotating()
@@ -148,8 +151,6 @@ public class ArcherAttack : MonoBehaviour
 
         LookCoroutine = StartCoroutine(look());
     }
-
-
 
     private IEnumerator look()
     {

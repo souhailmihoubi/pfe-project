@@ -2279,7 +2279,6 @@ GameObject:
   - component: {fileID: 5152690751368224939}
   - component: {fileID: 3708102804744079106}
   - component: {fileID: 1380355071}
-  - component: {fileID: 3023061716598880477}
   m_Layer: 0
   m_Name: archerGirl
   m_TagString: Player
@@ -2588,22 +2587,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentRange: {x: 300, y: 300, z: 1.3156}
---- !u!114 &3023061716598880477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6303585481674807422}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110c3acd18520234d833957c57cd668d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrowPrefab: {fileID: 1892282335434615718, guid: 7bfdfad6db797a141ab3301df17a05fa, type: 3}
-  triggered: 0
-  arrowSpawnPosition: {fileID: 3340479976585642088}
-  arrowSpeed: 5
 --- !u!1 &6348218897883909003
 GameObject:
   m_ObjectHideFlags: 0

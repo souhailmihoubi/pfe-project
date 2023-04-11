@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class ArrowLauncher : MonoBehaviourPunCallbacks
+public class GranadeLauncher : MonoBehaviourPunCallbacks
 {
     public float damage;
     public float range;

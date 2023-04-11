@@ -16,6 +16,7 @@ public class SaveManager : MonoBehaviour
     public int coins;
     public int gems;
     public int thunders;
+    public int playerID;
 
     public bool[] huntersUnlocked = new bool[3] { true,true,false };
     
@@ -49,6 +50,7 @@ public class SaveManager : MonoBehaviour
             gems = data.gems;
             thunders = data.thunders;
             huntersUnlocked = data.huntersUnlocked;
+            playerID = data.playerID;
 
             if(data.huntersUnlocked == null)
             {
@@ -77,6 +79,7 @@ public class SaveManager : MonoBehaviour
         data.gems = gems;
         data.thunders = thunders;
         data.huntersUnlocked = huntersUnlocked;
+        data.playerID = playerID;
 
         bf.Serialize(file, data);
         file.Close();
@@ -99,6 +102,7 @@ class PlayerData_Storage
     public int gems;
     public int thunders;
     public bool[] huntersUnlocked;
+    public int playerID;
 
 
 }
