@@ -82,18 +82,18 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
 
-            int selectedMap = SaveManager.instance.currentMap;
+        int selectedMap = SaveManager.instance.currentMap;
 
-            if(selectedMap == 0)
-            {
-                PhotonNetwork.LoadLevel("nature");
+        if(selectedMap == 0)
+        {
+            PhotonNetwork.LoadLevel("nature");
 
-            }
-            else  
+        }
+        else  
 
-            if (selectedMap == 1)
-            {
-                PhotonNetwork.LoadLevel("city");
-            }
+        if (selectedMap == 1)
+        {
+            PhotonNetwork.LoadLevel("city");
+        }
     }
 }

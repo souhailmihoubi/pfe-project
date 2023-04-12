@@ -67,6 +67,11 @@ MonoBehaviour:
   - SpawnEnemiesForPlayer
   - UpdatePlayerEnteredRange
   - UpdatePlayerPosition
+  - SyncCrownImage
+  - SyncInitialize
+  - SyncStatsUpdate
+  - UpdateCrownImage
+  - UpdateStats
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

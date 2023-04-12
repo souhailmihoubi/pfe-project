@@ -14634,27 +14634,11 @@ MonoBehaviour:
   - {fileID: 3359781518568219812, guid: 7c2c859bd304c0646834feb759ffd7ea, type: 3}
   - {fileID: 8447018275376623916, guid: 53de58d8e3ad87249abd644531113757, type: 3}
   warningPrefab: {fileID: 4978190571073790576, guid: 99369deb4b77e674b996024f0d5b7e1e, type: 3}
-  topRight:
-  - 17
-  - 29
-  - 8
-  - 20
-  topLeft:
-  - -1.17
-  - 10.73
-  - 8.31
-  - 20
-  botRight:
-  - 18
-  - 29
-  - -10
-  - 1.8
-  botLeft:
-  - -1.19
-  - 11.24
-  - -10
-  - 2
   warningDuration: 3
+  minX: -2
+  minZ: -10
+  maxX: 29
+  maxZ: 20
 --- !u!4 &1407661955
 Transform:
   m_ObjectHideFlags: 0

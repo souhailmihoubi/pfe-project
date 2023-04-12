@@ -92,6 +92,8 @@ public class ArcherAttack : MonoBehaviour
                         StartCoroutine(RangedAttackInterval());
                     }
                 }
+
+               
             }
 
             // Reset attack timer
@@ -112,8 +114,12 @@ public class ArcherAttack : MonoBehaviour
             _animatorController.StopAttack();
             preformArrowAttack = true;
         }
+        if (closestEnemy.currentHealth <= 0)
+        {
+            playerItem.GetKill();
+        }
 
-        
+
 
     }
     public void RangedAttack()
