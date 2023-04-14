@@ -8,57 +8,31 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System.Data;
 using UnityEngine.UI;
 
+
 public class ScoreboardItem : MonoBehaviourPunCallbacks
 {
-    [SerializeField] TextMeshProUGUI playerName;
-    [SerializeField] TextMeshProUGUI killsText;
-    [SerializeField] TextMeshProUGUI playerKills;
-    [SerializeField] Image crownImage;
+    [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private TextMeshProUGUI playerKillsText;
+    [SerializeField] private GameObject crownImage;
+    public int rankedFirst;
 
-    Player player;
-    int maxKills;
-
-    private void Start()
-    {
-        playerKills = GameObject.FindGameObjectWithTag("playerKills").GetComponentInParent<TextMeshProUGUI>();
-        crownImage.gameObject.SetActive(false);
-    }
+    private Player player;
+    private int maxKills;
 
     public void Initialize(Player player)
     {
-        playerName.text = player.NickName;
         this.player = player;
+        
+        playerNameText.text = player.NickName;
+
         UpdateStats();
+        
+        UpdateCrownImage();
     }
 
     private void Update()
     {
-        if (PhotonNetwork.LocalPlayer == null) return;
-
-        object killsObj;
-        if (player.CustomProperties.TryGetValue("kills", out killsObj))
-        {
-            int playerKills = (int)killsObj;
-
-            if (playerKills > maxKills)
-            {
-                maxKills = playerKills;
-                UpdateCrownImage();
-            }
-            else if (playerKills < maxKills && player.Equals(PhotonNetwork.LocalPlayer))
-            {
-                crownImage.gameObject.SetActive(false);
-            }
-        }
-    }
-
-    void UpdateStats()
-    {
-        if (player.CustomProperties.TryGetValue("kills", out object kills))
-        {
-            killsText.text = kills.ToString();
-            playerKills.text = kills.ToString();
-        }
+        UpdateCrownImage();
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -66,27 +40,57 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
         if (targetPlayer == player && changedProps.ContainsKey("kills"))
         {
             UpdateStats();
+            
             UpdateCrownImage();
         }
     }
 
-    void UpdateCrownImage()
+    private void UpdateStats()
     {
-        if (PhotonNetwork.LocalPlayer == null) return;
-
-        object killsObj;
-        if (player.CustomProperties.TryGetValue("kills", out killsObj))
+        if (player.CustomProperties.TryGetValue("kills", out object kills))
         {
-            int playerKills = (int)killsObj;
+            playerKillsText.text = kills.ToString();
+        }
+    }
 
-            if (player.Equals(PhotonNetwork.LocalPlayer) && playerKills == maxKills)
+    private void UpdateCrownImage()
+    {
+        ScoreboardItem[] scoreboardItems = FindObjectsOfType<ScoreboardItem>();
+
+        int maxKills = -1;
+
+        ScoreboardItem maxKillsPlayer = null;
+
+        foreach (ScoreboardItem scoreboardItem in scoreboardItems)
+        {
+            if (scoreboardItem.player.CustomProperties.TryGetValue("kills", out object kills))
             {
-                crownImage.gameObject.SetActive(true);
+                int playerKills = (int)kills;
+
+                if (playerKills > maxKills)
+                {
+                    maxKills = playerKills;
+
+                    maxKillsPlayer = scoreboardItem;
+                }
             }
-            else
+        }
+
+        if (maxKillsPlayer != null && maxKillsPlayer.player == player)
+        {
+            crownImage.SetActive(true);
+
+            foreach (ScoreboardItem scoreboardItem in scoreboardItems)
             {
-                crownImage.gameObject.SetActive(false);
+                if (scoreboardItem != maxKillsPlayer)
+                {
+                    scoreboardItem.crownImage.SetActive(false);
+                }
             }
+        }
+        else
+        {
+            crownImage.SetActive(false);
         }
     }
 }

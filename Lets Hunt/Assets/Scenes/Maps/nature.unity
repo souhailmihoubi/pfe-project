@@ -4755,10 +4755,8 @@ MonoBehaviour:
   - {fileID: 8992765846657963910, guid: c1ae99679944e404b8bdcb75d7405a43, type: 3}
   - {fileID: 3359781518568219812, guid: 7bc10d2eb3b14ad418509290a032169a, type: 3}
   - {fileID: 1300342873632802416, guid: 419656afde1d2c149993e334c8d3d8be, type: 3}
-  spawnInterval: 5
-  level1Duration: 10
-  level2Duration: 1
-  level3Duration: 1
+  warningPrefab: {fileID: 0}
+  warningDuration: 3
   minX: 101
   minZ: 142
   maxX: 123
@@ -4800,7 +4798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1258224107
 Transform:
   m_ObjectHideFlags: 0

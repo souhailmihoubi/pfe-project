@@ -289,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCountText: {fileID: 1588044311}
   roomId: {fileID: 1433840810}
-  x: 2
+  maxPlayers: 1
 --- !u!4 &347588023
 Transform:
   m_ObjectHideFlags: 0

@@ -218,10 +218,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ff3f83244ced4469e940f1a5435b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: {fileID: 8276141431792530303}
-  killsText: {fileID: 8276141432309061754}
-  playerKills: {fileID: 0}
-  crownImage: {fileID: 918236459164457242}
+  playerNameText: {fileID: 8276141431792530303}
+  playerKillsText: {fileID: 8276141432309061754}
+  crownImage: {fileID: 2440953011923100093}
+  rankedFirst: 0
 --- !u!1 &8276141431792530273
 GameObject:
   m_ObjectHideFlags: 0

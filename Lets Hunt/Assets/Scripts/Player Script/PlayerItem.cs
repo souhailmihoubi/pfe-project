@@ -14,31 +14,39 @@ public class PlayerItem : MonoBehaviour
 
     public int kills;
 
- 
+    Hashtable hash;
+
 
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+
+        hash = new Hashtable();
+
     }
 
     public void GetKill()
     {
-        photonView.RPC(nameof(RPC_GetKill), photonView.Owner);
+        photonView.RPC("RPC_GetKill", photonView.Owner);
     }
 
     [PunRPC]
     void RPC_GetKill()
     {
         kills++;
-        Hashtable hash = new Hashtable();
-        hash.Add("kills", kills);
 
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        hash["kills"] = kills;
+
+        print(kills);
+
+        photonView.Owner.SetCustomProperties(hash);
     }
+
 
     public static PlayerItem Find(Player player)
     {
         return FindObjectsOfType<PlayerItem>().SingleOrDefault(x => x.photonView.Owner == player);
     }
+
 
 }

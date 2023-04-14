@@ -66,7 +66,7 @@ public class Timer : MonoBehaviourPunCallbacks
 
         //GameManager.instance.AddCoins(PlayerPrefs.GetInt("Coins"));
 
-        PhotonNetwork.LeaveRoom();
+       // RemoveRoom();
 
 
 
@@ -80,6 +80,18 @@ public class Timer : MonoBehaviourPunCallbacks
         
     }
 
+   /* void RemoveRoom()
+    {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+
+        PhotonNetwork.LeaveRoom();
+
+        string roomId = SaveManager.instance.roomId;
+
+    }
+   */
     [PunRPC]
     private void SyncStartTime(float startTime)
     {
