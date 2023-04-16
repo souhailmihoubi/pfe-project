@@ -4096,6 +4096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxXP: 100
+  XPvalue: 25
   currentXP: 0
   currentLevel: 1
   levelUpScript: {fileID: 5325324513244206569}

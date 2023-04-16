@@ -27,17 +27,17 @@ public class PlayerItem : MonoBehaviour
 
     public void GetKill()
     {
+        kills++;
         photonView.RPC("RPC_GetKill", photonView.Owner);
     }
 
     [PunRPC]
     void RPC_GetKill()
     {
-        kills++;
-
+       
         hash["kills"] = kills;
 
-        print(kills);
+        print(hash["kills"]);
 
         photonView.Owner.SetCustomProperties(hash);
     }
