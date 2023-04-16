@@ -153,7 +153,12 @@ public class LevelUpScript : MonoBehaviour
 
     public void OnXPButtonClick()
     {
-        // Handle the xp button click
+        SetupXPBar setupXPBar = GetComponent<SetupXPBar>();
+
+        if(setupXPBar != null)
+        {
+            setupXPBar.IncreaseValue(5);
+        }
     }
 
 

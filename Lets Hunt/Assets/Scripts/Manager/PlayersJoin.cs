@@ -22,6 +22,8 @@ public class PlayersJoin : MonoBehaviourPunCallbacks
 
             if (PhotonNetwork.IsMasterClient)
             {
+              
+
                 int currentMap = SaveManager.instance.currentMap;
 
                 PlayerPrefs.SetInt("masterMap", currentMap);

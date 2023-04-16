@@ -121,32 +121,13 @@ public class EnemyHealth : MonoBehaviour
 
     }
 
-    public void SpawnCoinsXP()
-    {
-        Vector3 randomPos0 = UnityEngine.Random.insideUnitSphere * 1f;
-
-        Vector3 randomPos = new Vector3(randomPos0.x, 0.15f, randomPos0.z);
-
-        Vector3 coinPos = transform.position + randomPos;
-
-        Vector3 xpPos = transform.position;
-
-
-        GameObject coin = PhotonNetwork.Instantiate(coinPrefab.name, coinPos, Quaternion.identity);
-
-        GameObject xp = PhotonNetwork.Instantiate(xpPrefab.name, xpPos, Quaternion.identity);
-
-        coinAnimator = coinPrefab.GetComponent<Animator>();
-
-        xpAnimator = xpPrefab.GetComponent<Animator>();
-
-    }
+   
 
     [PunRPC]
     private void DestroyEnemy()
     {
         Destroy(gameObject);
-       // SpawnCoinsXP();
+        SpawnCoinsXP();
 
         //StartCoroutine(SpawnCoinsXPCoroutine());
     }
@@ -156,6 +137,34 @@ public class EnemyHealth : MonoBehaviour
         yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds
         SpawnCoinsXP();
     }
+
+    public void SpawnCoinsXP()
+    {
+        if (enemyDead)
+        {
+            return;
+        }
+
+        enemyDead = true;
+
+        Vector3 randomPos0 = UnityEngine.Random.insideUnitSphere * 1f;
+
+        Vector3 randomPos = new Vector3(randomPos0.x, 0.3f, randomPos0.z);
+
+        Vector3 coinPos = transform.position + randomPos;
+
+        Vector3 xpPos = new Vector3(transform.position.x, 0.3f, transform.position.z);
+
+
+        GameObject coin = PhotonNetwork.Instantiate(coinPrefab.name, coinPos, Quaternion.identity);
+
+        GameObject xp = PhotonNetwork.Instantiate(xpPrefab.name, xpPos, Quaternion.identity);
+
+        coinAnimator = coinPrefab.GetComponent<Animator>();
+
+        xpAnimator = xpPrefab.GetComponent<Animator>();
+    }
+
 
     public void UpdateUI()
     {

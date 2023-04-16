@@ -9,6 +9,8 @@ using TMPro;
 public class SetupXPBar : MonoBehaviourPunCallbacks
 {
     public int maxXP = 100;
+    public int XPvalue = 30;
+
     [SerializeField] private int currentXP = 0;
     [SerializeField] private int currentLevel = 1;
 
@@ -32,11 +34,32 @@ public class SetupXPBar : MonoBehaviourPunCallbacks
         {
             Destroy(other.gameObject);
         }
+        switch (currentLevel)
+        {
+            case 1:
+                maxXP = 100; 
+                break;
+                
+            case 2:
+                maxXP = 150;
+                break;
+                
+            case 3:
+                maxXP = 250;
+                break;
+            case 4:
+                maxXP = 350;
+                break;
+
+            default:
+                maxXP = 450;
+                break;
+        }
 
         if (other.gameObject.CompareTag("XP") && photonView.IsMine)
         {
-            currentXP += 30;
-
+            currentXP += XPvalue;
+            
             if (currentXP >= maxXP)
             {
                 currentXP = currentXP - maxXP;
@@ -107,5 +130,21 @@ public class SetupXPBar : MonoBehaviourPunCallbacks
             currentLevel = (int)stream.ReceiveNext();
             UpdateUI();
         }
+    }
+
+    public void IncreaseValue(int value)
+    {
+        XPvalue += value;
+
+        if(photonView.IsMine)
+        {
+            photonView.RPC("UpdateXPvalue", RpcTarget.AllBuffered, XPvalue);
+
+        }
+    }
+    [PunRPC]
+    private void UpdateXPvalue(int value)
+    {
+        XPvalue = value;
     }
 }
