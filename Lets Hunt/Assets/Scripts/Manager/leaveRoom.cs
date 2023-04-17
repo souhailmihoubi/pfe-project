@@ -6,11 +6,12 @@ public class leaveRoom : MonoBehaviourPunCallbacks
 
     public void OnClickLeaveRoom()
     {
+        SceneManager.LoadScene("MainMenu");
         PhotonNetwork.LeaveRoom();
     }
 
     public override void OnLeftRoom()
     {
-        SceneManager.LoadScene("MainMenu");
+        //
     }
 }

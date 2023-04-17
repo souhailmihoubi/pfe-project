@@ -76,7 +76,7 @@ public class Timer : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
 
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
         
     }
 

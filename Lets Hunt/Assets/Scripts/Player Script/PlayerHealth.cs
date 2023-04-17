@@ -23,6 +23,9 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
     private Button btn;
 
+
+    EndGamePanel endGamePanel;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -169,14 +172,29 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
         if (scoreboardItem != null)
         {
+            scoreboardItem.playerDied = true;
             scoreboardItem.PlayerOut();
+
         }
 
-        if (photonView.IsMine)
-        {
-            StartCoroutine(OnEndPanel());
-            PhotonNetwork.Disconnect();
-        }
+        endGamePanel = GameObject.FindGameObjectWithTag("resultPanel").GetComponent<EndGamePanel>();
+
+        endGamePanel.rank.text = "Rank : " + scoreboardItem.playerRank.ToString() ;
+
+        endGamePanel.thunders.text = " -5 ";
+
+        Coin coin = GetComponent<Coin>();
+
+        endGamePanel.coins.text = coin.coinsCollected.ToString() ;
+
+        PlayerItem playerItem = GetComponent<PlayerItem>();
+
+        endGamePanel.kills.text = playerItem.kills.ToString() ;
+
+        StartCoroutine(OnEndPanel());
+
+        
+
 
 
         Debug.Log("Die");
@@ -184,11 +202,12 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
     IEnumerator OnEndPanel()
     {
-        EndGamePanel endGamePanel = GameObject.FindGameObjectWithTag("resultPanel").GetComponent<EndGamePanel>();
 
         yield return new WaitForSeconds(3f);
 
         endGamePanel.canvas.rootCanvas.enabled = true;
+
+        PhotonNetwork.LeaveRoom();
     }
 
 }

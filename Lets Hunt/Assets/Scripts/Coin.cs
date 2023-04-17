@@ -10,7 +10,7 @@ public class Coin : MonoBehaviourPunCallbacks
 
     private bool isCollected = false;
 
-    private int coinsCollected;
+    public int coinsCollected;
 
     private TextMeshProUGUI coins;
 

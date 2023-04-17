@@ -15,7 +15,7 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
     [SerializeField] private TextMeshProUGUI playerKillsText;
     [SerializeField] private GameObject crownImage;
     [SerializeField] private GameObject redLine;
-    public int rankedFirst;
+    public int playerRank;
 
     private Player player;
     private int maxKills;
@@ -31,10 +31,6 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
         UpdateCrownImage();
     }
 
-    private void Update()
-    {
-        UpdateCrownImage();
-    }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
@@ -45,6 +41,8 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
             UpdateCrownImage();
 
             int rank = GetRank(PhotonNetwork.PlayerList.ToList());
+
+            playerRank = rank;
 
             Debug.Log($"{player} : rank : {rank}");
         }
@@ -79,23 +77,27 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
         }
     }
 
-    private void UpdateCrownImage()
-    {
-        ScoreboardItem[] scoreboardItems = FindObjectsOfType<ScoreboardItem>();
+ private void UpdateCrownImage()
+{
+    ScoreboardItem[] scoreboardItems = FindObjectsOfType<ScoreboardItem>();
 
-        int rank = GetRank(PhotonNetwork.PlayerList.ToList());
+    int rank = GetRank(PhotonNetwork.PlayerList.ToList());
 
-        player.SetCustomProperties(new Hashtable { { "rank", rank } });
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            player.SetCustomProperties(new Hashtable { { "rank", rank } });
+        }
 
         if (rank == 1)
-        {
-            crownImage.SetActive(true);
-        }
-        else
-        {
-            crownImage.SetActive(false);
-        }
+    {
+        crownImage.SetActive(true);
     }
+    else
+    {
+        crownImage.SetActive(false);
+    }
+}
+
 
     public void PlayerOut()
     {
