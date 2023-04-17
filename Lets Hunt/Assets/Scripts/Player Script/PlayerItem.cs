@@ -14,7 +14,11 @@ public class PlayerItem : MonoBehaviour
 
     public int kills;
 
+    private int coinsCollected;
+
     Hashtable hash;
+
+    GameObject resultPanel;
 
 
     private void Awake()

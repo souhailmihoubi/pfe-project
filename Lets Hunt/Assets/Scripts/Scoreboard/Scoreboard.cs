@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+using System;
 
 public class Scoreboard : MonoBehaviourPunCallbacks
 {
@@ -30,6 +32,8 @@ public class Scoreboard : MonoBehaviourPunCallbacks
         scoreboardItems[player] = item;
     }
 
+
+
     void RemoveScoreboardItem(Player player)
     {
         Destroy(scoreboardItems[player].gameObject);
@@ -43,7 +47,20 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        RemoveScoreboardItem(otherPlayer);
+        //RemoveScoreboardItem(otherPlayer);
+    }
+
+    public ScoreboardItem GetScoreboardItem(Player player)
+    {
+        if (scoreboardItems.ContainsKey(player))
+        {
+            return scoreboardItems[player];
+        }
+        else
+        {
+            Debug.LogWarningFormat("Player {0} not found in scoreboardItems dictionary", player.NickName);
+            return null;
+        }
     }
 }
 

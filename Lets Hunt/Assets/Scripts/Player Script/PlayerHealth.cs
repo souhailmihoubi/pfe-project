@@ -58,12 +58,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
 
 
-    private void Die()
-    {
-        // Kif ymout
-        Debug.Log("Die");
-    }
-
+   
     public void UpdateUI()
     {
         if (!gameObject.activeSelf)
@@ -161,4 +156,39 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
             yield return new WaitForSeconds(2f);
         }
     }
+
+
+
+    //--------- After Death ---------------
+
+    private void Die()
+    {
+        GameObject scoreboard = GameObject.FindGameObjectWithTag("Scoreboard");
+
+        ScoreboardItem scoreboardItem = scoreboard.GetComponent<Scoreboard>().GetScoreboardItem(photonView.Owner);
+
+        if (scoreboardItem != null)
+        {
+            scoreboardItem.PlayerOut();
+        }
+
+        if (photonView.IsMine)
+        {
+            StartCoroutine(OnEndPanel());
+            PhotonNetwork.Disconnect();
+        }
+
+
+        Debug.Log("Die");
+    }
+
+    IEnumerator OnEndPanel()
+    {
+        EndGamePanel endGamePanel = GameObject.FindGameObjectWithTag("resultPanel").GetComponent<EndGamePanel>();
+
+        yield return new WaitForSeconds(3f);
+
+        endGamePanel.canvas.rootCanvas.enabled = true;
+    }
+
 }

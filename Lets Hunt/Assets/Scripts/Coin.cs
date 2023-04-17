@@ -6,13 +6,13 @@ using TMPro;
 
 public class Coin : MonoBehaviourPunCallbacks
 {
-    public int value = 1;
+    private int value = 1;
 
     private bool isCollected = false;
 
-    public int coinsCollected;
+    private int coinsCollected;
 
-    public TextMeshProUGUI coins;
+    private TextMeshProUGUI coins;
 
     private PhotonView photonView;
 
@@ -43,15 +43,21 @@ public class Coin : MonoBehaviourPunCallbacks
         if (other.gameObject.CompareTag("Coin"))
         {
             Destroy(other.gameObject);
+
+            Sound();
         }
 
         if (other.gameObject.CompareTag("Coin") && photonView.IsMine)
         {
+            value = Random.Range(1, 2);
+
             coinsCollected += value;
 
             coins.text = coinsCollected.ToString();
 
             SaveManager.instance.coins += value;
+
+            SaveManager.instance.Save();
 
         }
     }

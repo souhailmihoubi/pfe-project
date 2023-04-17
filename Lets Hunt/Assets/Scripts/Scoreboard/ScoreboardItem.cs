@@ -7,13 +7,14 @@ using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System.Data;
 using UnityEngine.UI;
-
+using System.Linq;
 
 public class ScoreboardItem : MonoBehaviourPunCallbacks
 {
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private TextMeshProUGUI playerKillsText;
     [SerializeField] private GameObject crownImage;
+    [SerializeField] private GameObject redLine;
     public int rankedFirst;
 
     private Player player;
@@ -42,8 +43,33 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
             UpdateStats();
             
             UpdateCrownImage();
+
+            int rank = GetRank(PhotonNetwork.PlayerList.ToList());
+
+            Debug.Log($"{player} : rank : {rank}");
         }
     }
+
+    public int GetRank(List<Player> players)
+    {
+        players.Sort((p1, p2) => {
+            int p1Kills = p1.CustomProperties.ContainsKey("kills") ? (int)p1.CustomProperties["kills"] : 0;
+            int p2Kills = p2.CustomProperties.ContainsKey("kills") ? (int)p2.CustomProperties["kills"] : 0;
+
+            return p2Kills.CompareTo(p1Kills);
+        });
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i] == player)
+            {
+                return i + 1;
+            }
+        }
+
+        return -1;
+    }
+
 
     private void UpdateStats()
     {
@@ -57,40 +83,28 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
     {
         ScoreboardItem[] scoreboardItems = FindObjectsOfType<ScoreboardItem>();
 
-        int maxKills = -1;
+        int rank = GetRank(PhotonNetwork.PlayerList.ToList());
 
-        ScoreboardItem maxKillsPlayer = null;
+        player.SetCustomProperties(new Hashtable { { "rank", rank } });
 
-        foreach (ScoreboardItem scoreboardItem in scoreboardItems)
-        {
-            if (scoreboardItem.player.CustomProperties.TryGetValue("kills", out object kills))
-            {
-                int playerKills = (int)kills;
-
-                if (playerKills > maxKills)
-                {
-                    maxKills = playerKills;
-
-                    maxKillsPlayer = scoreboardItem;
-                }
-            }
-        }
-
-        if (maxKillsPlayer != null && maxKillsPlayer.player == player)
+        if (rank == 1)
         {
             crownImage.SetActive(true);
-
-            foreach (ScoreboardItem scoreboardItem in scoreboardItems)
-            {
-                if (scoreboardItem != maxKillsPlayer)
-                {
-                    scoreboardItem.crownImage.SetActive(false);
-                }
-            }
         }
         else
         {
             crownImage.SetActive(false);
         }
     }
+
+    public void PlayerOut()
+    {
+
+        redLine.SetActive(true);
+
+        player.SetCustomProperties(new Hashtable { { "rank", PhotonNetwork.PlayerList.Length } });
+
+        Debug.Log(GetRank(PhotonNetwork.PlayerList.ToList()));
+    }
+
 }
