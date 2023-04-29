@@ -91,8 +91,14 @@ public class LevelUpScript : MonoBehaviour
 
         PlayerAttack playerAttack = GetComponent<PlayerAttack>();
         if (playerAttack != null)
-        {
+        {   
             playerAttack.IncreaseAtkSpeed();
+        }
+        else
+        {
+            PlayerAttack pa = GetComponent<PlayerAttack>();
+
+            pa.IncreaseAtkSpeed();
         }
 
         // Sync Animation
@@ -108,10 +114,16 @@ public class LevelUpScript : MonoBehaviour
 
     public void OnDamageButtonClick()
     {
-        PlayerAttack playerAttack = GetComponent<PlayerAttack>();
+        ArcherAttack playerAttack = GetComponent<ArcherAttack>();
         if (playerAttack != null)
         {
             playerAttack.IncreaseDamage(5f);
+        }
+        else
+        {
+            PlayerAttack pa = GetComponent<PlayerAttack>();
+
+            pa.attackRange += 1f;
         }
 
     }
@@ -123,9 +135,20 @@ public class LevelUpScript : MonoBehaviour
         playerRange.ChangeRange(100, 100);
         playerRange.UpdateUI();
 
-       PlayerAttack pa = GetComponent<PlayerAttack>();
+        ArcherAttack pa = GetComponent<ArcherAttack>();
 
-        pa.attackRange += 1f;
+        if(pa != null)
+        {
+            pa.attackRange += 1f;
+        }
+
+        else
+        {
+            PlayerAttack playerAttack = GetComponent<PlayerAttack>();
+
+            playerAttack.attackRange += 1f;
+        }
+
 
         photonView.RPC("UpdateRange", RpcTarget.OthersBuffered, playerRange.currentRange);
 

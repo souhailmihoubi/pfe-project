@@ -11,6 +11,12 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 {
     [SerializeField] Transform container;
     [SerializeField] GameObject playerScoreboard;
+    [SerializeField] TextMeshProUGUI deadPlayerName;
+    GameObject playerDies;
+
+    public int playersInRoom = 4;
+
+    public bool dead = false;
 
 
     Dictionary<Player, ScoreboardItem> scoreboardItems = new Dictionary<Player, ScoreboardItem>();
@@ -18,11 +24,14 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        playerDies = GameObject.FindGameObjectWithTag("whenPlayerDies");
+        playerDies.SetActive(false);
 
         foreach(Player player in PhotonNetwork.PlayerList)
         {
             AddScoreoardItem(player);
         }
+
     }
 
     void AddScoreoardItem(Player player)
@@ -47,9 +56,39 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        //RemoveScoreboardItem(otherPlayer);
+        //RemoveScoreboardItem(otherPlayer);      
+    }
+    
+    public void PlayerDies(Player player)
+    {
+        dead = true;
+
+        scoreboardItems[player].redLine.SetActive(true);
+
+        scoreboardItems[player].crownImage.SetActive(false);
+
+        playersInRoom = PhotonNetwork.CurrentRoom.PlayerCount;
+
+        playersInRoom--;
+
+        player.SetCustomProperties(new Hashtable { { "rank", playersInRoom } });
+
+        PlayerPrefs.SetInt("playersInRoom", playersInRoom);
+
+        playerDies.SetActive(true);
+
+        deadPlayerName.text = player.NickName;
+
+        StartCoroutine(ClosePanel());
+
     }
 
+    IEnumerator ClosePanel()
+    {
+        yield return new WaitForSeconds(3f);
+        playerDies.SetActive(false);
+    }
+    
     public ScoreboardItem GetScoreboardItem(Player player)
     {
         if (scoreboardItems.ContainsKey(player))

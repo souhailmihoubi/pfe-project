@@ -3,6 +3,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class Coin : MonoBehaviourPunCallbacks
 {
@@ -22,6 +24,9 @@ public class Coin : MonoBehaviourPunCallbacks
 
     private Player playerToTransfer;
 
+    Hashtable hash;
+
+
     private void Start()
     {
 
@@ -36,6 +41,9 @@ public class Coin : MonoBehaviourPunCallbacks
     private void Awake()
     {
         coins = GameObject.FindGameObjectWithTag("coinsCollected").GetComponent<TextMeshProUGUI>();
+
+        hash = new Hashtable();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -59,12 +67,21 @@ public class Coin : MonoBehaviourPunCallbacks
 
             SaveManager.instance.Save();
 
+            hash["coinsCollected"] = coinsCollected;
+
+            photonView.Owner.SetCustomProperties(hash);
+
         }
     }
 
     void Sound()
     {
         //hnee naamel sound effect
+    }
+
+    public PhotonView GetPhotonView()
+    {
+        return photonView;
     }
 
     /*

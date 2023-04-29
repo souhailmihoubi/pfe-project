@@ -691,6 +691,7 @@ GameObject:
   - component: {fileID: 2179782667706323462}
   - component: {fileID: 9026738250799129196}
   - component: {fileID: -6744081199705917142}
+  - component: {fileID: 4718207543452205700}
   m_Layer: 0
   m_Name: frog
   m_TagString: Player
@@ -955,6 +956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxXP: 100
+  XPvalue: 30
   currentXP: 0
   currentLevel: 1
   levelUpScript: {fileID: 7429048816832743168}
@@ -1005,9 +1007,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57987a847939c9489dc609b0f70c84f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
   coinsCollected: 0
-  coins: {fileID: 0}
+--- !u!114 &4718207543452205700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2194281256130776493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e817d3854f1b31a4c822a34f7485fcb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endGameCanvas: {fileID: 2000300958359860370, guid: e3f617d50ea695541ad333282ebd5c97, type: 3}
 --- !u!1 &2333895574122123371
 GameObject:
   m_ObjectHideFlags: 0

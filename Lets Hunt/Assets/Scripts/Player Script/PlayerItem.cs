@@ -7,9 +7,11 @@ using System.Linq;
 using System.IO;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerItem : MonoBehaviour
 {
+
     PhotonView photonView;
 
     public int kills;
@@ -18,7 +20,8 @@ public class PlayerItem : MonoBehaviour
 
     Hashtable hash;
 
-    GameObject resultPanel;
+    private TextMeshProUGUI killsCount;
+
 
 
     private void Awake()
@@ -27,11 +30,19 @@ public class PlayerItem : MonoBehaviour
 
         hash = new Hashtable();
 
+        killsCount = GameObject.FindGameObjectWithTag("playerKills").GetComponent<TextMeshProUGUI>();
+
+
     }
 
     public void GetKill()
     {
         kills++;
+        if (photonView.IsMine)
+        {
+            killsCount.text = kills.ToString();
+        }
+
         photonView.RPC("RPC_GetKill", photonView.Owner);
     }
 
@@ -41,7 +52,7 @@ public class PlayerItem : MonoBehaviour
        
         hash["kills"] = kills;
 
-        print(hash["kills"]);
+      //  print(hash["kills"]);
 
         photonView.Owner.SetCustomProperties(hash);
     }
@@ -49,8 +60,23 @@ public class PlayerItem : MonoBehaviour
 
     public static PlayerItem Find(Player player)
     {
-        return FindObjectsOfType<PlayerItem>().SingleOrDefault(x => x.photonView.Owner == player);
+
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject playerObject in playerObjects)
+        {
+            PhotonView photonView = playerObject.GetComponent<PhotonView>();
+
+            if (photonView.Owner.ActorNumber == player.ActorNumber)
+            {
+                return playerObject.GetComponent<PlayerItem>();
+            }
+        }
+
+        return null;
     }
+
+    
 
 
 }

@@ -128,15 +128,9 @@ public class EnemyHealth : MonoBehaviour
     {
         Destroy(gameObject);
         SpawnCoinsXP();
-
-        //StartCoroutine(SpawnCoinsXPCoroutine());
     }
 
-    private IEnumerator SpawnCoinsXPCoroutine()
-    {
-        yield return new WaitForSeconds(0.1f); // Wait for 0.1 seconds
-        SpawnCoinsXP();
-    }
+
 
     public void SpawnCoinsXP()
     {

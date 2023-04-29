@@ -14,7 +14,7 @@ public class EndGamePanel : MonoBehaviour
     void Start()
     {
         canvas = GetComponent<Canvas>();
-        canvas.rootCanvas.enabled = false;
+        //canvas.rootCanvas.enabled = false;
     }
 
 

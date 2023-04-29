@@ -6,20 +6,31 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using System.ComponentModel;
 
 public class Timer : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Image uiFill;
     [SerializeField] private TextMeshProUGUI uiText;
 
-    public GameObject movement, timer, lvl;
+    public GameObject movement, timer, lvl,score;
     public int duration = 60;
     private float startTime;
 
+    public GameObject timeOver;
+
+
     PhotonView photonView;
+
+     
+
+
 
     private void Start()
     {
+
+
         photonView = GetComponent<PhotonView>();
         
         if (PhotonNetwork.IsMasterClient)
@@ -57,41 +68,45 @@ public class Timer : MonoBehaviourPunCallbacks
 
     private void OnEnd()
     {
-        // End Time , if want Do something
-        Debug.Log("End");
-        /*movement.SetActive(false);
-        lvl.SetActive(false);
-        timer.SetActive(false);
-        winLoss.SetActive(true);*/
-
-        //GameManager.instance.AddCoins(PlayerPrefs.GetInt("Coins"));
-
-       // RemoveRoom();
+        movement.gameObject.SetActive(false);
+        lvl.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
+        score.gameObject.SetActive(false);
 
 
-
-
-
+        StartCoroutine(ShowResult());   
     }
-    public override void OnLeftRoom()
+
+    IEnumerator ShowResult()
     {
+        timeOver.gameObject.SetActive(true);
 
-        //SceneManager.LoadScene("MainMenu");
-        
+        yield return new WaitForSeconds(3f);
+
+
+        // ba3d raja3 l game
+        //Time.timeScale = 1f;
+
+
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            GameObject playerObject = player.TagObject as GameObject;
+
+            if (playerObject != null)
+            {
+                PlayerScore playerScore = playerObject.GetComponent<PlayerScore>();
+
+                if (playerScore != null)
+                {
+                    playerScore.SetScore();
+                }
+            }
+        }
+
+        Time.timeScale = 0f;
+
     }
 
-   /* void RemoveRoom()
-    {
-        PhotonNetwork.CurrentRoom.IsOpen = false;
-
-        PhotonNetwork.CurrentRoom.IsVisible = false;
-
-        PhotonNetwork.LeaveRoom();
-
-        string roomId = SaveManager.instance.roomId;
-
-    }
-   */
     [PunRPC]
     private void SyncStartTime(float startTime)
     {

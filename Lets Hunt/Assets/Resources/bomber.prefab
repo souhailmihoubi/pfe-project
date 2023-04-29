@@ -2605,7 +2605,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6184380572753675192}
-  m_LocalRotation: {x: 0.00000052012956, y: -0.0001294277, z: -0.005690534, w: 0.9999838}
+  m_LocalRotation: {x: 0.0000005201296, y: -0.0001294277, z: -0.0056905346, w: 0.9999838}
   m_LocalPosition: {x: 0.00007898964, y: 0.017135147, z: -1.867977e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3040,7 +3040,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6743383030050933286}
-  m_LocalRotation: {x: 0.00000056722365, y: -0.0002932807, z: -0.005982346, w: 0.99998206}
+  m_LocalRotation: {x: 0.0000005672237, y: -0.0002932807, z: -0.0059823464, w: 0.99998206}
   m_LocalPosition: {x: 0.000041867297, y: 0.01655295, z: -2.4412591e-10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3607,7 +3607,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7318049229988516011}
-  m_LocalRotation: {x: 0.000000103005895, y: 0.00008696377, z: -0.0020925235, w: 0.9999978}
+  m_LocalRotation: {x: 0.0000001030059, y: 0.00008696377, z: -0.0020925237, w: 0.9999978}
   m_LocalPosition: {x: 0.00006863202, y: 0.012395404, z: -8.678391e-11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3821,6 +3821,7 @@ GameObject:
   - component: {fileID: 4311362434465474139}
   - component: {fileID: -7015273928089448591}
   - component: {fileID: 6831055411920752847}
+  - component: {fileID: -1131709111893542159}
   m_Layer: 0
   m_Name: bomber
   m_TagString: Player
@@ -4151,6 +4152,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinsCollected: 0
+--- !u!114 &-1131709111893542159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7849980251958396378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e817d3854f1b31a4c822a34f7485fcb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endGameCanvas: {fileID: 2000300958359860370, guid: e3f617d50ea695541ad333282ebd5c97, type: 3}
 --- !u!1 &7953282565815325182
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ TagManager:
   - Coin
   - Scoreboard
   - resultPanel
+  - whenPlayerDies
   layers:
   - Default
   - TransparentFX

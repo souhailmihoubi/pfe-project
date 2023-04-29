@@ -44,6 +44,8 @@ public class PlayerAttack : MonoBehaviour
         joystick = FindObjectOfType<FixedJoystick>();
     }
 
+    EnemyHealth closestEnemy;
+
     void Update()
     {
         // Check if enough time has elapsed since the last attack
@@ -54,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
 
             float closestDistance = float.MaxValue;
 
-            EnemyHealth closestEnemy = null;
+            closestEnemy = null;
 
             foreach (Collider hitCollider in hitColliders)
             {
@@ -80,19 +82,9 @@ public class PlayerAttack : MonoBehaviour
             // Attack the closest enemy
             if (closestEnemy != null)
             {
-                closestEnemy.TakeDamage(attackDamage);
                 _animatorController.PlayAttack();
+
                 isAttacking = true;
-                if(closestEnemy.currentHealth <= 0)
-                {
-                    _animatorController.StopAttack();
-
-                    
-                    playerItem.GetKill();
-                }
-
-           
-
 
                 if (playerMove.isMoving == true)
                 {
@@ -103,6 +95,18 @@ public class PlayerAttack : MonoBehaviour
 
             // Reset attack timer
             lastAttackTime = Time.time;
+        }
+    }
+
+    public void FrogAttacked()
+    {
+        closestEnemy.TakeDamage(attackDamage);
+
+        if (closestEnemy.currentHealth <= 0)
+        {
+            _animatorController.StopAttack();
+
+            playerItem.GetKill();
         }
     }
 

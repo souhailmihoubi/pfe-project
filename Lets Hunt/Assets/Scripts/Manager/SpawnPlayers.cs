@@ -59,9 +59,10 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
             playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "archerGirl"), spawnPoints[spawnIndex].position, Quaternion.identity);
         }
 
-        animator = playerPrefab.GetComponent<Animator>();
+        // Store a reference to the player's game object in their TagObject
+        PhotonNetwork.LocalPlayer.TagObject = playerPrefab;
 
-        //PlayerPrefs.SetInt("spawnPoints", (spawnIndex + 1) % spawnPoints.Length);
+        animator = playerPrefab.GetComponent<Animator>();
     }
 
 }

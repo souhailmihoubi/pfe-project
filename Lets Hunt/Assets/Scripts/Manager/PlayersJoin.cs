@@ -82,6 +82,7 @@ public class PlayersJoin : MonoBehaviourPunCallbacks
 
             PhotonNetwork.CurrentRoom.SetCustomProperties(customProps);
         }
+
     }
 
 

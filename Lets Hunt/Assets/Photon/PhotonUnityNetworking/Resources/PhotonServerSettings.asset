@@ -73,6 +73,9 @@ MonoBehaviour:
   - UpdateCrownImage
   - UpdateStats
   - UpdateXPvalue
+  - EnableRedLine
+  - SetPlayerDied
+  - PlayerFinish
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

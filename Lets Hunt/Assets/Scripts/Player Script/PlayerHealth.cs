@@ -5,6 +5,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -28,14 +30,13 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Start()
     {
+        endGamePanel = GameObject.FindGameObjectWithTag("resultPanel").GetComponent<EndGamePanel>();
+
         currentHealth = maxHealth;
         UpdateUI();
         photonView.RPC("UpdateHealth", RpcTarget.Others, currentHealth);
     }
 
-
-
-   
 
     public void TakeDamage(float damage)
     {
@@ -58,8 +59,6 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
     
     }
-
-
 
    
     public void UpdateUI()
@@ -166,48 +165,53 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
     private void Die()
     {
-        GameObject scoreboard = GameObject.FindGameObjectWithTag("Scoreboard");
-
-        ScoreboardItem scoreboardItem = scoreboard.GetComponent<Scoreboard>().GetScoreboardItem(photonView.Owner);
-
-        if (scoreboardItem != null)
-        {
-            scoreboardItem.playerDied = true;
-            scoreboardItem.PlayerOut();
-
-        }
-
-        endGamePanel = GameObject.FindGameObjectWithTag("resultPanel").GetComponent<EndGamePanel>();
-
-        endGamePanel.rank.text = "Rank : " + scoreboardItem.playerRank.ToString() ;
-
-        endGamePanel.thunders.text = " -5 ";
-
-        Coin coin = GetComponent<Coin>();
-
-        endGamePanel.coins.text = coin.coinsCollected.ToString() ;
-
-        PlayerItem playerItem = GetComponent<PlayerItem>();
-
-        endGamePanel.kills.text = playerItem.kills.ToString() ;
 
         StartCoroutine(OnEndPanel());
 
-        
+        Player player = PhotonNetwork.PlayerList[FindLocalPlayer()];
 
+        //Debug.Log(player);
 
+        photonView.RPC("PlayerFinish", RpcTarget.AllBuffered, player);
 
-        Debug.Log("Die");
     }
+
+    [PunRPC]
+    void PlayerFinish(Player player)
+    {
+        Scoreboard scoreboard = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<Scoreboard>();
+
+        scoreboard.PlayerDies(player);
+    }
+
 
     IEnumerator OnEndPanel()
     {
-
         yield return new WaitForSeconds(3f);
 
-        endGamePanel.canvas.rootCanvas.enabled = true;
+        PhotonNetwork.Destroy(gameObject);
 
-        PhotonNetwork.LeaveRoom();
+        PlayerScore playerScore = GetComponent<PlayerScore>();
+
+        playerScore.SetScoreDeadPlayer();
+    }
+
+
+    private int FindLocalPlayer()
+    {
+        int localPlayerIndex = -1;
+
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                localPlayerIndex = i;
+                break;
+            }
+        }
+
+        return localPlayerIndex;
+
     }
 
 }
