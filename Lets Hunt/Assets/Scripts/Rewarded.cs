@@ -11,8 +11,6 @@ public class Rewarded : MonoBehaviour
     private RewardedAd rewardedAd;
     private string adUnitId = "ca-app-pub-3940256099942544/5224354917";
     public float timer;
-    public Text Ttimer;
-    public Button Breward;
 
     void Start()
     {
@@ -21,27 +19,15 @@ public class Rewarded : MonoBehaviour
         RequestRewardVideo();
     }
 
-    void Update()
-    {
-        //Ttimer.text = ("reward in " + Mathf.Round(timer) + " sec");
-
-        /*if (timer <= 0f)
-        {
-            Breward.interactable = true;
-        }
-        if (timer > 0f)
-        {
-            timer -= Time.deltaTime;
-            Breward.interactable = false;
-        }*/
-    }
 
     public void showrewarded()
     {
         RequestRewardVideo();
+
         if (rewardedAd.IsLoaded())
         {
             rewardedAd.Show();
+
             timer = 5f;
         }
     }
@@ -92,8 +78,15 @@ public class Rewarded : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        Debug.Log("You got your reward");
+
+        int reward = PlayerPrefs.GetInt("CollectedCoins") * 2;
+
+        SaveManager.instance.coins += reward;
+
+        SaveManager.instance.Save();
+
     }
+
 
 
 

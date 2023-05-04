@@ -11,6 +11,8 @@ public class EndGamePanel : MonoBehaviour
     public TextMeshProUGUI coins;
     public TextMeshProUGUI kills;
     public TextMeshProUGUI thunders;
+
+    public GameObject adsPanel;
     void Start()
     {
         canvas = GetComponent<Canvas>();

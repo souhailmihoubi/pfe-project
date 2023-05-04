@@ -91,6 +91,8 @@ public class Timer : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(3f);
 
+        timeOver.gameObject.SetActive(false);
+
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             GameObject playerObject = player.TagObject as GameObject;

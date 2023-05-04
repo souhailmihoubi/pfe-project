@@ -13,7 +13,7 @@ public class Scoreboard : MonoBehaviourPunCallbacks
     [SerializeField] Transform container;
     [SerializeField] GameObject playerScoreboard;
     [SerializeField] TextMeshProUGUI deadPlayerName;
-    GameObject playerDies;
+    [SerializeField] GameObject playerDies;
 
     public int playersInRoom = 4;
 
@@ -25,9 +25,6 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        playerDies = GameObject.FindGameObjectWithTag("whenPlayerDies");
-
-        playerDies.SetActive(false);
 
         foreach(Player player in PhotonNetwork.PlayerList)
         {

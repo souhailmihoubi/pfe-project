@@ -76,9 +76,13 @@ public class PlayerScore : MonoBehaviour
 
         if (success) playerCoinsCollected = (int)coinsCollected;
 
+        PlayerPrefs.SetInt("CollectedCoins", playerCoinsCollected);
+
         endGamePanel.kills.text = playerKills.ToString();
 
         endGamePanel.coins.text = "+" + playerCoinsCollected.ToString();
+
+        endGamePanel.adsPanel.gameObject.SetActive(true);
 
         SaveManager.instance.Save();
 

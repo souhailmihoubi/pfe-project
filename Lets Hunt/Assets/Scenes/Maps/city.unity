@@ -16983,7 +16983,7 @@ PrefabInstance:
       objectReference: {fileID: 1368759211809244395}
     - target: {fileID: 8048203859557167495, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
       propertyPath: duration
-      value: 10
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8048203859557167495, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
       propertyPath: movement
@@ -22595,6 +22595,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -20.000061
       objectReference: {fileID: 0}
+    - target: {fileID: 1368759211637603959, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: playerDies
+      value: 
+      objectReference: {fileID: 1368759211809244396}
     - target: {fileID: 4601286530229966217, guid: b76710d3482391a4a935177573bde104, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -22683,11 +22687,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scoreboard Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6638883894042014888, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b76710d3482391a4a935177573bde104, type: 3}
 --- !u!1 &1368759211809244395 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4601286530229966221, guid: b76710d3482391a4a935177573bde104, type: 3}
+  m_PrefabInstance: {fileID: 1368759211809244394}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1368759211809244396 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6638883894042014888, guid: b76710d3482391a4a935177573bde104, type: 3}
   m_PrefabInstance: {fileID: 1368759211809244394}
   m_PrefabAsset: {fileID: 0}
 --- !u!23 &1437417469933416150
