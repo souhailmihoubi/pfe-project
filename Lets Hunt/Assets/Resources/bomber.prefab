@@ -4056,7 +4056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1184539753819069249}
   _animatorController: {fileID: 9048920440925208871}
-  _moveSpeed: 3
+  _moveSpeed: 3.6
   isMoving: 0
 --- !u!114 &3623046722478984666
 MonoBehaviour:
@@ -4070,7 +4070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef48b8fe1377634fb4cb00fe843d6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 123
   currentHealth: 0
   healthText: {fileID: 8711911378513742115}
   healthFill: {fileID: 2813684681776515892}
@@ -4132,13 +4132,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attackDamage: 10
+  attackDamage: 12
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8
   _animatorController: {fileID: 9048920440925208871}
-  attackCooldown: 2
-  speed: 1
+  attackCooldown: 1
+  speed: 0.5
   isAttacking: 0
   preformArrowAttack: 1
   arrowPrefab: {fileID: 1954799129562931615, guid: e78ac8b48c24bbc4da3d4816fec48523, type: 3}

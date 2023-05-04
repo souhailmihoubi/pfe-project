@@ -547,7 +547,7 @@ MonoBehaviour:
   damageMesh: {fileID: 1466348282}
   healthText: 140
   rangeText: Short
-  damageText: 15
+  damageText: 17
 --- !u!1 &35453907
 GameObject:
   m_ObjectHideFlags: 0
@@ -4908,55 +4908,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515554571}
   m_CullTransparentMesh: 1
---- !u!1 &544043252
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 544043253}
-  - component: {fileID: 544043254}
-  m_Layer: 0
-  m_Name: PlayerInfo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &544043253
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 544043252}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -334, y: -13.810205, z: 91.41074}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1207890896}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &544043254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 544043252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93c4fc3964bda3743878ce59d69b7304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mySelectedCharacter: 0
-  allCharacters:
-  - {fileID: 286453652987895749, guid: 8b19c2d57b024fa46ad798b9b20a5c99, type: 3}
-  - {fileID: 5020665164754727916, guid: ebd7f1cedc53dad4c8088fdd45137540, type: 3}
-  - {fileID: 4193520517959816275, guid: bd27bf3c5b1823843b4b2a33a3ab905c, type: 3}
 --- !u!1 &555683448
 GameObject:
   m_ObjectHideFlags: 0
@@ -5532,55 +5483,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590333843}
   m_CullTransparentMesh: 1
---- !u!1 &601489904
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 601489905}
-  - component: {fileID: 601489906}
-  m_Layer: 5
-  m_Name: MenuController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &601489905
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 601489904}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1207890896}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 96}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &601489906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 601489904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dea73fff3692eb4eac4f42e4892d195, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &603956567
 GameObject:
   m_ObjectHideFlags: 0
@@ -8348,7 +8250,7 @@ RectTransform:
   m_Children:
   - {fileID: 497114555}
   m_Father: {fileID: 1207890896}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -9674,8 +9576,6 @@ RectTransform:
   - {fileID: 1791968376}
   - {fileID: 1316057700}
   - {fileID: 773631544}
-  - {fileID: 544043253}
-  - {fileID: 601489905}
   - {fileID: 1051138581}
   - {fileID: 1585378617}
   m_Father: {fileID: 1800352483}
@@ -10097,7 +9997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   joinInput: {fileID: 1054226067}
-  x: 1
+  x: 2
   roomIds: []
 --- !u!4 &1318702610
 Transform:
@@ -12265,7 +12165,7 @@ RectTransform:
   - {fileID: 2023796508}
   - {fileID: 1984251072}
   m_Father: {fileID: 1207890896}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
