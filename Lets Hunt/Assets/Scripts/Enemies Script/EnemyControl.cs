@@ -183,9 +183,7 @@ public class EnemyControl : MonoBehaviour
     [SerializeField] private float attackDistance = 2f;
     [SerializeField] private float alertAttackDistance = 8f;
     [SerializeField] private float followDistance = 15f;
-    [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float walkSpeed = 1f;
-    [SerializeField] private float waitAttackTime = 1f;
 
     public bool doDamage = false;
 

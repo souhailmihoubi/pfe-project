@@ -95,8 +95,8 @@ SubShader {
 		#include "UnityCG.cginc"
 		#include "UnityUI.cginc"
 		#include "TMPro_Properties.cginc"
-
 		#include "TMPro_Mobile.cginc"
+		#include "TMPro.cginc"
 
 		ENDCG
 	}

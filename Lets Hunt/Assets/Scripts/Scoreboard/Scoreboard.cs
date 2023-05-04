@@ -6,6 +6,7 @@ using Photon.Realtime;
 using TMPro;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System;
+using System.Linq;
 
 public class Scoreboard : MonoBehaviourPunCallbacks
 {
@@ -25,6 +26,7 @@ public class Scoreboard : MonoBehaviourPunCallbacks
     private void Start()
     {
         playerDies = GameObject.FindGameObjectWithTag("whenPlayerDies");
+
         playerDies.SetActive(false);
 
         foreach(Player player in PhotonNetwork.PlayerList)
@@ -61,19 +63,11 @@ public class Scoreboard : MonoBehaviourPunCallbacks
     
     public void PlayerDies(Player player)
     {
-        dead = true;
-
         scoreboardItems[player].redLine.SetActive(true);
 
         scoreboardItems[player].crownImage.SetActive(false);
 
-        playersInRoom = PhotonNetwork.CurrentRoom.PlayerCount;
-
-        playersInRoom--;
-
-        player.SetCustomProperties(new Hashtable { { "rank", playersInRoom } });
-
-        PlayerPrefs.SetInt("playersInRoom", playersInRoom);
+        player.SetCustomProperties(new Hashtable { { "kills", 0 } });
 
         playerDies.SetActive(true);
 
@@ -81,6 +75,13 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 
         StartCoroutine(ClosePanel());
 
+        List<Player> players = PhotonNetwork.PlayerList.ToList();
+
+        players.Remove(player);
+
+        playersInRoom = players.Count;
+
+        Debug.Log(playersInRoom);
     }
 
     IEnumerator ClosePanel()

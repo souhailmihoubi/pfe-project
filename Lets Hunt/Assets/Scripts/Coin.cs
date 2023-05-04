@@ -10,7 +10,6 @@ public class Coin : MonoBehaviourPunCallbacks
 {
     private int value = 1;
 
-    private bool isCollected = false;
 
     public int coinsCollected;
 
@@ -18,11 +17,8 @@ public class Coin : MonoBehaviourPunCallbacks
 
     private PhotonView photonView;
 
-    private bool isTransferringOwnership = false;
-
     private Renderer coinRenderer;
 
-    private Player playerToTransfer;
 
     Hashtable hash;
 
@@ -34,7 +30,7 @@ public class Coin : MonoBehaviourPunCallbacks
 
         coinRenderer = GetComponent<Renderer>();
 
-        //photonView.OwnershipTransfer = OwnershipOption.Takeover;
+        //photonView.OwnersipTransfer = OwnershipOption.Takeover;
 
     }
 

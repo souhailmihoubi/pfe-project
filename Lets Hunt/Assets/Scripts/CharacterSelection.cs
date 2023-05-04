@@ -78,6 +78,9 @@ public class CharacterSelection : MonoBehaviour
     {
         SaveManager.instance.coins -= hunterPrices[selectedCharacterIndex];
         SaveManager.instance.huntersUnlocked[selectedCharacterIndex] = true;
+
+        SaveManager.instance.owned += 1;
+
         SaveManager.instance.Save();
         UpdateUI();
     }

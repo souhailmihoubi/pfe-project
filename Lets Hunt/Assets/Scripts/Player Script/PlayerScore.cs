@@ -7,26 +7,38 @@ using UnityEngine;
 public class PlayerScore : MonoBehaviour
 {
 
-    public GameObject endGameCanvas;
+    public GameObject endGameCanvas,victory,defeat;
 
     PhotonView view;
 
+    GameObject victoryPanel,defeatPanel;
+
+    Vector3 pos2, pos;
+
+    PlayerHealth playerHealth;
+
+    public int playerRank = 0;
+
     private void Start()
     {
+        playerHealth = GetComponent<PlayerHealth>();
         view = GetComponent<PhotonView>();
+
+        pos = new Vector3(113.5f, 236.45f, -4.5f);
+        pos2 = new Vector3(36.5f, 99.95f, -4.5f);
     }
 
     public void SetScore()
     {
-        Vector3 pos = new Vector3(113.5f, 236.45f, -4.5f);
 
         EndGamePanel endGamePanel = Instantiate(endGameCanvas, pos, Quaternion.identity).GetComponent<EndGamePanel>();
 
-        int playerRank = 0;
-
         bool success = view.Owner.CustomProperties.TryGetValue("rank", out object rank);
 
-        if (success) { playerRank = (int)rank; }
+        if (success) 
+        { 
+            playerRank = (int) rank; 
+        }
 
         switch (playerRank)
         {
@@ -34,25 +46,22 @@ public class PlayerScore : MonoBehaviour
                 endGamePanel.rank.text = "Rank : 1";
                 endGamePanel.thunders.text = " +10 ";
                 SaveManager.instance.thunders += 10;
-                SaveManager.instance.Save();
+                SaveManager.instance.ranked += 1;
                 break;
             case 2:
                 endGamePanel.rank.text = "Rank : 2";
                 endGamePanel.thunders.text = " +7 ";
                 SaveManager.instance.thunders += 7;
-                SaveManager.instance.Save();
                 break;
             case 3:
                 endGamePanel.rank.text = "Rank : 3";
                 endGamePanel.thunders.text = " +4 ";
                 SaveManager.instance.thunders += 4;
-                SaveManager.instance.Save();
                 break;
             case 4:
                 endGamePanel.rank.text = "Rank : 4";
                 endGamePanel.thunders.text = " -5 ";
                 SaveManager.instance.thunders -= 5;
-                SaveManager.instance.Save();
                 break;
         }
 
@@ -71,6 +80,8 @@ public class PlayerScore : MonoBehaviour
 
         endGamePanel.coins.text = "+" + playerCoinsCollected.ToString();
 
+        SaveManager.instance.Save();
+
     }
 
     public void SetScoreDeadPlayer()
@@ -79,18 +90,7 @@ public class PlayerScore : MonoBehaviour
 
         EndGamePanel endGamePanel = Instantiate(endGameCanvas, pos, Quaternion.identity).GetComponent<EndGamePanel>();
 
-        //---- Rank ----
-
-        int playerRank = 0;
-
-        bool success = view.Owner.CustomProperties.TryGetValue("rank", out object rank);
-
-        if (success) 
-        { 
-            playerRank = (int)rank; 
-        }
-
-        endGamePanel.rank.text = playerRank.ToString();
+        endGamePanel.rank.text = "DEFEAT!";
 
         endGamePanel.thunders.text = " -5 ";
 
@@ -102,7 +102,7 @@ public class PlayerScore : MonoBehaviour
 
         int playerKills = 0;
 
-        success = view.Owner.CustomProperties.TryGetValue("kills", out object kills);
+        bool success = view.Owner.CustomProperties.TryGetValue("kills", out object kills);
 
         if (success) 
         {
@@ -124,5 +124,35 @@ public class PlayerScore : MonoBehaviour
 
         endGamePanel.coins.text = "+" + playerCoinsCollected.ToString();
 
+    }
+
+    public void WinLosePanel()
+    {
+        bool success = view.Owner.CustomProperties.TryGetValue("rank", out object rank);
+
+        if (success)
+        {
+            playerRank = (int)rank;
+        }
+        if(playerRank == 1 && !playerHealth.playerDead)
+        {
+            victoryPanel = Instantiate(victory, pos2, Quaternion.identity);
+
+            StartCoroutine(ClosePanel(victoryPanel));
+        }
+        else
+        {
+            defeatPanel = Instantiate(defeat, pos2, Quaternion.identity);
+
+            StartCoroutine(ClosePanel(defeatPanel));
+        }
+
+    }
+
+    IEnumerator ClosePanel(GameObject panel)
+    {
+        yield return new WaitForSeconds(3f);
+
+        Destroy(panel.gameObject);
     }
 }

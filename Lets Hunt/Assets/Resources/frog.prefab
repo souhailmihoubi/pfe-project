@@ -1021,6 +1021,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endGameCanvas: {fileID: 2000300958359860370, guid: e3f617d50ea695541ad333282ebd5c97, type: 3}
+  victory: {fileID: 5819748258600591566, guid: 586623f670992bc40b9ed4ba11f05c2a, type: 3}
+  defeat: {fileID: 8369023609677432226, guid: 8e45149775d0e8942b88b276275f3ca2, type: 3}
 --- !u!1 &2333895574122123371
 GameObject:
   m_ObjectHideFlags: 0

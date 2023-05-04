@@ -23,9 +23,6 @@ public class Timer : MonoBehaviourPunCallbacks
 
     PhotonView photonView;
 
-     
-
-
 
     private void Start()
     {
@@ -59,7 +56,7 @@ public class Timer : MonoBehaviourPunCallbacks
             {
                 break;
             }
-
+            
             yield return null;
         }
 
@@ -73,7 +70,6 @@ public class Timer : MonoBehaviourPunCallbacks
         timer.gameObject.SetActive(false);
         score.gameObject.SetActive(false);
 
-
         StartCoroutine(ShowResult());   
     }
 
@@ -81,12 +77,19 @@ public class Timer : MonoBehaviourPunCallbacks
     {
         timeOver.gameObject.SetActive(true);
 
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            GameObject playerObject = player.TagObject as GameObject;
+
+            if (playerObject != null)
+            {
+                PlayerScore playerScore = playerObject.GetComponent<PlayerScore>();
+
+                playerScore.WinLosePanel();
+            }
+        }
+
         yield return new WaitForSeconds(3f);
-
-
-        // ba3d raja3 l game
-        //Time.timeScale = 1f;
-
 
         foreach (Player player in PhotonNetwork.PlayerList)
         {
@@ -99,6 +102,10 @@ public class Timer : MonoBehaviourPunCallbacks
                 if (playerScore != null)
                 {
                     playerScore.SetScore();
+
+                    SaveManager.instance.matchPlayed += 1;
+                    SaveManager.instance.Save();
+
                 }
             }
         }

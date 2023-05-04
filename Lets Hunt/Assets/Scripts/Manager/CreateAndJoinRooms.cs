@@ -64,11 +64,18 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
         PlayerPrefs.SetInt("friends", 0);
 
-        int currentMap = SaveManager.instance.currentMap;
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            int currentMap = SaveManager.instance.currentMap;
+            Hashtable customProps = new Hashtable() { { "currentMap", currentMap } };
+            PhotonNetwork.JoinRandomRoom(customProps, 0, MatchmakingMode.FillRoom, null, "", new string[0]);
+        }
+        else
+        {
+            Debug.LogWarning("Client is not connected to the master server yet. Wait for OnConnectedToMaster callback before joining a room.");
+        }
 
-        Hashtable customProps = new Hashtable() { { "currentMap", currentMap } };
 
-        PhotonNetwork.JoinRandomRoom(customProps, 0, MatchmakingMode.FillRoom, null, "", new string[0]);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -106,6 +113,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
          {
              roomIds.Remove(PhotonNetwork.CurrentRoom.Name);
          }
+
+         
 
         PhotonNetwork.LoadLevel("waiting");
     }

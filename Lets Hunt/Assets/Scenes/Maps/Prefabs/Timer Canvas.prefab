@@ -110,10 +110,10 @@ RectTransform:
   m_Father: {fileID: 329575224988870366}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.0000038146973}
-  m_SizeDelta: {x: 900.64, y: 224.657}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -613}
+  m_SizeDelta: {x: 900.64, y: 224.65698}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1022437431
 CanvasRenderer:
@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 329575224988870364}
   - component: {fileID: 329575224988870435}
   - component: {fileID: 8048203859557167495}
+  - component: {fileID: 1634426168}
   m_Layer: 5
   m_Name: Timer Canvas
   m_TagString: Untagged
@@ -278,7 +279,28 @@ MonoBehaviour:
   score: {fileID: 0}
   duration: 60
   timeOver: {fileID: 1022437428}
-  endGameCanvas: {fileID: 2000300958359860370, guid: e3f617d50ea695541ad333282ebd5c97, type: 3}
+--- !u!114 &1634426168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 329575224988870434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &880134798902942775
 GameObject:
   m_ObjectHideFlags: 0

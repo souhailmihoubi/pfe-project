@@ -448,6 +448,5 @@ namespace Photon.Realtime
 
             return false;
         }
-
     }
 }

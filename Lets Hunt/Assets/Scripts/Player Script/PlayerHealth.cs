@@ -23,14 +23,10 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     private float updateSpeedSeconds = 0.5f;
 
-    private Button btn;
-
-
-    EndGamePanel endGamePanel;
+    public bool playerDead = false;
 
     private void Start()
     {
-        endGamePanel = GameObject.FindGameObjectWithTag("resultPanel").GetComponent<EndGamePanel>();
 
         currentHealth = maxHealth;
         UpdateUI();
@@ -50,6 +46,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
         if (currentHealth <= 0f)
         {
             currentHealth = 0f;
+            playerDead = true;
             Die();
         }
 
@@ -166,13 +163,11 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
     private void Die()
     {
 
-        StartCoroutine(OnEndPanel());
-
         Player player = PhotonNetwork.PlayerList[FindLocalPlayer()];
 
-        //Debug.Log(player);
-
         photonView.RPC("PlayerFinish", RpcTarget.AllBuffered, player);
+
+        StartCoroutine(OnEndPanel());
 
     }
 
@@ -187,11 +182,14 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
     IEnumerator OnEndPanel()
     {
+        PlayerScore playerScore = GetComponent<PlayerScore>();
+
+        playerScore.WinLosePanel();
+
         yield return new WaitForSeconds(3f);
 
         PhotonNetwork.Destroy(gameObject);
 
-        PlayerScore playerScore = GetComponent<PlayerScore>();
 
         playerScore.SetScoreDeadPlayer();
     }

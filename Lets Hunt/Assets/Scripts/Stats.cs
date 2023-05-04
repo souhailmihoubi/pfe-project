@@ -12,20 +12,13 @@ public class Stats : MonoBehaviour
     public TextMeshProUGUI owned; 
     public TextMeshProUGUI mostplayed; 
 
-
-    // Start is called before the first frame update
     void Start()
     { 
         total.text = SaveManager.instance.matchPlayed.ToString();
         owned.text = SaveManager.instance.owned.ToString();
-        //mostplayed.text = SaveManager.instance.mostPlayed.ToString();
-        //ranked.text = SaveManager.instance.ranked.ToString();
+        mostplayed.text = SaveManager.instance.MostPlayed();
+        ranked.text = SaveManager.instance.ranked.ToString();
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -585,9 +585,7 @@ MonoBehaviour:
   attackDistance: 2
   alertAttackDistance: 8
   followDistance: 15
-  moveSpeed: 2
   walkSpeed: 1
-  waitAttackTime: 4
   doDamage: 0
   enemyCurrentState: 0
 --- !u!114 &-8244705594870193898

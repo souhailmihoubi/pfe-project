@@ -1,4 +1,5 @@
 using Photon.Pun;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class leaveRoom : MonoBehaviourPunCallbacks
@@ -8,10 +9,5 @@ public class leaveRoom : MonoBehaviourPunCallbacks
     {
         SceneManager.LoadScene("MainMenu");
         PhotonNetwork.LeaveRoom();
-    }
-
-    public override void OnLeftRoom()
-    {
-        //
     }
 }

@@ -56,26 +56,12 @@ MonoBehaviour:
   - UpdateAtkSpeed
   - ChangeLevel
   - DisableScript
-  - SpawnArrowRPC
   - DestroyEnemy
   - OnGrenadeReleased
-  - SpawngrenadeRPC
-  - RPC_GetKill
-  - RPC_UpdateCrownImage
-  - CollectCoin
-  - UpdatePosition
-  - SpawnEnemiesForPlayer
-  - UpdatePlayerEnteredRange
-  - UpdatePlayerPosition
-  - SyncCrownImage
-  - SyncInitialize
-  - SyncStatsUpdate
-  - UpdateCrownImage
-  - UpdateStats
-  - UpdateXPvalue
-  - EnableRedLine
-  - SetPlayerDied
   - PlayerFinish
+  - RPC_GetKill
+  - SpawngrenadeRPC
+  - UpdateXPvalue
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
+  ShowSettings: 0
   DevRegionSetOnce: 1

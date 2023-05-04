@@ -111,7 +111,7 @@ public class SaveManager : MonoBehaviour
 
 
     }
-    public String mostPlayed()
+    public String MostPlayed()
     {
         int[] favourite = { kaboom, swordToad, archer };
 

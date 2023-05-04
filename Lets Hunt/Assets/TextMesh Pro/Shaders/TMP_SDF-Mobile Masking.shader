@@ -98,6 +98,7 @@ SubShader {
 		#include "UnityCG.cginc"
 		#include "UnityUI.cginc"
 		#include "TMPro_Properties.cginc"
+		#include "TMPro.cginc"
 
 		struct vertex_t {
 			float4	vertex			: POSITION;

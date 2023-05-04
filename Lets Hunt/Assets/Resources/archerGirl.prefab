@@ -2523,6 +2523,7 @@ MonoBehaviour:
   healthText: {fileID: 7602717239213081905}
   healthFill: {fileID: 7802160363209946118}
   updateSpeedSeconds: 0.5
+  playerDead: 0
 --- !u!114 &9196619998684240456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2616,6 +2617,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endGameCanvas: {fileID: 2000300958359860370, guid: e3f617d50ea695541ad333282ebd5c97, type: 3}
+  victory: {fileID: 5819748258600591566, guid: 586623f670992bc40b9ed4ba11f05c2a, type: 3}
+  defeat: {fileID: 8369023609677432226, guid: 8e45149775d0e8942b88b276275f3ca2, type: 3}
+  playerRank: 0
 --- !u!1 &6348218897883909003
 GameObject:
   m_ObjectHideFlags: 0

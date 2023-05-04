@@ -47,7 +47,10 @@ public class PlayersJoin : MonoBehaviourPunCallbacks
         {
             sceneLoaded = true;
 
-            LoadLevel();
+            //PhotonNetwork.LoadLevel("Loading");
+
+
+           LoadLevel();
         }
     }
 
