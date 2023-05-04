@@ -78,8 +78,10 @@ SubShader {
 	#pragma shader_feature __ GLOW_ON
 	#pragma glsl
 
-	#include "TMPro_Properties.cginc"
-	#include "TMPro.cginc"
+		#include "UnityCG.cginc"
+		#include "UnityUI.cginc"
+		#include "TMPro_Properties.cginc"
+		#include "TMPro.cginc"
 
 	half _FaceShininess;
 	half _OutlineShininess;

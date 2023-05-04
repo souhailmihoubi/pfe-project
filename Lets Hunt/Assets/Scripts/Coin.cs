@@ -1,42 +1,174 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class Coin : MonoBehaviourPunCallbacks
 {
-    public int value = 10;
-    private bool isCollected = false;
+    private int value = 1;
+
+
     public int coinsCollected;
 
-    public TextMeshProUGUI coins;
+    private TextMeshProUGUI coins;
+
+    private PhotonView photonView;
+
+    private Renderer coinRenderer;
+
+
+    Hashtable hash;
+
 
     private void Start()
     {
-      //  coins = GameObject.FindGameObjectWithTag("coinsCollected").GetComponentInParent<TextMeshProUGUI>();
+
+        photonView = GetComponent<PhotonView>();
+
+        coinRenderer = GetComponent<Renderer>();
+
+        //photonView.OwnersipTransfer = OwnershipOption.Takeover;
+
     }
 
-    [PunRPC]
-    private void CollectCoin()
+    private void Awake()
     {
-        isCollected = true;
+        coins = GameObject.FindGameObjectWithTag("coinsCollected").GetComponent<TextMeshProUGUI>();
 
-        //hnee naamlou l animation w sound effect
+        hash = new Hashtable();
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isCollected && other.CompareTag("Player") && PhotonNetwork.IsConnected)
+        if (other.gameObject.CompareTag("Coin"))
         {
-            photonView.RPC("CollectCoin", RpcTarget.AllBuffered);
+            Destroy(other.gameObject);
+
+            Sound();
+        }
+
+        if (other.gameObject.CompareTag("Coin") && photonView.IsMine)
+        {
+            value = Random.Range(1, 2);
+
+            coinsCollected += value;
+
+            coins.text = coinsCollected.ToString();
 
             SaveManager.instance.coins += value;
 
             SaveManager.instance.Save();
 
-            PhotonNetwork.Destroy(gameObject);
+            hash["coinsCollected"] = coinsCollected;
+
+            photonView.Owner.SetCustomProperties(hash);
+
         }
     }
+
+    void Sound()
+    {
+        //hnee naamel sound effect
+    }
+
+    public PhotonView GetPhotonView()
+    {
+        return photonView;
+    }
+
+    /*
+        [PunRPC]
+        private void CollectCoin()
+        {
+            isCollected = true;
+            //hnee naamlou l animation w sound effect
+        }
+
+         private void OnTriggerEnter(Collider other)
+         {
+             if (!isCollected && other.CompareTag("Player") && PhotonNetwork.IsConnected)
+             {
+
+                 if (photonView.Owner.ActorNumber != other.gameObject.GetPhotonView().Owner.ActorNumber)
+                 {
+
+                     playerToTransfer = PhotonNetwork.CurrentRoom.GetPlayer(photonView.Owner.ActorNumber);
+
+                     photonView.TransferOwnership(playerToTransfer);
+
+                     isTransferringOwnership = true;
+
+                     coinRenderer.enabled = false;
+
+                     //print("hided");
+
+                     StartCoroutine(DestroyAfterTransfer());
+                 }
+                 else
+                 {
+                     PhotonNetwork.Destroy(gameObject);
+
+                     //print("eat it normal");
+
+                     Sound();
+
+                     photonView.RPC("CollectCoin", RpcTarget.AllBuffered);
+
+                     SaveManager.instance.coins += value;
+
+                     SaveManager.instance.Save();
+                 }
+             }
+         }
+
+
+
+        private IEnumerator DestroyAfterTransfer()
+        {
+            while (isTransferringOwnership)
+            {
+                yield return new WaitForSeconds(0.2f);
+            }
+            if (photonView.IsMine)
+            {
+                //print("transfered");
+
+                PhotonNetwork.Destroy(gameObject);
+
+                Sound();
+
+                photonView.RPC("CollectCoin", RpcTarget.AllBuffered);
+
+                SaveManager.instance.coins += value;
+
+                print(SaveManager.instance.coins);
+
+                SaveManager.instance.Save();
+            }
+        }
+
+
+        public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
+        {
+
+        }
+        public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
+        {
+                //Debug.Log("Ownership of Coin transferred");
+
+                isTransferringOwnership = false;
+                print(photonView.Owner.ActorNumber);
+        }
+
+
+        public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
+        {
+            //Debug.Log("Ownership transfer of Coin failed");
+        }*/
+
 
 }

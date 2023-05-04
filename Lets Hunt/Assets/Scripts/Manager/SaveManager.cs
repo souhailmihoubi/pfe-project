@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+//using System.Security.Policy;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -10,16 +13,26 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance { get; private set; }
 
     public int currentHunter;
+
+    public int archer = 0;
+    public int kaboom = 0;
+    public int swordToad = 0;
+    public int matchPlayed = 0;
+
+    public int ranked = 0;
+
+    public int owned = 1;
+
     public int currentMap;
     public string selectedMapName;
     public string selectedMapSprite;
     public int coins;
     public int gems;
     public int thunders;
-    public int playerID;
 
-    public bool[] huntersUnlocked = new bool[3] { true,true,false };
-    
+
+    public bool[] huntersUnlocked = new bool[3] { false, false, false };
+
 
 
     private void Awake()
@@ -36,10 +49,10 @@ public class SaveManager : MonoBehaviour
 
     public void Load()
     {
-        if(File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
+        if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat",FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
             PlayerData_Storage data = (PlayerData_Storage)bf.Deserialize(file);
 
             currentHunter = data.currentHunter;
@@ -50,11 +63,16 @@ public class SaveManager : MonoBehaviour
             gems = data.gems;
             thunders = data.thunders;
             huntersUnlocked = data.huntersUnlocked;
-            playerID = data.playerID;
+            archer = data.archer;
+            kaboom = data.kaboom;
+            swordToad = data.swordToad;
+            matchPlayed = data.matchPlayed;
+            ranked = data.ranked;
+            owned = data.owned;
 
-            if(data.huntersUnlocked == null)
+            if (data.huntersUnlocked == null)
             {
-                huntersUnlocked = new bool[3] {true,true,false };
+                huntersUnlocked = new bool[3] { true, true, false };
             }
 
             file.Close();
@@ -79,13 +97,45 @@ public class SaveManager : MonoBehaviour
         data.gems = gems;
         data.thunders = thunders;
         data.huntersUnlocked = huntersUnlocked;
-        data.playerID = playerID;
+        data.archer = archer;
+        data.kaboom = kaboom;
+        data.owned = owned;
+        data.ranked = ranked;
+        data.matchPlayed = matchPlayed;
+        data.swordToad = swordToad;
+
+
 
         bf.Serialize(file, data);
         file.Close();
 
-        
+
     }
+    public String MostPlayed()
+    {
+        int[] favourite = { kaboom, swordToad, archer };
+
+
+
+        if (favourite[0] == favourite.Max())
+        {
+            return "Kaboom";
+        }
+        else if (favourite[1] == favourite.Max())
+        {
+            return "SwordToad";
+        }
+        else if (favourite[2] == favourite.Max())
+        {
+            return "Archer";
+        }
+        else
+        {
+            return "Unknown";
+        }
+    }
+
+
 
 
 
@@ -102,7 +152,16 @@ class PlayerData_Storage
     public int gems;
     public int thunders;
     public bool[] huntersUnlocked;
-    public int playerID;
+    public int archer = 0;
+    public int kaboom = 0;
+    public int swordToad = 0;
+    public int matchPlayed = 0;
+
+    public int ranked = 0;
+
+    public int owned = 1;
+
+
 
 
 }

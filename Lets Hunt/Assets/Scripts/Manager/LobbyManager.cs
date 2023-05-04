@@ -90,9 +90,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        roomPanel.SetActive(false);
+        /*roomPanel.SetActive(false);
         envPanel.SetActive(false);
-        lobbyPanel.SetActive(true);
+        lobbyPanel.SetActive(true);*/
     }
 
     public override void OnConnectedToMaster()

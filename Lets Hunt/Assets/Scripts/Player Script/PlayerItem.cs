@@ -7,38 +7,76 @@ using System.Linq;
 using System.IO;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerItem : MonoBehaviour
 {
+
     PhotonView photonView;
 
     public int kills;
 
- 
+    private int coinsCollected;
+
+    Hashtable hash;
+
+    private TextMeshProUGUI killsCount;
+
+
 
     private void Awake()
     {
         photonView = GetComponent<PhotonView>();
+
+        hash = new Hashtable();
+
+        killsCount = GameObject.FindGameObjectWithTag("playerKills").GetComponent<TextMeshProUGUI>();
+
+
     }
 
     public void GetKill()
     {
-        photonView.RPC(nameof(RPC_GetKill), photonView.Owner);
+        kills++;
+        if (photonView.IsMine)
+        {
+            killsCount.text = kills.ToString();
+        }
+
+        photonView.RPC("RPC_GetKill", photonView.Owner);
     }
 
     [PunRPC]
     void RPC_GetKill()
     {
-        kills++;
-        Hashtable hash = new Hashtable();
-        hash.Add("kills", kills);
+       
+        hash["kills"] = kills;
 
-        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+      //  print(hash["kills"]);
+
+        photonView.Owner.SetCustomProperties(hash);
     }
+
 
     public static PlayerItem Find(Player player)
     {
-        return FindObjectsOfType<PlayerItem>().SingleOrDefault(x => x.photonView.Owner == player);
+
+        GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (GameObject playerObject in playerObjects)
+        {
+            PhotonView photonView = playerObject.GetComponent<PhotonView>();
+
+            if (photonView.Owner.ActorNumber == player.ActorNumber)
+            {
+                return playerObject.GetComponent<PlayerItem>();
+            }
+        }
+
+        return null;
     }
+
+    
+
 
 }

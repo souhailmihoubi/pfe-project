@@ -1,19 +1,20 @@
 
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections.Generic;
-using System.Diagnostics;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
-    public TMP_InputField createInput;
     public TMP_InputField joinInput;
 
-    public byte x = 4; //maximum number of players in a room
+    public byte x = 4;
 
-    public List<string> roomIds = new List<string>();   // a list to store generated room IDs
+    public List<string> roomIds = new List<string>();
+
+    private int playersInRoom = 0;
 
     public void CreateRoom()
     {
@@ -33,26 +34,25 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
         roomIds.Add(roomId);
 
-        var roomOptions = new Photon.Realtime.RoomOptions
+        Hashtable customProps = new Hashtable() { { "PlayersInRoom", playersInRoom } };
+
+        var roomOptions = new RoomOptions
         {
             MaxPlayers = x,
-            IsOpen = false,
-           /*CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() 
-           {
-            { "Map", SaveManager.instance.currentMap }
-           },*/
-
-            //CustomRoomPropertiesForLobby = new[] { "Map" }
+            IsVisible = false,
+            CustomRoomProperties = customProps,
+            CustomRoomPropertiesForLobby = new[] { "currentMap" }
         };
 
         PhotonNetwork.CreateRoom(roomId, roomOptions);
 
+
         PlayerPrefs.SetString("roomId", roomId);
+
         PlayerPrefs.SetInt("friends", 1);
 
         print("Room ID: " + roomId);
     }
-
 
     public void JoinRoom()
     {
@@ -61,39 +61,62 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void OnClickJoinRandomRoom()
     {
-        PhotonNetwork.JoinRandomRoom();
+
+        PlayerPrefs.SetInt("friends", 0);
+
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            int currentMap = SaveManager.instance.currentMap;
+            Hashtable customProps = new Hashtable() { { "currentMap", currentMap } };
+            PhotonNetwork.JoinRandomRoom(customProps, 0, MatchmakingMode.FillRoom, null, "", new string[0]);
+        }
+        else
+        {
+            Debug.LogWarning("Client is not connected to the master server yet. Wait for OnConnectedToMaster callback before joining a room.");
+        }
+
+
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        base.OnJoinRandomFailed(returnCode, message);
-
-        PhotonNetwork.CreateRoom("random_room", new Photon.Realtime.RoomOptions { MaxPlayers = x, IsOpen = true });
-
         PlayerPrefs.SetInt("friends", 0);
+
+        int currentMap = SaveManager.instance.currentMap;
+
+        Hashtable customProps = new Hashtable() { { "currentMap", currentMap } };
+
+        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = x, CustomRoomProperties = customProps, CustomRoomPropertiesForLobby = new[] { "currentMap" } });
     }
 
-    public override void OnConnectedToMaster()
+    public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-      //  PhotonNetwork.AutomaticallySyncScene = true;
-
+        playersInRoom++;
     }
 
+    public override void OnPlayerLeftRoom(Player newPlayer)
+    {
+        playersInRoom--;
+    }
     public override void OnJoinedRoom()
     {
+         playersInRoom++;
 
-            int selectedMap = SaveManager.instance.currentMap;
+         Hashtable customRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
 
-            if(selectedMap == 0)
-            {
-                PhotonNetwork.LoadLevel("nature");
+         if (customRoomProperties.ContainsKey("PlayersInRoom"))
+         {
+            playersInRoom = (int)customRoomProperties["PlayersInRoom"];
+         }
 
-            }
-            else  
+         if (playersInRoom == PhotonNetwork.CurrentRoom.MaxPlayers)
+         {
+             roomIds.Remove(PhotonNetwork.CurrentRoom.Name);
+         }
 
-            if (selectedMap == 1)
-            {
-                PhotonNetwork.LoadLevel("city");
-            }
+         
+
+        PhotonNetwork.LoadLevel("waiting");
     }
+
 }

@@ -5,6 +5,8 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using TMPro;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -21,18 +23,16 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
     [SerializeField]
     private float updateSpeedSeconds = 0.5f;
 
-    private Button btn;
+    public bool playerDead = false;
 
     private void Start()
     {
+
         currentHealth = maxHealth;
         UpdateUI();
         photonView.RPC("UpdateHealth", RpcTarget.Others, currentHealth);
     }
 
-
-
-   
 
     public void TakeDamage(float damage)
     {
@@ -46,6 +46,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
         if (currentHealth <= 0f)
         {
             currentHealth = 0f;
+            playerDead = true;
             Die();
         }
 
@@ -56,14 +57,7 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
     
     }
 
-
-
-    private void Die()
-    {
-        // Kif ymout
-        Debug.Log("Die");
-    }
-
+   
     public void UpdateUI()
     {
         if (!gameObject.activeSelf)
@@ -161,4 +155,61 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
             yield return new WaitForSeconds(2f);
         }
     }
+
+
+
+    //--------- After Death ---------------
+
+    private void Die()
+    {
+
+        Player player = PhotonNetwork.PlayerList[FindLocalPlayer()];
+
+        photonView.RPC("PlayerFinish", RpcTarget.AllBuffered, player);
+
+        StartCoroutine(OnEndPanel());
+
+    }
+
+    [PunRPC]
+    void PlayerFinish(Player player)
+    {
+        Scoreboard scoreboard = GameObject.FindGameObjectWithTag("Scoreboard").GetComponent<Scoreboard>();
+
+        scoreboard.PlayerDies(player);
+    }
+
+
+    IEnumerator OnEndPanel()
+    {
+        PlayerScore playerScore = GetComponent<PlayerScore>();
+
+        playerScore.WinLosePanel();
+
+        yield return new WaitForSeconds(3f);
+
+        PhotonNetwork.Destroy(gameObject);
+
+
+        playerScore.SetScoreDeadPlayer();
+    }
+
+
+    private int FindLocalPlayer()
+    {
+        int localPlayerIndex = -1;
+
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            if (PhotonNetwork.PlayerList[i].ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                localPlayerIndex = i;
+                break;
+            }
+        }
+
+        return localPlayerIndex;
+
+    }
+
 }

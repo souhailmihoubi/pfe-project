@@ -13,6 +13,10 @@ TagManager:
   - playerKills
   - coinsCollected
   - crown
+  - Coin
+  - Scoreboard
+  - resultPanel
+  - whenPlayerDies
   layers:
   - Default
   - TransparentFX

@@ -1,28 +1,58 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
+using TMPro;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
-  //  public Text buttonText;
+    [SerializeField] private Image barFill;
+    [SerializeField] private TextMeshProUGUI loadingText;
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+
+        OnClickConnect();
+
+        StartCoroutine(LoadSceneAsync());
     }
 
     public void OnClickConnect()
     {
-      //  buttonText.text = "Starting...";
-        PhotonNetwork.OfflineMode = false; //true would fake an online connection
-        PhotonNetwork.NickName = "Player Name";  //after login zidou
-        //PhotonNetwork.AutomaticallySyncScene = true; //to call PhotonNetwork.loadLevel()
+        if (Application.internetReachability != NetworkReachability.NotReachable)
+        {
+            // There is internet
 
-        PhotonNetwork.ConnectUsingSettings(); //automatic connection based on the config file PhotonServerSettings
+            PhotonNetwork.OfflineMode = false;
+            PhotonNetwork.NickName = "Souhail";
+            PhotonNetwork.ConnectUsingSettings();
+
+        }
+        else
+        {
+            Debug.Log("Network Error");
+        }
     }
+
+    IEnumerator LoadSceneAsync()
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync("MainMenu");
+
+        while (!operation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(operation.progress);
+
+            barFill.fillAmount = progressValue;
+
+            loadingText.text = "Loading" + Mathf.RoundToInt(progressValue * 100) + "%";
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
 
     public override void OnDisconnected(DisconnectCause cause)
     {
@@ -32,6 +62,14 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to The master!");
-       // SceneManager.LoadScene("Lobby");
+    }
+
+    public override void OnLeftRoom()
+    {
+        Debug.Log("player left the room");
+        if (!PhotonNetwork.IsConnectedAndReady)
+        {
+            OnClickConnect();
+        }
     }
 }

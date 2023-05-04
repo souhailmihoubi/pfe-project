@@ -92,6 +92,8 @@ public class ArcherAttack : MonoBehaviour
                         StartCoroutine(RangedAttackInterval());
                     }
                 }
+
+               
             }
 
             // Reset attack timer
@@ -103,19 +105,22 @@ public class ArcherAttack : MonoBehaviour
     {
         preformArrowAttack = false;
 
-        _animatorController.PlayAttack();
-
-        yield return new WaitForSeconds(attackCooldown / ((100 + attackCooldown) * 0.01f));
-
-        if (closestEnemy == null)
+        if (closestEnemy != null && !closestEnemy.enemyDead)
         {
-            _animatorController.StopAttack();
-            preformArrowAttack = true;
+            _animatorController.PlayAttack();
+
+            yield return new WaitForSeconds(attackCooldown / ((100 + attackCooldown) * 0.01f));
+
+            if (closestEnemy.enemyDead)
+            {
+                playerItem.GetKill();
+            }
         }
 
-        
-
+        _animatorController.StopAttack();
+        preformArrowAttack = true;
     }
+
     public void RangedAttack()
     {
         if (closestEnemy != null)

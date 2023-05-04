@@ -6,20 +6,28 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using System.ComponentModel;
 
 public class Timer : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Image uiFill;
     [SerializeField] private TextMeshProUGUI uiText;
 
-    public GameObject movement, timer, lvl;
+    public GameObject movement, timer, lvl,score;
     public int duration = 60;
     private float startTime;
 
+    public GameObject timeOver;
+
+
     PhotonView photonView;
+
 
     private void Start()
     {
+
+
         photonView = GetComponent<PhotonView>();
         
         if (PhotonNetwork.IsMasterClient)
@@ -48,7 +56,7 @@ public class Timer : MonoBehaviourPunCallbacks
             {
                 break;
             }
-
+            
             yield return null;
         }
 
@@ -57,27 +65,55 @@ public class Timer : MonoBehaviourPunCallbacks
 
     private void OnEnd()
     {
-        // End Time , if want Do something
-        Debug.Log("End");
-        /*movement.SetActive(false);
-        lvl.SetActive(false);
-        timer.SetActive(false);
-        winLoss.SetActive(true);*/
+        movement.gameObject.SetActive(false);
+        lvl.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
+        score.gameObject.SetActive(false);
 
-        //GameManager.instance.AddCoins(PlayerPrefs.GetInt("Coins"));
-
-        PhotonNetwork.LeaveRoom();
-
-
-
-
-
+        StartCoroutine(ShowResult());   
     }
-    public override void OnLeftRoom()
-    {
 
-        SceneManager.LoadScene("MainMenu");
-        
+    IEnumerator ShowResult()
+    {
+        timeOver.gameObject.SetActive(true);
+
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            GameObject playerObject = player.TagObject as GameObject;
+
+            if (playerObject != null)
+            {
+                PlayerScore playerScore = playerObject.GetComponent<PlayerScore>();
+
+                playerScore.WinLosePanel();
+            }
+        }
+
+        yield return new WaitForSeconds(3f);
+
+        timeOver.gameObject.SetActive(false);
+
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            GameObject playerObject = player.TagObject as GameObject;
+
+            if (playerObject != null)
+            {
+                PlayerScore playerScore = playerObject.GetComponent<PlayerScore>();
+
+                if (playerScore != null)
+                {
+                    playerScore.SetScore();
+
+                    SaveManager.instance.matchPlayed += 1;
+                    SaveManager.instance.Save();
+
+                }
+            }
+        }
+
+        Time.timeScale = 0f;
+
     }
 
     [PunRPC]

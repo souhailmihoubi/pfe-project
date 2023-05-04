@@ -7,86 +7,110 @@ using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using System.Data;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ScoreboardItem : MonoBehaviourPunCallbacks
 {
-    [SerializeField] TextMeshProUGUI playerName;
-    [SerializeField] TextMeshProUGUI killsText;
-    [SerializeField] TextMeshProUGUI playerKills;
-    [SerializeField] Image crownImage;
+    [SerializeField] private TextMeshProUGUI playerNameText;
+    [SerializeField] private TextMeshProUGUI playerKillsText;
+    public GameObject crownImage;
 
-    Player player;
-    int maxKills;
 
-    private void Start()
-    {
-        playerKills = GameObject.FindGameObjectWithTag("playerKills").GetComponentInParent<TextMeshProUGUI>();
-        crownImage.gameObject.SetActive(false);
-    }
+    public GameObject redLine;
+    public int playerRank;
+
+    private Player player;
+
+    public bool playerDied = false;
 
     public void Initialize(Player player)
     {
-        playerName.text = player.NickName;
         this.player = player;
+        
+        playerNameText.text = player.NickName;
+
         UpdateStats();
-    }
-
-    private void Update()
-    {
-        if (PhotonNetwork.LocalPlayer == null) return;
-
-        object killsObj;
-        if (player.CustomProperties.TryGetValue("kills", out killsObj))
-        {
-            int playerKills = (int)killsObj;
-
-            if (playerKills > maxKills)
-            {
-                maxKills = playerKills;
-                UpdateCrownImage();
-            }
-            else if (playerKills < maxKills && player.Equals(PhotonNetwork.LocalPlayer))
-            {
-                crownImage.gameObject.SetActive(false);
-            }
-        }
-    }
-
-    void UpdateStats()
-    {
-        if (player.CustomProperties.TryGetValue("kills", out object kills))
-        {
-            killsText.text = kills.ToString();
-            playerKills.text = kills.ToString();
-        }
+        
+        UpdateCrownImage();
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
     {
-        if (targetPlayer == player && changedProps.ContainsKey("kills"))
+        if (changedProps.ContainsKey("kills"))
         {
+            UpdateRanks();
             UpdateStats();
             UpdateCrownImage();
         }
     }
 
-    void UpdateCrownImage()
+    private void UpdateRanks()
     {
-        if (PhotonNetwork.LocalPlayer == null) return;
+        List<Player> players = PhotonNetwork.PlayerList.ToList();
 
-        object killsObj;
-        if (player.CustomProperties.TryGetValue("kills", out killsObj))
+        players.Sort((p1, p2) => {
+            int p1Kills = p1.CustomProperties.ContainsKey("kills") ? (int)p1.CustomProperties["kills"] : 0;
+            int p2Kills = p2.CustomProperties.ContainsKey("kills") ? (int)p2.CustomProperties["kills"] : 0;
+            return p2Kills.CompareTo(p1Kills);
+        });
+
+        for (int i = 0; i < players.Count; i++)
         {
-            int playerKills = (int)killsObj;
+            Hashtable customProps = new Hashtable { { "rank", i + 1 } };
 
-            if (player.Equals(PhotonNetwork.LocalPlayer) && playerKills == maxKills)
-            {
-                crownImage.gameObject.SetActive(true);
-            }
-            else
-            {
-                crownImage.gameObject.SetActive(false);
-            }
+            players[i].SetCustomProperties(customProps);
         }
     }
+
+
+    private void UpdateStats()
+    {
+        if (player.CustomProperties.TryGetValue("kills", out object kills))
+        {
+            playerKillsText.text = kills.ToString();
+
+        }
+    }
+
+    private void UpdateCrownImage()
+    {
+        ScoreboardItem[] scoreboardItems = FindObjectsOfType<ScoreboardItem>();
+
+        int playerRank = 0;
+
+        bool success = player.CustomProperties.TryGetValue("rank", out object rank);
+
+        if (success) { playerRank = (int)rank; }
+
+        if (playerRank == 1)
+        {
+            crownImage.SetActive(true);
+        }
+        else
+        {
+            crownImage.SetActive(false);
+        }
+    }
+
+
+    public int GetPlayerRank(Player player, List<Player> players)
+    {
+        players.Sort((p1, p2) => {
+            int p1Kills = p1.CustomProperties.ContainsKey("kills") ? (int)p1.CustomProperties["kills"] : 0;
+            int p2Kills = p2.CustomProperties.ContainsKey("kills") ? (int)p2.CustomProperties["kills"] : 0;
+
+            return p2Kills.CompareTo(p1Kills);
+        });
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i] == player)
+            {
+                return i + 1;
+            }
+        }
+
+        return -1;
+    }
+
 }

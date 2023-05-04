@@ -929,13 +929,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 6
-  attack_Distance: 2
-  alert_attack_Distance: 5
-  follow_Distance: 6
-  enemy_CurrentState: 0
-  move_Speed: 1
-  walk_Speed: 0.5
-  waitAttackTime: 4
+  attackDistance: 2
+  alertAttackDistance: 8
+  followDistance: 15
+  walkSpeed: 1
+  doDamage: 0
+  enemyCurrentState: 0
 --- !u!114 &6289209436259984482
 MonoBehaviour:
   m_ObjectHideFlags: 0

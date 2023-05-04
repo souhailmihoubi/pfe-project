@@ -48,20 +48,27 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 
         if (whichCharacter == 0)
         {
-            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "frog"), spawnPoints[spawnIndex].position, Quaternion.identity); ; ;
+            playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "frog"), spawnPoints[spawnIndex].position, Quaternion.identity);
+            SaveManager.instance.swordToad += 1;
         }
         else if (whichCharacter == 1)
         {
             playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "bomber"), spawnPoints[spawnIndex].position, Quaternion.identity);
+            SaveManager.instance.kaboom += 1;
         }
         else if (whichCharacter == 2)
         {
             playerPrefab = PhotonNetwork.Instantiate(Path.Combine("", "archerGirl"), spawnPoints[spawnIndex].position, Quaternion.identity);
+            SaveManager.instance.archer += 1;
+
         }
 
-        animator = playerPrefab.GetComponent<Animator>();
+        SaveManager.instance.Save();
 
-        //PlayerPrefs.SetInt("spawnPoints", (spawnIndex + 1) % spawnPoints.Length);
+        // Store a reference to the player's game object in their TagObject
+        PhotonNetwork.LocalPlayer.TagObject = playerPrefab;
+
+        animator = playerPrefab.GetComponent<Animator>();
     }
 
 }
