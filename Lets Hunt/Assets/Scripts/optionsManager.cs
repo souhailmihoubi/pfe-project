@@ -10,4 +10,14 @@ public class optionsManager : MonoBehaviour
    {
         audioMixer.SetFloat("volume", volume) ; 
    }
+    
+   public void SetVolumeSfx (float volume)
+   {
+        audioMixer.SetFloat("sfxVolume", volume) ; 
+   }
+
+    public void SetQuality(int qualityIndex)
+    {
+        QualitySettings.SetQualityLevel(qualityIndex);
+    }
 }

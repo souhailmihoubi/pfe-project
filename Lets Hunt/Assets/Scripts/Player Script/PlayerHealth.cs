@@ -25,6 +25,9 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
 
     public bool playerDead = false;
 
+    [SerializeField] AudioSource healingAudioSource;
+
+
     private void Start()
     {
 
@@ -151,6 +154,11 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
                 currentHealth = maxHealth;
             }
             UpdateUI();
+
+            if (photonView.IsMine)
+            {
+                healingAudioSource.Play();
+            }
 
             yield return new WaitForSeconds(2f);
         }

@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &569370222
 RectTransform:
   m_ObjectHideFlags: 0
@@ -783,7 +783,6 @@ GameObject:
   - component: {fileID: 2103906556}
   - component: {fileID: 2103906555}
   - component: {fileID: 2103906554}
-  - component: {fileID: 2103906553}
   m_Layer: 5
   m_Name: collect
   m_TagString: Untagged
@@ -895,7 +894,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2103906553}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Rewarded, Assembly-CSharp
         m_MethodName: showrewarded
         m_Mode: 1
@@ -919,21 +918,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2103906553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103906551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1dd616e8d24a3d43b5fc92523325068, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 0
-  Ttimer: {fileID: 0}
-  Breward: {fileID: 0}
 --- !u!1 &418146315041787188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +1315,7 @@ MonoBehaviour:
   coins: {fileID: 8415887134473115460}
   kills: {fileID: 793325918495295320}
   thunders: {fileID: 4731224033517757581}
-  adsPanel: {fileID: 0}
+  adsPanel: {fileID: 569370221}
 --- !u!114 &8177471948441823774
 MonoBehaviour:
   m_ObjectHideFlags: 0

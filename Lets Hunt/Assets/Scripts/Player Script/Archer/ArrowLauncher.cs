@@ -13,6 +13,11 @@ public class ArrowLauncher : MonoBehaviourPunCallbacks
 
     public bool stopProjectile;
 
+    //---------- SFX
+
+    [SerializeField] AudioSource bomberAudioSource;
+    [SerializeField] AudioSource archerAudioSource;
+
     private void Update()
     {
         if (target)
@@ -33,7 +38,21 @@ public class ArrowLauncher : MonoBehaviourPunCallbacks
                     {
                         target.GetComponent<EnemyHealth>().TakeDamage(damage);
 
+                        if(archerAudioSource != null)
+                        {
+                            archerAudioSource.Play();
+                        }
+
+                        if(bomberAudioSource != null)
+                        {
+                            bomberAudioSource.Play();
+                        }
+
+
                         stopProjectile = true;
+
+
+
                     }
 
                     stopProjectile = true;

@@ -100,9 +100,12 @@ public class PlayerAttack : MonoBehaviour
 
     public void FrogAttacked()
     {
-        closestEnemy.TakeDamage(attackDamage);
+        if(closestEnemy != null)
+        {
+            closestEnemy.TakeDamage(attackDamage);
+        }
 
-        if (closestEnemy.currentHealth <= 0)
+        if (closestEnemy.enemyDead)
         {
             _animatorController.StopAttack();
 

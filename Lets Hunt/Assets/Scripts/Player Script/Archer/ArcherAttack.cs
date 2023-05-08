@@ -35,6 +35,9 @@ public class ArcherAttack : MonoBehaviour
     EnemyHealth closestEnemy;
 
 
+
+
+
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -113,6 +116,8 @@ public class ArcherAttack : MonoBehaviour
 
             if (closestEnemy.enemyDead)
             {
+                _animatorController.StopAttack();
+                preformArrowAttack = true;
                 playerItem.GetKill();
             }
         }

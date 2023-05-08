@@ -89,7 +89,8 @@ public class LevelUpScript : MonoBehaviour
     {
         // Attack Speed
 
-        PlayerAttack playerAttack = GetComponent<PlayerAttack>();
+        ArcherAttack playerAttack = GetComponent<ArcherAttack>();
+
         if (playerAttack != null)
         {   
             playerAttack.IncreaseAtkSpeed();
@@ -104,10 +105,13 @@ public class LevelUpScript : MonoBehaviour
         // Sync Animation
 
         Animator animator = GetComponent<Animator>();
+
         if (animator != null)
         {
             float currentSpeed = animator.GetFloat("AttackSpeed");
+
             float newSpeed = currentSpeed + 0.75f;
+
             animator.SetFloat("AttackSpeed", newSpeed);
         }
     }
@@ -142,14 +146,6 @@ public class LevelUpScript : MonoBehaviour
             pa.attackRange += 1f;
         }
 
-        else
-        {
-            PlayerAttack playerAttack = GetComponent<PlayerAttack>();
-
-            playerAttack.attackRange += 1f;
-        }
-
-
         photonView.RPC("UpdateRange", RpcTarget.OthersBuffered, playerRange.currentRange);
 
 
@@ -170,7 +166,7 @@ public class LevelUpScript : MonoBehaviour
         PlayerMove playerMove = GetComponent<PlayerMove>();
         if (playerMove != null)
         {
-            playerMove.IncreaseSpeed(1.5f);
+            playerMove.IncreaseSpeed(0.5f);
         }
     }
 

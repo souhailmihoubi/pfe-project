@@ -113,6 +113,7 @@ public class EnemyHealth : MonoBehaviour
             enemyDead = true;
 
             photonView.RPC("DestroyEnemy", RpcTarget.AllBuffered);
+            photonView.RPC("SpawnCoinsXP", RpcTarget.MasterClient);
         }
 
         UpdateUI();
@@ -127,11 +128,11 @@ public class EnemyHealth : MonoBehaviour
     private void DestroyEnemy()
     {
         Destroy(gameObject);
-        SpawnCoinsXP();
+        //SpawnCoinsXP();
     }
 
 
-
+    [PunRPC]
     public void SpawnCoinsXP()
     {
         if (enemyDead)

@@ -19,6 +19,8 @@ public class Coin : MonoBehaviourPunCallbacks
 
     private Renderer coinRenderer;
 
+    [SerializeField] AudioSource coinAudioSource;
+
 
     Hashtable hash;
 
@@ -47,6 +49,12 @@ public class Coin : MonoBehaviourPunCallbacks
         if (other.gameObject.CompareTag("Coin"))
         {
             Destroy(other.gameObject);
+
+            if (photonView.IsMine)
+            {
+                coinAudioSource.Play();
+            }
+
 
             Sound();
         }

@@ -86,6 +86,9 @@ public class PlayerScore : MonoBehaviour
 
         SaveManager.instance.Save();
 
+        PhotonNetwork.Destroy(gameObject);
+
+
     }
 
     public void SetScoreDeadPlayer()

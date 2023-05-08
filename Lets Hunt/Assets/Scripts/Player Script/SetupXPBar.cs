@@ -22,6 +22,10 @@ public class SetupXPBar : MonoBehaviourPunCallbacks
     [SerializeField]
     private float updateSpeedSeconds = 0.5f;
 
+    [SerializeField] AudioSource xpAudioSource;
+    [SerializeField] AudioSource LevelUpAudioSource;
+
+
 
     private void Start()
     {
@@ -33,6 +37,12 @@ public class SetupXPBar : MonoBehaviourPunCallbacks
         if (other.gameObject.CompareTag("XP"))
         {
             Destroy(other.gameObject);
+
+            if (photonView.IsMine)
+            {
+                xpAudioSource.Play();
+            }
+
         }
         switch (currentLevel)
         {
@@ -66,6 +76,11 @@ public class SetupXPBar : MonoBehaviourPunCallbacks
                 currentLevel++;
 
                 levelUpScript.LevelUp();
+
+                if (photonView.IsMine)
+                {
+                    LevelUpAudioSource.Play();
+                }
             }
 
             UpdateUI();
