@@ -43,7 +43,7 @@ public class EnemySpawn : MonoBehaviour
 
             spawnTimer = 0f;
 
-            if (currentEnemyLevel == 3)
+            if (currentEnemyLevel > 3)
                 currentEnemyLevel = 1;
         }
         if (batchTimer >= 20f)
@@ -61,11 +61,11 @@ public class EnemySpawn : MonoBehaviour
             {
                 GameObject warning = null;
                 GameObject enemyPrefab = null;
-
                 switch (currentEnemyLevel)
                 {
+
                     case 1:
-                    for (int i = 0; i < 2; i++) // baad nbadalha 9ad m nheb 
+                    for (int i = 0; i < 3; i++)
                     {
                         Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
 
@@ -76,7 +76,7 @@ public class EnemySpawn : MonoBehaviour
                     }
                     break;
                 case 2:
-                    for (int i = 0; i < 2; i++) // baad nbadalha 9ad m nheb 
+                    for (int i = 0; i < 3; i++)
                     {
                         Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
 
@@ -84,17 +84,18 @@ public class EnemySpawn : MonoBehaviour
                         warning = PhotonNetwork.Instantiate(warningPrefab.name, randomPosition, Quaternion.identity);
                         StartCoroutine(DestroyWarningPrefab(warning, warningDuration, enemyPrefab, randomPosition));
                     }
-                        break;
+                    break;
                     case 3:
-                    for (int i = 0; i < 2; i++) // baad nbadalha 9ad m nheb 
+                    for (int i = 0; i < 3; i++)
                     {
                         Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
 
                         enemyPrefab = level3Enemies[Random.Range(0, level3Enemies.Length)];
                         warning = PhotonNetwork.Instantiate(warningPrefab.name, randomPosition, Quaternion.identity);
                         StartCoroutine(DestroyWarningPrefab(warning, warningDuration, enemyPrefab, randomPosition));
+
                     }
-                        break;
+                    break;
                 }
             }
         
