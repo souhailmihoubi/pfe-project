@@ -1398,7 +1398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd0fe4664f99724f9a0d73f5f7c6bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 20
+  startingHealth: 325
   currentHealth: 0
   healthText: {fileID: 5546060085628991686}
   healthFill: {fileID: 5595820198997554315}
@@ -1424,9 +1424,7 @@ MonoBehaviour:
   attackDistance: 2
   alertAttackDistance: 8
   followDistance: 15
-  moveSpeed: 2
   walkSpeed: 1
-  waitAttackTime: 2
   doDamage: 0
   enemyCurrentState: 0
 --- !u!114 &-201514128202110633

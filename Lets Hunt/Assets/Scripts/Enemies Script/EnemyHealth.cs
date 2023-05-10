@@ -135,12 +135,12 @@ public class EnemyHealth : MonoBehaviour
     [PunRPC]
     public void SpawnCoinsXP()
     {
-        if (enemyDead)
+        /*if (enemyDead)
         {
             return;
         }
 
-        enemyDead = true;
+        enemyDead = true;*/
 
         Vector3 randomPos0 = UnityEngine.Random.insideUnitSphere * 1f;
 

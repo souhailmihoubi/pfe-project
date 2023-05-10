@@ -100,7 +100,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void FrogAttacked()
     {
-        if(closestEnemy != null)
+        if(closestEnemy != null && !closestEnemy.enemyDead)
         {
             closestEnemy.TakeDamage(attackDamage);
         }

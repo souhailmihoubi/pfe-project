@@ -152,13 +152,15 @@ public class PlayerHealth : MonoBehaviourPunCallbacks, IPunObservable
             if (currentHealth > maxHealth)
             {
                 currentHealth = maxHealth;
+                isHealing = false;
             }
-            UpdateUI();
 
             if (photonView.IsMine)
             {
                 healingAudioSource.Play();
             }
+
+            UpdateUI();
 
             yield return new WaitForSeconds(2f);
         }

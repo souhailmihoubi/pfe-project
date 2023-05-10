@@ -4002,9 +4002,6 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Attack
-  - Type: 1
-    SynchronizeType: 0
-    Name: Attack speed
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

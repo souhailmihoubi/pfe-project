@@ -644,7 +644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd0fe4664f99724f9a0d73f5f7c6bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 20
+  startingHealth: 45
   currentHealth: 0
   healthText: {fileID: 6715996160904149717}
   healthFill: {fileID: 1627773425231636184}
