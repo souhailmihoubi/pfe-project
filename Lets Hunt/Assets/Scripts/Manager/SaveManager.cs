@@ -31,7 +31,7 @@ public class SaveManager : MonoBehaviour
     public int thunders;
 
 
-    public bool[] huntersUnlocked = new bool[3] { false, true, false };
+    public bool[] huntersUnlocked = new bool[3] { true, true, false };
 
 
 

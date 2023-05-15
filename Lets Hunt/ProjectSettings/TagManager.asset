@@ -17,6 +17,7 @@ TagManager:
   - Scoreboard
   - resultPanel
   - whenPlayerDies
+  - PlayFabManger
   layers:
   - Default
   - TransparentFX

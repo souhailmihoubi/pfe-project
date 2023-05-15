@@ -19,6 +19,8 @@ public class PlayerScore : MonoBehaviour
 
     public int playerRank = 0;
 
+    PlayFabManager playFabManager;
+
     private void Start()
     {
         playerHealth = GetComponent<PlayerHealth>();
@@ -26,6 +28,9 @@ public class PlayerScore : MonoBehaviour
 
         pos = new Vector3(113.5f, 236.45f, -4.5f);
         pos2 = new Vector3(36.5f, 99.95f, -4.5f);
+
+        playFabManager = GameObject.FindGameObjectWithTag("PlayFabManger").GetComponent<PlayFabManager>();
+
     }
 
     public void SetScore()
@@ -86,6 +91,8 @@ public class PlayerScore : MonoBehaviour
 
         SaveManager.instance.Save();
 
+        playFabManager.SendLeaderboard(SaveManager.instance.thunders);
+
         PhotonNetwork.Destroy(gameObject);
 
 
@@ -104,6 +111,9 @@ public class PlayerScore : MonoBehaviour
         SaveManager.instance.thunders -= 5;
 
         SaveManager.instance.Save();
+
+        playFabManager.SendLeaderboard(SaveManager.instance.thunders);
+
 
         //---- Kills ----
 
