@@ -27,7 +27,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
             // There is internet
 
             PhotonNetwork.OfflineMode = false;
-            PhotonNetwork.NickName = "Souhail";
             PhotonNetwork.ConnectUsingSettings();
 
         }
@@ -39,7 +38,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     IEnumerator LoadSceneAsync()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync("MainMenu");
+        AsyncOperation operation = SceneManager.LoadSceneAsync("Authentification");
 
         while (!operation.isDone)
         {

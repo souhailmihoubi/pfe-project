@@ -29,7 +29,7 @@ public class PlayerScore : MonoBehaviour
         pos = new Vector3(113.5f, 236.45f, -4.5f);
         pos2 = new Vector3(36.5f, 99.95f, -4.5f);
 
-        playFabManager = GameObject.FindGameObjectWithTag("PlayFabManger").GetComponent<PlayFabManager>();
+       playFabManager = GameObject.FindGameObjectWithTag("PlayFabManger").GetComponent<PlayFabManager>();
 
     }
 

@@ -26,6 +26,7 @@ public class SaveManager : MonoBehaviour
     public int currentMap;
     public string selectedMapName;
     public string selectedMapSprite;
+    public string displayName;
     public int coins;
     public int gems;
     public int thunders;
@@ -63,6 +64,7 @@ public class SaveManager : MonoBehaviour
             gems = data.gems;
             thunders = data.thunders;
             huntersUnlocked = data.huntersUnlocked;
+            displayName = data.displayName;
             archer = data.archer;
             kaboom = data.kaboom;
             swordToad = data.swordToad;
@@ -97,6 +99,7 @@ public class SaveManager : MonoBehaviour
         data.gems = gems;
         data.thunders = thunders;
         data.huntersUnlocked = huntersUnlocked;
+        data.displayName = displayName;
         data.archer = archer;
         data.kaboom = kaboom;
         data.owned = owned;
@@ -110,6 +113,11 @@ public class SaveManager : MonoBehaviour
         file.Close();
 
 
+    }
+
+    public string GetName()
+    {
+        return displayName;
     }
     public String MostPlayed()
     {
@@ -148,6 +156,7 @@ class PlayerData_Storage
     public int currentMap;
     public string selectedMapName;
     public string selectedMapSprite;
+    public string displayName;
     public int coins;
     public int gems;
     public int thunders;

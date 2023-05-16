@@ -6,168 +6,109 @@ using PlayFab.ClientModels;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Photon.Pun;
 
 public class PlayFabManager : MonoBehaviour
 {
     public GameObject playerRow;
     public Transform rowsParent;
     public TextMeshProUGUI message;
+    public TextMeshProUGUI playerName;
+    public TextMeshProUGUI playerNameInput;
 
-    [Header("AuthUI")]
-    public TextMeshProUGUI emailInput;
-    public TextMeshProUGUI pwdInput;
+    Auth auth;
 
-
-    void Start()
+    private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        //Login();
-    }
+        DontDestroyOnLoad(this);
 
+        auth = GameObject.FindGameObjectWithTag("Authentification").GetComponent<Auth>();
 
-    //Logging in 
-    void Login()
-    {
-        var request = new LoginWithCustomIDRequest
-        {
-            CustomId = SystemInfo.deviceUniqueIdentifier,
-            CreateAccount = true,
-        };
-        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
-    }
-    void OnLoginSuccess(LoginResult result)
-    {
-        message.text = "logged in!";
+        SaveManager.instance.displayName = PlayerPrefs.GetString("playerName") ;
+
+        PhotonNetwork.NickName = SaveManager.instance.displayName;
+
+        Debug.Log(PhotonNetwork.NickName);
+
+        playerName.text = PhotonNetwork.NickName;
+
+        SaveManager.instance.Save();
+
         SaveAppearance();
-        GetTitleData();
-
     }
-   
-
-    //Login Register Reset PAssword
-
-    public void RgisterButton()
-    {
-        if(pwdInput.text.Length < 6)
-        {
-            message.text = "Password too short!";
-            return;
-        }
-        var request = new RegisterPlayFabUserRequest
-        {
-            Email = emailInput.text,
-            Password = pwdInput.text,
-            RequireBothUsernameAndEmail = false,
-        };
-
-        PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnError);
-    }
-
-    void OnRegisterSuccess(RegisterPlayFabUserResult result)
-    {
-        message.text = "Registred and logged in!";
-    }
-
-    public void LoginButton()
-    {
-        var request = new LoginWithEmailAddressRequest
-        {
-            Email = emailInput.text,
-            Password = pwdInput.text,
-        };
-
-        PlayFabClientAPI.LoginWithEmailAddress(request, OnLoginSuccess, OnError); 
-    }
-
-    public void ResetPasswordButton()
-    {
-        var request = new SendAccountRecoveryEmailRequest
-        {
-            Email = emailInput.text,
-            TitleId = "AF633"
-        };
-
-        PlayFabClientAPI.SendAccountRecoveryEmail(request, OnPasswordReset, OnError);
-    }
-
-    void OnPasswordReset(SendAccountRecoveryEmailResult result)
-    {
-        message.text = "Password reset! mail sent";
-    }
-
 
     //Player data
     public void GetAppearance()
-    {
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
-    }
-    void OnDataRecieved(GetUserDataResult result)
-    {
-        Debug.Log("Data Received!");
+     {
+         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
+     }
+     void OnDataRecieved(GetUserDataResult result)
+     {
+         Debug.Log("Data Received!");
 
-        if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Gems") && result.Data.ContainsKey("Thunders") && result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
-        {
-            SaveManager.instance.coins = Int32.Parse(result.Data["Coins"].Value);
-            SaveManager.instance.gems = Int32.Parse(result.Data["Gems"].Value);
-            SaveManager.instance.thunders = Int32.Parse(result.Data["Thunders"].Value);
-            SaveManager.instance.currentHunter = Int32.Parse(result.Data["currentHunter"].Value);
-            SaveManager.instance.matchPlayed = Int32.Parse(result.Data["matchPlayed"].Value);
-            SaveManager.instance.ranked = Int32.Parse(result.Data["ranked"].Value);
+         if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Gems") && result.Data.ContainsKey("Thunders") && result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
+         {
+             SaveManager.instance.coins = Int32.Parse(result.Data["Coins"].Value);
+             SaveManager.instance.gems = Int32.Parse(result.Data["Gems"].Value);
+             SaveManager.instance.thunders = Int32.Parse(result.Data["Thunders"].Value);
+             SaveManager.instance.currentHunter = Int32.Parse(result.Data["currentHunter"].Value);
+             SaveManager.instance.matchPlayed = Int32.Parse(result.Data["matchPlayed"].Value);
+             SaveManager.instance.ranked = Int32.Parse(result.Data["ranked"].Value);
 
-            bool[] huntersUnlocked = new bool[result.Data.Count - 6]; // Subtract the number of non-huntersUnlocked keys
+             bool[] huntersUnlocked = new bool[3];
 
-            // Extract the huntersUnlocked bool array from the loaded data
+             int index = 0;
+             foreach (var entry in result.Data)
+             {
+                 if (entry.Key.StartsWith("HunterUnlocked_"))
+                 {
+                     bool value = bool.Parse(entry.Value.Value);
+                     huntersUnlocked[index] = value;
+                     index++;
+                 }
+             }
 
-            int index = 0;
-            foreach (var entry in result.Data)
-            {
-                if (entry.Key.StartsWith("HunterUnlocked_"))
-                {
-                    bool value = bool.Parse(entry.Value.Value);
-                    huntersUnlocked[index] = value;
-                    index++;
-                }
-            }
+             SaveManager.instance.huntersUnlocked = huntersUnlocked;
+         }
+         else
+         {
+             Debug.Log("Player data incomplete!");
+         }
+     }
+     public void SaveAppearance()
+     {
+         bool[] huntersUnlocked = SaveManager.instance.huntersUnlocked;
 
-            SaveManager.instance.huntersUnlocked = huntersUnlocked;
-        }
-        else
-        {
-            Debug.Log("Player data incomplete!");
-        }
-    }
-    public void SaveAppearance()
-    {
-        bool[] huntersUnlocked = SaveManager.instance.huntersUnlocked;
+         var dataDictionary = new Dictionary<string, string>
+         {
+             {"Coins", SaveManager.instance.coins.ToString() },
+             {"Gems", SaveManager.instance.gems.ToString() },
+             {"Thunders", SaveManager.instance.thunders.ToString() },
+             {"currentHunter", SaveManager.instance.currentHunter.ToString() },
+             {"matchPlayed", SaveManager.instance.matchPlayed.ToString() },
+             {"ranked", SaveManager.instance.ranked.ToString() },
+         };
 
-        var dataDictionary = new Dictionary<string, string>
-        {
-            {"Coins", SaveManager.instance.coins.ToString() },
-            {"Gems", SaveManager.instance.gems.ToString() },
-            {"Thunders", SaveManager.instance.thunders.ToString() },
-            {"currentHunter", SaveManager.instance.currentHunter.ToString() },
-            {"matchPlayed", SaveManager.instance.matchPlayed.ToString() },
-            {"ranked", SaveManager.instance.ranked.ToString() },
-        };
+         for (int i = 0; i < huntersUnlocked.Length; i++)
+         {
+             string key = "HunterUnlocked_" + i.ToString();
+             string value = huntersUnlocked[i].ToString();
+             dataDictionary[key] = value;
+         }
 
-        for (int i = 0; i < huntersUnlocked.Length; i++)
-        {
-            string key = "HunterUnlocked_" + i.ToString();
-            string value = huntersUnlocked[i].ToString();
-            dataDictionary[key] = value;
-        }
+         var request = new UpdateUserDataRequest
+         {
+             Data = dataDictionary
+         };
 
-        var request = new UpdateUserDataRequest
-        {
-            Data = dataDictionary
-        };
+         PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+     }
+     void OnDataSend(UpdateUserDataResult result)
+     {
+         Debug.Log("User data sent successfully!");
 
-        PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
-    }
-    void OnDataSend(UpdateUserDataResult result)
-    {
-        Debug.Log("User data sent successfully!");
-    }
+         GetAppearance();
+     }
 
 
     //Leaderboard
@@ -251,7 +192,18 @@ public class PlayFabManager : MonoBehaviour
         message.text = error.ErrorMessage;
         Debug.Log("Error while logging in !");
         Debug.Log(error.GenerateErrorReport());
-
     }
 
+
+    public void SetPlayerName()
+    {
+        PhotonNetwork.NickName = playerNameInput.text;
+
+        auth.UpdatePlayerName(playerNameInput.text);
+
+        playerName.text = PhotonNetwork.NickName;
+
+        playerNameInput.text = "";
+
+    }
 }

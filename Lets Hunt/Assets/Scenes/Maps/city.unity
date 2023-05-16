@@ -29432,6 +29432,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scoreboard Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4833927057441600268, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6638883894042014888, guid: b76710d3482391a4a935177573bde104, type: 3}
       propertyPath: m_IsActive
       value: 0
