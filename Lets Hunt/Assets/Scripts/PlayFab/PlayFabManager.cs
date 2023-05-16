@@ -34,6 +34,8 @@ public class PlayFabManager : MonoBehaviour
 
         SaveManager.instance.Save();
 
+        GetAppearance();
+
         SaveAppearance();
     }
 
@@ -48,6 +50,7 @@ public class PlayFabManager : MonoBehaviour
 
          if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Gems") && result.Data.ContainsKey("Thunders") && result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
          {
+            Debug.Log("changin...");
              SaveManager.instance.coins = Int32.Parse(result.Data["Coins"].Value);
              SaveManager.instance.gems = Int32.Parse(result.Data["Gems"].Value);
              SaveManager.instance.thunders = Int32.Parse(result.Data["Thunders"].Value);
@@ -106,8 +109,6 @@ public class PlayFabManager : MonoBehaviour
      void OnDataSend(UpdateUserDataResult result)
      {
          Debug.Log("User data sent successfully!");
-
-         GetAppearance();
      }
 
 
@@ -159,7 +160,7 @@ public class PlayFabManager : MonoBehaviour
             TextMeshProUGUI[] texts = newGo.GetComponentsInChildren<TextMeshProUGUI>();
 
             texts[0].text = (item.Position + 1).ToString();
-            texts[1].text = item.PlayFabId;
+            texts[1].text = item.DisplayName;
             texts[2].text = item.StatValue.ToString();
 
           
@@ -170,7 +171,7 @@ public class PlayFabManager : MonoBehaviour
 
     //Title Data
     
-    void GetTitleData()
+ /*   void GetTitleData()
     {
         PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(), OnTitleDataRecieved, OnError);
     }
@@ -185,8 +186,7 @@ public class PlayFabManager : MonoBehaviour
         
         message.text = result.Data["Message"].ToString();
     }
-
-
+    */
     void OnError(PlayFabError error)
     {
         message.text = error.ErrorMessage;

@@ -114,11 +114,6 @@ public class SaveManager : MonoBehaviour
 
 
     }
-
-    public string GetName()
-    {
-        return displayName;
-    }
     public String MostPlayed()
     {
         int[] favourite = { kaboom, swordToad, archer };

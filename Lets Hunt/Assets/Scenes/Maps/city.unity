@@ -29338,7 +29338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1368759210586413144, guid: b76710d3482391a4a935177573bde104, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -20.000061
+      value: -20.000092
       objectReference: {fileID: 0}
     - target: {fileID: 1368759211637603959, guid: b76710d3482391a4a935177573bde104, type: 3}
       propertyPath: playerDies
