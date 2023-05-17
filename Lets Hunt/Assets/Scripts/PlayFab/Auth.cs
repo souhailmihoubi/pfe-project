@@ -52,7 +52,9 @@ public class Auth : MonoBehaviour
         var request = new LoginWithEmailAddressRequest
         {
             Email = emailLoginInput.text,
+
             Password = pwdLoginInput.text,
+
             InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
             {
                 GetPlayerProfile = true
@@ -143,20 +145,22 @@ public class Auth : MonoBehaviour
         }
     }
 
-   /* public void AuthenticateWithSessionTicket(string sessionTicket)
-    {
-        var request = new AuthenticateSessionTicketRequest
-        {
-            SessionTicket = sessionTicket,
-        };
+    /* public void AuthenticateWithSessionTicket(string sessionTicket)
+     {
+         var request = new AuthenticateSessionTicketRequest
+         {
+             SessionTicket = sessionTicket,
+         };
 
-        PlayFabClientAPI.AuthenticateSessionTicket(request, AuthenticateSessionTicketSuccess, OnError);
-    }
+         PlayFabClientAPI.AuthenticateSessionTicket(request, AuthenticateSessionTicketSuccess, OnError);
+     }
 
-    private void AuthenticateSessionTicketSuccess(AuthenticateSessionTicketResult result)
-    {
-        Debug.Log("Authentication successful!");
-    }*/
+     private void AuthenticateSessionTicketSuccess(AuthenticateSessionTicketResult result)
+     {
+         Debug.Log("Authentication successful!");
+         
+         SceneManager.LoadSceneAsync("MainMenu");
+     }*/
 
 
 

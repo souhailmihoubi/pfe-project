@@ -188,6 +188,10 @@ public class PlayFabManager : MonoBehaviour
 
         playerName.text = PhotonNetwork.NickName;
 
+        SaveManager.instance.displayName = PhotonNetwork.NickName;
+
+        SaveManager.instance.Save();
+
         playerNameInput.text = "";
 
     }
