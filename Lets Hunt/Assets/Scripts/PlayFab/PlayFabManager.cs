@@ -18,13 +18,20 @@ public class PlayFabManager : MonoBehaviour
 
     Auth auth;
 
+    public GameObject loadingPanel;
+
     private void Start()
     {
         DontDestroyOnLoad(this);
 
         auth = GameObject.FindGameObjectWithTag("Authentification").GetComponent<Auth>();
 
-        SaveManager.instance.displayName = PlayerPrefs.GetString("playerName") ;
+        StartCoroutine(Loading());
+    }
+
+    IEnumerator Loading()
+    {
+        SaveManager.instance.displayName = PlayerPrefs.GetString("playerName");
 
         PhotonNetwork.NickName = SaveManager.instance.displayName;
 
@@ -37,6 +44,12 @@ public class PlayFabManager : MonoBehaviour
         GetAppearance();
 
         SaveAppearance();
+
+        SendLeaderboard(SaveManager.instance.thunders);
+
+        yield return new WaitForSeconds(3f);
+
+        loadingPanel.SetActive(false);
     }
 
     //Player data
@@ -46,11 +59,9 @@ public class PlayFabManager : MonoBehaviour
      }
      void OnDataRecieved(GetUserDataResult result)
      {
-         Debug.Log("Data Received!");
 
          if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Gems") && result.Data.ContainsKey("Thunders") && result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
          {
-            Debug.Log("changin...");
              SaveManager.instance.coins = Int32.Parse(result.Data["Coins"].Value);
              SaveManager.instance.gems = Int32.Parse(result.Data["Gems"].Value);
              SaveManager.instance.thunders = Int32.Parse(result.Data["Thunders"].Value);
@@ -72,7 +83,9 @@ public class PlayFabManager : MonoBehaviour
              }
 
              SaveManager.instance.huntersUnlocked = huntersUnlocked;
-         }
+
+             Debug.Log("Data Received!");
+        }
          else
          {
              Debug.Log("Player data incomplete!");
@@ -153,47 +166,19 @@ public class PlayFabManager : MonoBehaviour
 
         foreach (var item in result.Leaderboard)
         {
-            Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
+            Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
 
             GameObject newGo = Instantiate(playerRow, rowsParent);
 
             TextMeshProUGUI[] texts = newGo.GetComponentsInChildren<TextMeshProUGUI>();
 
             texts[0].text = (item.Position + 1).ToString();
-            texts[1].text = item.DisplayName;
-            texts[2].text = item.StatValue.ToString();
 
-          
-            
+            texts[1].text = item.DisplayName;
+
+            texts[2].text = item.StatValue.ToString();    
         }
     }
-
-
-    //Title Data
-    
- /*   void GetTitleData()
-    {
-        PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(), OnTitleDataRecieved, OnError);
-    }
-
-    void OnTitleDataRecieved(GetTitleDataResult result)
-    {
-        if(result.Data == null || result.Data.ContainsKey("Message") == false)
-        {
-            Debug.Log("No messages!");
-            return;
-        }     
-        
-        message.text = result.Data["Message"].ToString();
-    }
-    */
-    void OnError(PlayFabError error)
-    {
-        message.text = error.ErrorMessage;
-        Debug.Log("Error while logging in !");
-        Debug.Log(error.GenerateErrorReport());
-    }
-
 
     public void SetPlayerName()
     {
@@ -206,4 +191,30 @@ public class PlayFabManager : MonoBehaviour
         playerNameInput.text = "";
 
     }
+
+    void OnError(PlayFabError error)
+    {
+        message.text = error.ErrorMessage;
+        Debug.Log("Error while logging in !");
+        Debug.Log(error.GenerateErrorReport());
+    }
+
+    //Title Data
+    /*   void GetTitleData()
+       {
+           PlayFabClientAPI.GetTitleData(new GetTitleDataRequest(), OnTitleDataRecieved, OnError);
+       }
+
+       void OnTitleDataRecieved(GetTitleDataResult result)
+       {
+           if(result.Data == null || result.Data.ContainsKey("Message") == false)
+           {
+               Debug.Log("No messages!");
+               return;
+           }     
+
+           message.text = result.Data["Message"].ToString();
+       }
+       */
+
 }

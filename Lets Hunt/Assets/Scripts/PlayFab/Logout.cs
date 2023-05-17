@@ -12,6 +12,7 @@ public class Logout : MonoBehaviour
 
         PlayerPrefs.DeleteKey("playerName");
         PlayerPrefs.DeleteKey("RememberMe");
+        PlayerPrefs.DeleteKey("SessionTicket");
 
         SceneManager.LoadScene("Authentification");
     }

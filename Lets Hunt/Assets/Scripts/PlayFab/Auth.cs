@@ -33,7 +33,8 @@ public class Auth : MonoBehaviour
     {
         DontDestroyOnLoad(this);
 
-        // Check if remember me is enabled
+        rememberMeToggle.onValueChanged.AddListener(OnRememberMeToggleChanged);
+
         if (PlayerPrefs.HasKey(RememberMeKey))
         {
             bool rememberMeValue = PlayerPrefs.GetInt(RememberMeKey) == 1;
@@ -43,8 +44,6 @@ public class Auth : MonoBehaviour
                 ResumeSession();
         }
 
-        // Add event listener to Remember Me toggle
-        rememberMeToggle.onValueChanged.AddListener(OnRememberMeToggleChanged);
     }
 
     // Login
@@ -73,8 +72,12 @@ public class Auth : MonoBehaviour
 
         PlayerPrefs.SetInt("RememberMe", rememberMeToggle.isOn ? 1 : 0);
 
+        // Store the session ticket
+        PlayerPrefs.SetString("SessionTicket", result.SessionTicket);
+
         SceneManager.LoadSceneAsync("MainMenu");
     }
+
 
     // Register
     public void RegisterButton()
@@ -129,16 +132,33 @@ public class Auth : MonoBehaviour
     // Resume session
     public void ResumeSession()
     {
-        if (PlayerPrefs.HasKey("playerName"))
+        if (PlayerPrefs.HasKey("playerName") && PlayerPrefs.HasKey("SessionTicket"))
         {
             playerName = PlayerPrefs.GetString("playerName");
 
-            Debug.Log("Resuming session for player: " + playerName);
+            string sessionTicket = PlayerPrefs.GetString("SessionTicket");
 
-            // Continue with the logged-in flow
-            SceneManager.LoadSceneAsync("MainMenu");
+            //AuthenticateWithSessionTicket(sessionTicket);
+
         }
     }
+
+   /* public void AuthenticateWithSessionTicket(string sessionTicket)
+    {
+        var request = new AuthenticateSessionTicketRequest
+        {
+            SessionTicket = sessionTicket,
+        };
+
+        PlayFabClientAPI.AuthenticateSessionTicket(request, AuthenticateSessionTicketSuccess, OnError);
+    }
+
+    private void AuthenticateSessionTicketSuccess(AuthenticateSessionTicketResult result)
+    {
+        Debug.Log("Authentication successful!");
+    }*/
+
+
 
     private void OnRememberMeToggleChanged(bool value)
     {
@@ -171,5 +191,13 @@ public class Auth : MonoBehaviour
         Debug.LogError("Update display name failed: " + error.ErrorMessage);
     }
 
+
+    public bool IsLoggedIn()
+    {
+        return !string.IsNullOrEmpty(playerName);
+    }
+
+
+    // get player info 
 
 }
