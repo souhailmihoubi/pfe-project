@@ -26,12 +26,13 @@ public class SaveManager : MonoBehaviour
     public int currentMap;
     public string selectedMapName;
     public string selectedMapSprite;
+    public string displayName;
     public int coins;
     public int gems;
     public int thunders;
 
 
-    public bool[] huntersUnlocked = new bool[3] { false, true, false };
+    public bool[] huntersUnlocked = new bool[3] { true, true, false };
 
 
 
@@ -63,6 +64,7 @@ public class SaveManager : MonoBehaviour
             gems = data.gems;
             thunders = data.thunders;
             huntersUnlocked = data.huntersUnlocked;
+            displayName = data.displayName;
             archer = data.archer;
             kaboom = data.kaboom;
             swordToad = data.swordToad;
@@ -97,6 +99,7 @@ public class SaveManager : MonoBehaviour
         data.gems = gems;
         data.thunders = thunders;
         data.huntersUnlocked = huntersUnlocked;
+        data.displayName = displayName;
         data.archer = archer;
         data.kaboom = kaboom;
         data.owned = owned;
@@ -148,6 +151,7 @@ class PlayerData_Storage
     public int currentMap;
     public string selectedMapName;
     public string selectedMapSprite;
+    public string displayName;
     public int coins;
     public int gems;
     public int thunders;

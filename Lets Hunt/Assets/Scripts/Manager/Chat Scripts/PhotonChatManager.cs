@@ -34,7 +34,7 @@ public class PhotonChatManager : MonoBehaviour, IChatClientListener
     {
         userID = "2566"; // naatih l user id baad l authentification!!
 
-        username = "Souhail"; //kifkif l username!!
+        username = PhotonNetwork.NickName;
 
         isConnected = true;
 

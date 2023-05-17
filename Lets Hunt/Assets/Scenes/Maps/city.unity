@@ -29338,7 +29338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1368759210586413144, guid: b76710d3482391a4a935177573bde104, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -20.000061
+      value: -20.000092
       objectReference: {fileID: 0}
     - target: {fileID: 1368759211637603959, guid: b76710d3482391a4a935177573bde104, type: 3}
       propertyPath: playerDies
@@ -29431,6 +29431,10 @@ PrefabInstance:
     - target: {fileID: 4601286530229966221, guid: b76710d3482391a4a935177573bde104, type: 3}
       propertyPath: m_Name
       value: Scoreboard Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 4833927057441600268, guid: b76710d3482391a4a935177573bde104, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6638883894042014888, guid: b76710d3482391a4a935177573bde104, type: 3}
       propertyPath: m_IsActive
@@ -33416,6 +33420,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347639321}
     m_Modifications:
+    - target: {fileID: 1400771454, guid: 8f6d6fc6543ba1e41973a7012a656697, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1400771455, guid: 8f6d6fc6543ba1e41973a7012a656697, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.628113
@@ -33427,6 +33435,10 @@ PrefabInstance:
     - target: {fileID: 1400771455, guid: 8f6d6fc6543ba1e41973a7012a656697, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.628113
+      objectReference: {fileID: 0}
+    - target: {fileID: 2031318310128177930, guid: 8f6d6fc6543ba1e41973a7012a656697, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2958835107922036310, guid: 8f6d6fc6543ba1e41973a7012a656697, type: 3}
       propertyPath: m_LocalScale.x

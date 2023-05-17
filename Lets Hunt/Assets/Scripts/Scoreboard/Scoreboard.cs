@@ -68,7 +68,7 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 
         playerDies.SetActive(true);
 
-        deadPlayerName.text = player.NickName;
+        deadPlayerName.text = SaveManager.instance.displayName;
 
         StartCoroutine(ClosePanel());
 

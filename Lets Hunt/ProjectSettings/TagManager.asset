@@ -17,6 +17,7 @@ TagManager:
   - Scoreboard
   - resultPanel
   - whenPlayerDies
+  - Authentification
   layers:
   - Default
   - TransparentFX
