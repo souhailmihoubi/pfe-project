@@ -7,59 +7,58 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 public class PlayFabManager : MonoBehaviour
 {
     public GameObject playerRow;
     public Transform rowsParent;
-    public TextMeshProUGUI message;
     public TextMeshProUGUI playerName;
     public TextMeshProUGUI playerNameInput;
 
+    SaveManager saveManager;
+
     Auth auth;
 
-    public GameObject loadingPanel;
 
     private void Start()
     {
         DontDestroyOnLoad(this);
 
+        saveManager = GetComponent<SaveManager>();
+
         auth = GameObject.FindGameObjectWithTag("Authentification").GetComponent<Auth>();
 
-        StartCoroutine(Loading());
-    }
-
-    IEnumerator Loading()
-    {
-        SaveManager.instance.displayName = PlayerPrefs.GetString("playerName");
+        SaveManager.instance.displayName = auth.playerName;
 
         PhotonNetwork.NickName = SaveManager.instance.displayName;
 
-        Debug.Log(PhotonNetwork.NickName);
-
-        playerName.text = PhotonNetwork.NickName;
+        playerName.text = SaveManager.instance.displayName;
 
         SaveManager.instance.Save();
 
         GetAppearance();
 
-        SaveAppearance();
-
         SendLeaderboard(SaveManager.instance.thunders);
-
-        yield return new WaitForSeconds(3f);
-
-        loadingPanel.SetActive(false);
     }
+
+    private void Update()
+    {
+        if(saveManager.changed)
+        {
+            SaveAppearance();
+            saveManager.changed = false;
+        }
+    }
+
 
     //Player data
     public void GetAppearance()
      {
-         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
      }
      void OnDataRecieved(GetUserDataResult result)
      {
-
          if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Gems") && result.Data.ContainsKey("Thunders") && result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
          {
              SaveManager.instance.coins = Int32.Parse(result.Data["Coins"].Value);
@@ -83,6 +82,8 @@ public class PlayFabManager : MonoBehaviour
              }
 
              SaveManager.instance.huntersUnlocked = huntersUnlocked;
+
+             SaveManager.instance.Save();
 
              Debug.Log("Data Received!");
         }
@@ -152,7 +153,7 @@ public class PlayFabManager : MonoBehaviour
         {
             StatisticName = "Thunders Score",
             StartPosition = 0,
-            MaxResultsCount = 10
+            MaxResultsCount = 6
         };
 
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
@@ -198,8 +199,7 @@ public class PlayFabManager : MonoBehaviour
 
     void OnError(PlayFabError error)
     {
-        message.text = error.ErrorMessage;
-        Debug.Log("Error while logging in !");
+        Debug.Log("Error : " + error.ErrorMessage);
         Debug.Log(error.GenerateErrorReport());
     }
 

@@ -27,7 +27,7 @@ public class Auth : MonoBehaviour
 
     private const string RememberMeKey = "RememberMe";
 
-    public string playerName = null;
+    public string playerName;
 
     private void Start()
     {
@@ -68,16 +68,41 @@ public class Auth : MonoBehaviour
     {
         playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
 
-        Debug.Log(playerName + " logged in!");
-
         PlayerPrefs.SetString("playerName", playerName);
 
         PlayerPrefs.SetInt("RememberMe", rememberMeToggle.isOn ? 1 : 0);
 
-        // Store the session ticket
         PlayerPrefs.SetString("SessionTicket", result.SessionTicket);
 
         SceneManager.LoadSceneAsync("MainMenu");
+    }
+
+
+    public void SaveInitialAppearance()
+    {
+        var dataDictionary = new Dictionary<string, string>
+         {
+             {"Coins", "50" },
+             {"Gems", "0" },
+             {"Thunders", "10" },
+             {"currentHunter", "1" },
+             {"matchPlayed", "0" },
+             {"ranked", "0" },
+             {"HunterUnlocked_0","false" },
+             {"HunterUnlocked_1","true" },
+             {"HunterUnlocked_2","false" }
+         };
+
+        var request = new UpdateUserDataRequest
+        {
+            Data = dataDictionary
+        };
+
+        PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+    }
+    void OnDataSend(UpdateUserDataResult result)
+    {
+        Debug.Log("User data sent successfully!");
     }
 
 
@@ -104,6 +129,7 @@ public class Auth : MonoBehaviour
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         message.text = "Registered and logged in!";
+        SaveInitialAppearance();
         SceneManager.LoadSceneAsync("MainMenu");
     }
 

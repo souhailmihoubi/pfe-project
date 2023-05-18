@@ -27,9 +27,31 @@ public class BalenceManager : MonoBehaviour
 
     public void UpdateText(int coinBalance, int gemsBalance, int thundersBalance)
     {
-        coinBalanceText.text = coinBalance.ToString();
-        gemsBalanceText.text = gemsBalance.ToString();
-        thundersBalanceText.text = thundersBalance.ToString();
+        if(coinBalance < 0)
+        {
+            coinBalanceText.text = "0";
+        }
+        else
+        {
+            coinBalanceText.text = coinBalance.ToString();
+        }
+        if(gemsBalance < 0)
+        {
+            gemsBalanceText.text = "0";
+        }
+        else
+        {
+            gemsBalanceText.text = gemsBalance.ToString();
+        }
+        if (thundersBalance < 0)
+        {
+            thundersBalanceText.text = "0";
+        }
+        else
+        {
+            thundersBalanceText.text = thundersBalance.ToString();
+        }
+
 
     }
 }

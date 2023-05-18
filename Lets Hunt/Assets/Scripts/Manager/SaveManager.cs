@@ -31,6 +31,8 @@ public class SaveManager : MonoBehaviour
     public int gems;
     public int thunders;
 
+    public bool changed = false;
+
 
     public bool[] huntersUnlocked = new bool[3] { true, true, false };
 
@@ -108,6 +110,7 @@ public class SaveManager : MonoBehaviour
         data.swordToad = swordToad;
 
 
+        changed = true;
 
         bf.Serialize(file, data);
         file.Close();
