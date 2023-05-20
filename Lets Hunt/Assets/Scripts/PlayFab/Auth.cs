@@ -120,7 +120,8 @@ public class Auth : MonoBehaviour
             DisplayName = nameInput.text,
             Email = emailRegisterInput.text,
             Password = pwdRegisterInput.text,
-            RequireBothUsernameAndEmail = false
+            RequireBothUsernameAndEmail = false,
+            TitleId = "AF633"
         };
 
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnError);
@@ -128,9 +129,31 @@ public class Auth : MonoBehaviour
 
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
-        message.text = "Registered and logged in!";
+        // Send verification email
+
+        // Send verification email
+        SendAccountRecoveryEmailRequest emailRequest = new SendAccountRecoveryEmailRequest
+        {
+            Email = emailRegisterInput.text,
+            TitleId = "AF633"
+        };
+        PlayFabClientAPI.SendAccountRecoveryEmail(emailRequest, OnVerificationEmailSent, OnVerificationEmailFailure);
+
+        message.text = "Verification email sent successfully!";
         SaveInitialAppearance();
         SceneManager.LoadSceneAsync("MainMenu");
+    }
+
+    private void OnVerificationEmailSent(SendAccountRecoveryEmailResult result)
+    {
+        Debug.Log("Verification email sent successfully.");
+        // Display a message to the user indicating that the verification email has been sent
+    }
+
+    private void OnVerificationEmailFailure(PlayFabError error)
+    {
+        Debug.Log("Sending verification email failed: " + error.ErrorMessage);
+        // Display a message to the user indicating that the verification email failed to send
     }
 
     // Reset password

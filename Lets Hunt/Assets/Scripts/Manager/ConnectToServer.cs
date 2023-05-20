@@ -5,34 +5,60 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.Networking;
 
 public class ConnectToServer : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Image barFill;
     [SerializeField] private TextMeshProUGUI loadingText;
+    public GameObject panel;
+
+    private const string PlayFabUrl = "https://AF633.playfabapi.com";
+    private bool canConnect = false;
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
 
-        OnClickConnect();
-
-        StartCoroutine(LoadSceneAsync());
+        StartCoroutine(CheckInternetConnection());
     }
 
-    public void OnClickConnect()
+    private IEnumerator CheckInternetConnection()
     {
-        if (Application.internetReachability != NetworkReachability.NotReachable)
+        UnityWebRequest request = new UnityWebRequest(PlayFabUrl);
+
+        request.timeout = 5; // Set the timeout value in seconds
+
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError || request.isHttpError)
         {
-            // There is internet
-
-            PhotonNetwork.OfflineMode = false;
-            PhotonNetwork.ConnectUsingSettings();
-
+            Debug.Log("Device is not connected to the internet.");
+            panel.SetActive(true);
+            canConnect = false;
         }
         else
         {
-            Debug.Log("Network Error");
+            Debug.Log("Device is connected to the internet.");
+            panel.SetActive(false);
+            canConnect = true;
+            StartConnection();
+        }
+    }
+
+    public void RetryConnection()
+    {
+        StartCoroutine(CheckInternetConnection());
+    }
+
+    private void StartConnection()
+    {
+        if (canConnect)
+        {
+            PhotonNetwork.OfflineMode = false;
+            PhotonNetwork.ConnectUsingSettings();
+
+            StartCoroutine(LoadSceneAsync());
         }
     }
 
@@ -51,7 +77,10 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(1f);
         }
     }
-
+    public void ExitApplication()
+    {
+        Application.Quit();
+    }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
@@ -66,9 +95,10 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         Debug.Log("player left the room");
+
         if (!PhotonNetwork.IsConnectedAndReady)
         {
-            OnClickConnect();
+            StartCoroutine(CheckInternetConnection());
         }
     }
 }

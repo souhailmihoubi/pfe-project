@@ -30,6 +30,8 @@ public class BalenceManager : MonoBehaviour
         if(coinBalance < 0)
         {
             coinBalanceText.text = "0";
+            SaveManager.instance.coins = 0;
+            SaveManager.instance.Save();
         }
         else
         {
@@ -38,20 +40,15 @@ public class BalenceManager : MonoBehaviour
         if(gemsBalance < 0)
         {
             gemsBalanceText.text = "0";
+            SaveManager.instance.gems = 0;
+            SaveManager.instance.Save();
         }
         else
         {
             gemsBalanceText.text = gemsBalance.ToString();
         }
-        if (thundersBalance < 0)
-        {
-            thundersBalanceText.text = "0";
-        }
-        else
-        {
-            thundersBalanceText.text = thundersBalance.ToString();
-        }
-
+       
+        thundersBalanceText.text = thundersBalance.ToString();
 
     }
 }
