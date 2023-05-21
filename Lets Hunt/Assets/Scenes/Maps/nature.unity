@@ -12715,6 +12715,78 @@ PrefabInstance:
       propertyPath: movement
       value: 
       objectReference: {fileID: 1739805924}
+    - target: {fileID: 6515959164676396100, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: endGameAudioSource
+      value: 
+      objectReference: {fileID: 8987532309206572718}
+    - target: {fileID: 8379179930678383302, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179930678383302, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179931207053056, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179931207053056, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179931207053056, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179931643677265, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179931643677265, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179931643677265, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179932338815265, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179932338815265, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179932474071460, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179932474071461, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5767375
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179932474071461, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5767375
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179932474071461, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5767375
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179932474071461, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.6707535
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179932474071461, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8379179932474071461, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 46
+      objectReference: {fileID: 0}
     - target: {fileID: 8987532309018534761, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
       propertyPath: m_Name
       value: Timer Canvas
@@ -12810,6 +12882,107 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5085283350867183393, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
   m_PrefabInstance: {fileID: 8987532309206572715}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8987532309206572717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8987532309018534761, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
+  m_PrefabInstance: {fileID: 8987532309206572715}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &8987532309206572718
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8987532309206572717}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ca5a3798253d47043807df1f014501af, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!23 &8989325394468169389
 MeshRenderer:
   m_ObjectHideFlags: 0

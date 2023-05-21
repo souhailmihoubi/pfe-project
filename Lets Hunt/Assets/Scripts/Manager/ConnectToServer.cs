@@ -14,6 +14,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     public GameObject panel;
 
     private const string PlayFabUrl = "https://AF633.playfabapi.com";
+
     private bool canConnect = false;
 
     private void Start()
@@ -27,19 +28,21 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     {
         UnityWebRequest request = new UnityWebRequest(PlayFabUrl);
 
-        request.timeout = 5; // Set the timeout value in seconds
+        request.timeout = 5;
 
         yield return request.SendWebRequest();
 
         if (request.isNetworkError || request.isHttpError)
         {
             Debug.Log("Device is not connected to the internet.");
+
             panel.SetActive(true);
             canConnect = false;
         }
         else
         {
             Debug.Log("Device is connected to the internet.");
+
             panel.SetActive(false);
             canConnect = true;
             StartConnection();
@@ -72,7 +75,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
             barFill.fillAmount = progressValue;
 
-            loadingText.text = "Loading" + Mathf.RoundToInt(progressValue * 100) + "%";
+            loadingText.text = "Loading " + Mathf.RoundToInt(progressValue * 100) + "%";
 
             yield return new WaitForSeconds(1f);
         }

@@ -20,6 +20,9 @@ public class Timer : MonoBehaviourPunCallbacks
 
     public GameObject timeOver;
 
+    [SerializeField] AudioSource endGameAudioSource;
+
+
 
     PhotonView photonView;
 
@@ -65,6 +68,8 @@ public class Timer : MonoBehaviourPunCallbacks
 
     private void OnEnd()
     {
+        endGameAudioSource.Play();
+
         movement.gameObject.SetActive(false);
         lvl.gameObject.SetActive(false);
         timer.gameObject.SetActive(false);

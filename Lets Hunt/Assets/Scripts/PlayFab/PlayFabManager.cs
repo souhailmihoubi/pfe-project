@@ -11,8 +11,7 @@ using Unity.VisualScripting;
 
 public class PlayFabManager : MonoBehaviour
 {
-    public GameObject playerRow;
-    public Transform rowsParent;
+
     public TextMeshProUGUI playerName;
     public TextMeshProUGUI playerNameInput;
 
@@ -20,6 +19,12 @@ public class PlayFabManager : MonoBehaviour
 
     Auth auth;
 
+    [Header("Leaderboard")]
+
+    public GameObject playerRow;
+    public Transform rowsParent;
+    public TMP_InputField searchInputField;
+    public Button searchButton;
 
     private void Start()
     {
@@ -33,13 +38,19 @@ public class PlayFabManager : MonoBehaviour
 
         PhotonNetwork.NickName = SaveManager.instance.displayName;
 
-        playerName.text = SaveManager.instance.displayName;
+        Debug.Log(SaveManager.instance.displayName);
 
         SaveManager.instance.Save();
 
         GetAppearance();
 
         SendLeaderboard(SaveManager.instance.thunders);
+
+        searchInputField.onValueChanged.AddListener(OnSearchInputValueChanged);
+
+        playerName.text = SaveManager.instance.displayName;
+
+        Debug.Log(playerName.text);
     }
 
     private void Update()
@@ -125,7 +136,6 @@ public class PlayFabManager : MonoBehaviour
          Debug.Log("User data sent successfully!");
      }
 
-
     //Leaderboard
     public void SendLeaderboard(int thunders)
     {
@@ -153,31 +163,77 @@ public class PlayFabManager : MonoBehaviour
         {
             StatisticName = "Thunders Score",
             StartPosition = 0,
-            MaxResultsCount = 6
+            MaxResultsCount = 100,
         };
 
         PlayFabClientAPI.GetLeaderboard(request, OnLeaderboardGet, OnError);
     }
+
+    private List<PlayerLeaderboardEntry> leaderboardEntries = new List<PlayerLeaderboardEntry>();
+
     void OnLeaderboardGet(GetLeaderboardResult result)
     {
-        foreach(Transform item in rowsParent)
+        leaderboardEntries.Clear();
+       
+        leaderboardEntries.AddRange(result.Leaderboard);
+
+        FilterLeaderboard(searchInputField.text);
+    }
+    public void SearchLeaderboard()
+    {
+        string searchQuery = searchInputField.text;
+
+        FilterLeaderboard(searchQuery);
+    }
+
+    private void FilterLeaderboard(string searchQuery)
+    {
+        foreach (Transform item in rowsParent)
         {
             Destroy(item.gameObject);
         }
 
-        foreach (var item in result.Leaderboard)
+        bool isSearchEmpty = string.IsNullOrEmpty(searchQuery);
+
+        // Store the filtered leaderboard entries in a new list
+        List<PlayerLeaderboardEntry> filteredEntries = new List<PlayerLeaderboardEntry>();
+
+        foreach (var item in leaderboardEntries)
         {
-            Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
+            if (!isSearchEmpty && !item.DisplayName.ToLower().StartsWith(searchQuery.ToLower()))
+                continue;
+
+            filteredEntries.Add(item);
+        }
+
+        DisplayLeaderboard(filteredEntries);
+    }
+
+    private void OnSearchInputValueChanged(string searchQuery)
+    {
+        FilterLeaderboard(searchQuery);
+    }
+
+    private void DisplayLeaderboard(List<PlayerLeaderboardEntry> entries)
+    {
+        foreach (Transform item in rowsParent)
+        {
+            Destroy(item.gameObject);
+        }
+
+        for (int i = 0; i < entries.Count; i++)
+        {
+            var item = entries[i];
+            
+            //Debug.Log(item.Position + " " + item.DisplayName + " " + item.StatValue);
 
             GameObject newGo = Instantiate(playerRow, rowsParent);
 
             TextMeshProUGUI[] texts = newGo.GetComponentsInChildren<TextMeshProUGUI>();
 
             texts[0].text = (item.Position + 1).ToString();
-
             texts[1].text = item.DisplayName;
-
-            texts[2].text = item.StatValue.ToString();    
+            texts[2].text = item.StatValue.ToString();
         }
     }
 

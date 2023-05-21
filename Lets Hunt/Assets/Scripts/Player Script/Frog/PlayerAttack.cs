@@ -16,6 +16,9 @@ public class PlayerAttack : MonoBehaviour
     public float attackCooldown = 2f;
     private float lastAttackTime = 0f;
 
+    [SerializeField] AudioSource attackAudioSource;
+
+
 
     PlayerMove playerMove;
 
@@ -102,6 +105,8 @@ public class PlayerAttack : MonoBehaviour
     {
         if(closestEnemy != null && !closestEnemy.enemyDead)
         {
+            attackAudioSource.Play();
+
             closestEnemy.TakeDamage(attackDamage);
         }
 

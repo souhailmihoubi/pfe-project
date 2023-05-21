@@ -77,7 +77,6 @@ public class Auth : MonoBehaviour
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
-
     public void SaveInitialAppearance()
     {
         var dataDictionary = new Dictionary<string, string>
@@ -102,7 +101,7 @@ public class Auth : MonoBehaviour
     }
     void OnDataSend(UpdateUserDataResult result)
     {
-        Debug.Log("User data sent successfully!");
+        Debug.Log("Initial data sent successfully!");
     }
 
 
@@ -129,31 +128,20 @@ public class Auth : MonoBehaviour
 
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
-        // Send verification email
 
-        // Send verification email
-        SendAccountRecoveryEmailRequest emailRequest = new SendAccountRecoveryEmailRequest
-        {
-            Email = emailRegisterInput.text,
-            TitleId = "AF633"
-        };
-        PlayFabClientAPI.SendAccountRecoveryEmail(emailRequest, OnVerificationEmailSent, OnVerificationEmailFailure);
-
-        message.text = "Verification email sent successfully!";
         SaveInitialAppearance();
+
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
     private void OnVerificationEmailSent(SendAccountRecoveryEmailResult result)
     {
         Debug.Log("Verification email sent successfully.");
-        // Display a message to the user indicating that the verification email has been sent
     }
 
     private void OnVerificationEmailFailure(PlayFabError error)
     {
         Debug.Log("Sending verification email failed: " + error.ErrorMessage);
-        // Display a message to the user indicating that the verification email failed to send
     }
 
     // Reset password
@@ -249,8 +237,5 @@ public class Auth : MonoBehaviour
     {
         return !string.IsNullOrEmpty(playerName);
     }
-
-
-    // get player info 
 
 }

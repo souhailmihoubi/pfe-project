@@ -26,14 +26,14 @@ public class SaveManager : MonoBehaviour
     public int currentMap;
     public string selectedMapName;
     public string selectedMapSprite;
+    public string selectedAvatarSprite;
     public string displayName;
     public int coins;
     public int gems;
     public int thunders;
 
     public bool changed = false;
-
-
+    public bool avatarChanged = false;
     public bool[] huntersUnlocked = new bool[3] { true, true, false };
 
 
@@ -62,6 +62,7 @@ public class SaveManager : MonoBehaviour
             currentMap = data.currentMap;
             selectedMapName = data.selectedMapName;
             selectedMapSprite = data.selectedMapSprite;
+            selectedAvatarSprite = data.selectedAvatarSprite;
             coins = data.coins;
             gems = data.gems;
             thunders = data.thunders;
@@ -97,6 +98,7 @@ public class SaveManager : MonoBehaviour
         data.currentMap = currentMap;
         data.selectedMapName = selectedMapName;
         data.selectedMapSprite = selectedMapSprite;
+        data.selectedAvatarSprite = selectedAvatarSprite;
         data.coins = coins;
         data.gems = gems;
         data.thunders = thunders;
@@ -111,6 +113,10 @@ public class SaveManager : MonoBehaviour
 
 
         changed = true;
+
+        avatarChanged = true;
+
+        UnityEngine.Debug.Log(changed + " Saved!");
 
         bf.Serialize(file, data);
         file.Close();
@@ -154,6 +160,7 @@ class PlayerData_Storage
     public int currentMap;
     public string selectedMapName;
     public string selectedMapSprite;
+    public string selectedAvatarSprite;
     public string displayName;
     public int coins;
     public int gems;

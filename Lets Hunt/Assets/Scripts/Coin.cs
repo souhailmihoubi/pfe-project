@@ -55,8 +55,6 @@ public class Coin : MonoBehaviourPunCallbacks
                 coinAudioSource.Play();
             }
 
-
-            Sound();
         }
 
         if (other.gameObject.CompareTag("Coin") && photonView.IsMine)
@@ -76,11 +74,6 @@ public class Coin : MonoBehaviourPunCallbacks
             photonView.Owner.SetCustomProperties(hash);
 
         }
-    }
-
-    void Sound()
-    {
-        //hnee naamel sound effect
     }
 
     public PhotonView GetPhotonView()
