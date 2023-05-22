@@ -1,12 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine.UI;
 using TMPro;
-using System;
 using UnityEngine.SceneManagement;
+using PlayFab.ServerModels;
+using System;
 
 public class Auth : MonoBehaviour
 {
@@ -28,6 +28,7 @@ public class Auth : MonoBehaviour
     private const string RememberMeKey = "RememberMe";
 
     public string playerName;
+    
 
     private void Start()
     {
@@ -35,16 +36,55 @@ public class Auth : MonoBehaviour
 
         rememberMeToggle.onValueChanged.AddListener(OnRememberMeToggleChanged);
 
-        if (PlayerPrefs.HasKey(RememberMeKey))
+        if(RememberMe && !string.IsNullOrEmpty(RememberMeId))
         {
-            bool rememberMeValue = PlayerPrefs.GetInt(RememberMeKey) == 1;
-            rememberMeToggle.isOn = rememberMeValue;
+            var request = new LoginWithCustomIDRequest
+            {
+                TitleId = PlayFabSettings.TitleId,
+                CustomId = RememberMeId,
+                CreateAccount = true,
 
-            if (rememberMeValue)
-                ResumeSession();
+                InfoRequestParameters = new PlayFab.ClientModels.GetPlayerCombinedInfoRequestParams
+                {
+                    GetPlayerProfile = true
+                }
+            };
+
+            PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
+        }
+        else
+        {
+            PlayerPrefs.SetString("PlayFabIdPassGuid", "");
         }
 
     }
+
+    public bool RememberMe
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(RememberMeKey, 0) == 0 ? false : true;
+        }
+        set
+        {
+            PlayerPrefs.SetInt(RememberMeKey, value ? 1 : 0);
+        }
+    }
+
+    private string RememberMeId
+    {
+        get
+        {
+            return PlayerPrefs.GetString("PlayFabIdPassGuid","");
+        }
+        set
+        {
+            var guid = string.IsNullOrEmpty(value) ? Guid.NewGuid().ToString() : value;
+
+            PlayerPrefs.SetString("PlayFabIdPassGuid", guid);
+        }
+    }
+
 
     // Login
     public void LoginButton()
@@ -55,7 +95,7 @@ public class Auth : MonoBehaviour
 
             Password = pwdLoginInput.text,
 
-            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+            InfoRequestParameters = new PlayFab.ClientModels.GetPlayerCombinedInfoRequestParams
             {
                 GetPlayerProfile = true
             }
@@ -68,11 +108,22 @@ public class Auth : MonoBehaviour
     {
         playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
 
-        PlayerPrefs.SetString("playerName", playerName);
+        //PlayerPrefs.SetString("playerName", playerName);
 
-        PlayerPrefs.SetInt("RememberMe", rememberMeToggle.isOn ? 1 : 0);
+        //PlayerPrefs.SetInt(RememberMeKey, rememberMeToggle.isOn ? 1 : 0);
 
-        PlayerPrefs.SetString("SessionTicket", result.SessionTicket);
+        PlayerPrefs.SetString("PlayFabId", result.InfoResultPayload.PlayerProfile.PlayerId);
+
+        if (RememberMe)
+        {
+            RememberMeId = Guid.NewGuid().ToString();
+
+            PlayFabClientAPI.LinkCustomID(new LinkCustomIDRequest
+            {
+                CustomId = RememberMeId,
+              
+            },null,null);
+        }
 
         SceneManager.LoadSceneAsync("MainMenu");
     }
@@ -92,14 +143,14 @@ public class Auth : MonoBehaviour
              {"HunterUnlocked_2","false" }
          };
 
-        var request = new UpdateUserDataRequest
+        var request = new PlayFab.ClientModels.UpdateUserDataRequest
         {
             Data = dataDictionary
         };
 
         PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
     }
-    void OnDataSend(UpdateUserDataResult result)
+    void OnDataSend(PlayFab.ClientModels.UpdateUserDataResult result)
     {
         Debug.Log("Initial data sent successfully!");
     }
@@ -168,45 +219,61 @@ public class Auth : MonoBehaviour
         Debug.Log(error.GenerateErrorReport());
     }
 
-    // Resume session
-    public void ResumeSession()
-    {
-        if (PlayerPrefs.HasKey("playerName") && PlayerPrefs.HasKey("SessionTicket"))
-        {
-            playerName = PlayerPrefs.GetString("playerName");
-
-            string sessionTicket = PlayerPrefs.GetString("SessionTicket");
-
-            //AuthenticateWithSessionTicket(sessionTicket);
-
-        }
-    }
-
-    /* public void AuthenticateWithSessionTicket(string sessionTicket)
-     {
-         var request = new AuthenticateSessionTicketRequest
-         {
-             SessionTicket = sessionTicket,
-         };
-
-         PlayFabClientAPI.AuthenticateSessionTicket(request, AuthenticateSessionTicketSuccess, OnError);
-     }
-
-     private void AuthenticateSessionTicketSuccess(AuthenticateSessionTicketResult result)
-     {
-         Debug.Log("Authentication successful!");
-         
-         SceneManager.LoadSceneAsync("MainMenu");
-     }*/
-
-
 
     private void OnRememberMeToggleChanged(bool value)
     {
-        int rememberMeValue = value ? 1 : 0;
+        RememberMe = value;
 
-        PlayerPrefs.SetInt(RememberMeKey, rememberMeValue);
+        if (!value)
+        {
+            PlayerPrefs.SetString("PlayFabIdPassGuid", "");
+        }
     }
+
+    public void AuthenticateWithSessionTicket(string sessionTicket)
+    {
+        var request = new AuthenticateSessionTicketRequest
+        {
+            SessionTicket = sessionTicket,
+        };
+
+        PlayFabServerAPI.AuthenticateSessionTicket(request, AuthenticateSessionTicketSuccess, OnError);
+    }
+
+    private void AuthenticateSessionTicketSuccess(AuthenticateSessionTicketResult result)
+    {
+
+        Debug.Log("Authentication successful!");
+
+        SceneManager.LoadSceneAsync("MainMenu");
+    }
+
+    public void CheckSessionTicketValidity(string sessionTicket)
+    {
+        var request = new PlayFab.ClientModels.GetPlayerCombinedInfoRequest
+        {
+            InfoRequestParameters = new PlayFab.ClientModels.GetPlayerCombinedInfoRequestParams
+            {
+                GetPlayerProfile = true
+            },
+            AuthenticationContext = new PlayFabAuthenticationContext
+            {
+                PlayFabId = PlayerPrefs.GetString("PlayFabId"),
+                ClientSessionTicket = sessionTicket
+            }
+        };
+
+        PlayFabClientAPI.GetPlayerCombinedInfo(request, OnGetPlayerCombinedInfoSuccess, OnError);
+    }
+
+    private void OnGetPlayerCombinedInfoSuccess(PlayFab.ClientModels.GetPlayerCombinedInfoResult result)
+    {
+        Debug.Log("Session ticket is valid!");
+        AuthenticateWithSessionTicket(PlayerPrefs.GetString("SessionTicket"));
+
+    }
+
+
 
     // Update display name
 
@@ -222,7 +289,7 @@ public class Auth : MonoBehaviour
 
     private void OnUpdateDisplayNameSuccess(UpdateUserTitleDisplayNameResult result)
     {
-        Debug.Log("Display name updated successfully: " + result.DisplayName);
+        Debug.Log("Display name updated successfully: " + result. DisplayName);
 
         this.playerName = result.DisplayName;
     }
@@ -237,5 +304,9 @@ public class Auth : MonoBehaviour
     {
         return !string.IsNullOrEmpty(playerName);
     }
+
+
+
+
 
 }

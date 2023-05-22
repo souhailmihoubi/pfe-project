@@ -11,7 +11,6 @@ namespace PlayFab.PfEditor
     public static partial class PlayFabEditorHelper
     {
         #region EDITOR_STRINGS
-        public static string EDEX_VERSION_TEMPLATE = "namespace PlayFab.PfEditor { public static partial class PlayFabEditorHelper { public static string EDEX_VERSION = \"{sdkVersion}\"; } }\n";
         public static string EDEX_NAME = "PlayFab_EditorExtensions";
         public static string EDEX_ROOT = Application.dataPath + "/PlayFabEditorExtensions/Editor";
         public static string DEV_API_ENDPOINT = "https://editor.playfabapi.com";
@@ -22,6 +21,12 @@ namespace PlayFab.PfEditor
         public static string SDK_DOWNLOAD_PATH = "/Resources/PlayFabUnitySdk.unitypackage";
         public static string EDEX_UPGRADE_PATH = "/Resources/PlayFabUnityEditorExtensions.unitypackage";
         public static string EDEX_PACKAGES_PATH = "/Resources/MostRecentPackage.unitypackage";
+
+        public static string AAD_SIGNIN_URL = "https://login.microsoftonline.com/";
+        public static string ED_EX_AAD_SIGNIN_CLIENTID ="2d99511e-13ec-4b59-99c0-9ae8754f84aa";
+        public static string ED_EX_AAD_SCOPE = "448adbda-b8d8-4f33-a1b0-ac58cf44d4c1";
+        public static string ED_EX_AAD_SCOPES = ED_EX_AAD_SCOPE + "/plugin";
+        public static string ED_EX_AAD_SIGNNIN_TENANT = "common";
 
         public static string CLOUDSCRIPT_FILENAME = ".CloudScript.js";  //prefixed with a '.' to exclude this code from Unity's compiler
         public static string CLOUDSCRIPT_PATH = EDEX_ROOT + "/Resources/" + CLOUDSCRIPT_FILENAME;

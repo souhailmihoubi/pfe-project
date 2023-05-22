@@ -38,9 +38,10 @@ public class PlayFabManager : MonoBehaviour
 
         PhotonNetwork.NickName = SaveManager.instance.displayName;
 
-        Debug.Log(SaveManager.instance.displayName);
-
         SaveManager.instance.Save();
+
+        playerName.text = SaveManager.instance.displayName;
+
 
         GetAppearance();
 
@@ -48,9 +49,6 @@ public class PlayFabManager : MonoBehaviour
 
         searchInputField.onValueChanged.AddListener(OnSearchInputValueChanged);
 
-        playerName.text = SaveManager.instance.displayName;
-
-        Debug.Log(playerName.text);
     }
 
     private void Update()
