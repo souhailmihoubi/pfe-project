@@ -6821,7 +6821,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -190.99992, y: -546.265}
+  m_AnchoredPosition: {x: -190.99994, y: -546.265}
   m_SizeDelta: {x: 394, y: 123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &631780772
@@ -11426,6 +11426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingPanel: {fileID: 1139275101}
+  delay: 3
 --- !u!1 &1176504205
 GameObject:
   m_ObjectHideFlags: 0
@@ -16248,7 +16249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1628475556
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20380,6 +20381,10 @@ PrefabInstance:
     - target: {fileID: 7077740864143838358, guid: 9128ac164ca61ec46b8868610615aa46, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077740864729699045, guid: 9128ac164ca61ec46b8868610615aa46, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -21.520386
       objectReference: {fileID: 0}
     - target: {fileID: 7077740864794761212, guid: 9128ac164ca61ec46b8868610615aa46, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

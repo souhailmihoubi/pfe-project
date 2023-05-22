@@ -116,8 +116,6 @@ public class SaveManager : MonoBehaviour
 
         avatarChanged = true;
 
-        UnityEngine.Debug.Log(changed + " Saved!");
-
         bf.Serialize(file, data);
         file.Close();
 

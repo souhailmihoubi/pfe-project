@@ -12,6 +12,8 @@ public class Auth : MonoBehaviour
 {
     public TextMeshProUGUI message;
 
+    public GameObject loadingPanel;
+
     [Header("Login")]
     public TextMeshProUGUI emailLoginInput;
     public TextMeshProUGUI pwdLoginInput;
@@ -38,6 +40,8 @@ public class Auth : MonoBehaviour
 
         if(RememberMe && !string.IsNullOrEmpty(RememberMeId))
         {
+            loadingPanel.SetActive(true);
+
             var request = new LoginWithCustomIDRequest
             {
                 TitleId = PlayFabSettings.TitleId,
@@ -106,11 +110,9 @@ public class Auth : MonoBehaviour
 
     void OnLoginSuccess(LoginResult result)
     {
+        loadingPanel.SetActive(true);
+
         playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
-
-        //PlayerPrefs.SetString("playerName", playerName);
-
-        //PlayerPrefs.SetInt(RememberMeKey, rememberMeToggle.isOn ? 1 : 0);
 
         PlayerPrefs.SetString("PlayFabId", result.InfoResultPayload.PlayerProfile.PlayerId);
 
@@ -179,20 +181,11 @@ public class Auth : MonoBehaviour
 
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
+        loadingPanel.SetActive(true);
 
         SaveInitialAppearance();
 
         SceneManager.LoadSceneAsync("MainMenu");
-    }
-
-    private void OnVerificationEmailSent(SendAccountRecoveryEmailResult result)
-    {
-        Debug.Log("Verification email sent successfully.");
-    }
-
-    private void OnVerificationEmailFailure(PlayFabError error)
-    {
-        Debug.Log("Sending verification email failed: " + error.ErrorMessage);
     }
 
     // Reset password
