@@ -34,6 +34,8 @@ public class PlayFabManager : MonoBehaviour
 
         auth = GameObject.FindGameObjectWithTag("Authentification").GetComponent<Auth>();
 
+        GetAppearance();
+
         SaveManager.instance.displayName = auth.playerName;
 
         PhotonNetwork.NickName = SaveManager.instance.displayName;
@@ -42,8 +44,6 @@ public class PlayFabManager : MonoBehaviour
 
         playerName.text = SaveManager.instance.displayName;
 
-
-        GetAppearance();
 
         SendLeaderboard(SaveManager.instance.thunders);
 

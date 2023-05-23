@@ -7,12 +7,16 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using PlayFab.ServerModels;
 using System;
+using PlayFab.AdminModels;
 
 public class Auth : MonoBehaviour
 {
     public TextMeshProUGUI message;
+    public TextMeshProUGUI mailMessage;
 
     public GameObject loadingPanel;
+
+    public GameObject mailVerifPanel;
 
     [Header("Login")]
     public TextMeshProUGUI emailLoginInput;
@@ -30,7 +34,8 @@ public class Auth : MonoBehaviour
     private const string RememberMeKey = "RememberMe";
 
     public string playerName;
-    
+    public string playFabID;
+    private PlayFab.ClientModels.EmailVerificationStatus? accountStatus;
 
     private void Start()
     {
@@ -93,6 +98,7 @@ public class Auth : MonoBehaviour
     // Login
     public void LoginButton()
     {
+
         var request = new LoginWithEmailAddressRequest
         {
             Email = emailLoginInput.text,
@@ -112,22 +118,37 @@ public class Auth : MonoBehaviour
     {
         loadingPanel.SetActive(true);
 
-        playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
+        GetPlayerData(OnPlayerDataResult);
 
-        PlayerPrefs.SetString("PlayFabId", result.InfoResultPayload.PlayerProfile.PlayerId);
-
-        if (RememberMe)
+        if (accountStatus == PlayFab.ClientModels.EmailVerificationStatus.Confirmed)
         {
-            RememberMeId = Guid.NewGuid().ToString();
+            loadingPanel.SetActive(false);
 
-            PlayFabClientAPI.LinkCustomID(new LinkCustomIDRequest
+            playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
+
+            PlayerPrefs.SetString("PlayFabId", result.InfoResultPayload.PlayerProfile.PlayerId);
+
+            if (RememberMe)
             {
-                CustomId = RememberMeId,
-              
-            },null,null);
+                RememberMeId = Guid.NewGuid().ToString();
+
+                PlayFabClientAPI.LinkCustomID(new LinkCustomIDRequest
+                {
+                    CustomId = RememberMeId,
+
+                }, null, null);
+            }
+
+            SceneManager.LoadSceneAsync("MainMenu");
+        }
+        else
+        {
+            loadingPanel.SetActive(false);
+
+            mailVerifPanel.SetActive(true);
         }
 
-        SceneManager.LoadSceneAsync("MainMenu");
+
     }
 
     public void SaveInitialAppearance()
@@ -179,30 +200,80 @@ public class Auth : MonoBehaviour
         PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnError);
     }
 
+
     void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
-        loadingPanel.SetActive(true);
+        mailVerifPanel.SetActive(true);
 
-        SaveInitialAppearance();
+        playFabID = result.PlayFabId;
 
+        var emailAddress = emailRegisterInput.text;
+
+        AddOrUpdateContactEmail(emailAddress);
+    }
+
+    private void LoadScene()
+    {
         SceneManager.LoadSceneAsync("MainMenu");
+    }
+
+    void AddOrUpdateContactEmail(string emailAddress)
+    {
+        var request = new AddOrUpdateContactEmailRequest
+        {
+            EmailAddress = emailAddress
+        };
+        PlayFabClientAPI.AddOrUpdateContactEmail(request, result =>
+        {
+            Debug.Log("The player's account has been updated with a contact email");
+
+        }, FailureCallback);
+    }
+
+    void FailureCallback(PlayFabError error)
+    {
+        Debug.LogWarning("Something went wrong with your API call. Here's some debug information:");
+        Debug.LogError(error.GenerateErrorReport());
     }
 
     // Reset password
     public void ResetPasswordButton()
     {
-        var request = new SendAccountRecoveryEmailRequest
+        var request = new PlayFab.ClientModels.SendAccountRecoveryEmailRequest
         {
             Email = emailResetInput.text,
-            TitleId = "AF633"
+            EmailTemplateId = "BD6EBC6AE010AB5",
+            TitleId = PlayFabSettings.TitleId,
         };
 
         PlayFabClientAPI.SendAccountRecoveryEmail(request, OnPasswordReset, OnError);
     }
 
-    void OnPasswordReset(SendAccountRecoveryEmailResult result)
+    void OnPasswordReset(PlayFab.ClientModels.SendAccountRecoveryEmailResult result)
     {
-        message.text = "Password reset! Mail sent";
+        message.text = "Mail sent! Check your Email!";
+
+    }
+
+    void ResetPassword(string newPassword, string token)
+    {
+        var request = new ResetPasswordRequest
+        {
+            Password = newPassword,
+            Token = token
+        };
+
+        PlayFabAdminAPI.ResetPassword(request, result =>
+        {
+            Debug.Log("The player's password has been resetl");
+        }, ResetFailureCallback);
+
+    }
+
+    void ResetFailureCallback(PlayFabError error)
+    {
+        Debug.LogWarning("Something went wrong with your API call. Here's some debug information:");
+        Debug.LogError(error.GenerateErrorReport());
     }
 
     void OnError(PlayFabError error)
@@ -211,8 +282,6 @@ public class Auth : MonoBehaviour
         Debug.Log("Error while logging in!");
         Debug.Log(error.GenerateErrorReport());
     }
-
-
     private void OnRememberMeToggleChanged(bool value)
     {
         RememberMe = value;
@@ -223,56 +292,10 @@ public class Auth : MonoBehaviour
         }
     }
 
-    public void AuthenticateWithSessionTicket(string sessionTicket)
-    {
-        var request = new AuthenticateSessionTicketRequest
-        {
-            SessionTicket = sessionTicket,
-        };
-
-        PlayFabServerAPI.AuthenticateSessionTicket(request, AuthenticateSessionTicketSuccess, OnError);
-    }
-
-    private void AuthenticateSessionTicketSuccess(AuthenticateSessionTicketResult result)
-    {
-
-        Debug.Log("Authentication successful!");
-
-        SceneManager.LoadSceneAsync("MainMenu");
-    }
-
-    public void CheckSessionTicketValidity(string sessionTicket)
-    {
-        var request = new PlayFab.ClientModels.GetPlayerCombinedInfoRequest
-        {
-            InfoRequestParameters = new PlayFab.ClientModels.GetPlayerCombinedInfoRequestParams
-            {
-                GetPlayerProfile = true
-            },
-            AuthenticationContext = new PlayFabAuthenticationContext
-            {
-                PlayFabId = PlayerPrefs.GetString("PlayFabId"),
-                ClientSessionTicket = sessionTicket
-            }
-        };
-
-        PlayFabClientAPI.GetPlayerCombinedInfo(request, OnGetPlayerCombinedInfoSuccess, OnError);
-    }
-
-    private void OnGetPlayerCombinedInfoSuccess(PlayFab.ClientModels.GetPlayerCombinedInfoResult result)
-    {
-        Debug.Log("Session ticket is valid!");
-        AuthenticateWithSessionTicket(PlayerPrefs.GetString("SessionTicket"));
-
-    }
-
-
-
     // Update display name
-
     public void UpdatePlayerName(string newDisplayName)
     {
-        var request = new UpdateUserTitleDisplayNameRequest
+        var request = new PlayFab.ClientModels.UpdateUserTitleDisplayNameRequest
         {
             DisplayName = newDisplayName
         };
@@ -280,7 +303,7 @@ public class Auth : MonoBehaviour
         PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnUpdateDisplayNameSuccess, OnUpdateDisplayNameFailure);
     }
 
-    private void OnUpdateDisplayNameSuccess(UpdateUserTitleDisplayNameResult result)
+    private void OnUpdateDisplayNameSuccess(PlayFab.ClientModels.UpdateUserTitleDisplayNameResult result)
     {
         Debug.Log("Display name updated successfully: " + result. DisplayName);
 
@@ -299,7 +322,48 @@ public class Auth : MonoBehaviour
     }
 
 
+    private void GetPlayerData(Action<PlayFab.ClientModels.GetPlayerProfileResult> callback)
+    {
+        var request = new PlayFab.ClientModels.GetPlayerProfileRequest
+        {
+            PlayFabId = playFabID,
+        };
 
+        var constraints = new PlayFab.ClientModels.PlayerProfileViewConstraints
+        {
+            ShowContactEmailAddresses = true,
+        };
+
+        request.ProfileConstraints = constraints;
+
+        PlayFabClientAPI.GetPlayerProfile(request, result => callback?.Invoke(result), OnError);
+    }
+
+    void OnPlayerDataResult(PlayFab.ClientModels.GetPlayerProfileResult result)
+    {
+        var myList = result.PlayerProfile.ContactEmailAddresses;
+        accountStatus = myList[0].VerificationStatus;
+        Debug.Log("Verification status: " + myList[0].VerificationStatus);
+    }
+
+
+    public void CheckifVerified()
+    {
+        GetPlayerData(OnPlayerDataResult);
+
+        if (accountStatus == PlayFab.ClientModels.EmailVerificationStatus.Confirmed)
+        {
+            loadingPanel.SetActive(true);
+
+            SaveInitialAppearance();
+
+            Invoke("LoadScene", 3f);
+        }
+        else
+        {
+            mailMessage.text = "Email still not verified!";
+        }
+    }
 
 
 }
