@@ -33,6 +33,7 @@ public class CharacterSelection : MonoBehaviour
         }
 
         saveButton.onClick.AddListener(() => SaveSelectedCharacter());
+
     }
 
     private void SelectCharacter(int index)
@@ -65,7 +66,7 @@ public class CharacterSelection : MonoBehaviour
             charLocks.SetActive(true);
             
             //Check if we have enough money!
-            buy.interactable = (SaveManager.instance.coins >= hunterPrices[selectedCharacterIndex]);
+            buy.interactable = (BalenceManager.instance.coinBalance >= hunterPrices[selectedCharacterIndex]);
         }
     }
 
@@ -77,7 +78,8 @@ public class CharacterSelection : MonoBehaviour
 
     public void BuyHunter()
     {
-        SaveManager.instance.coins -= hunterPrices[selectedCharacterIndex];
+        BalenceManager.instance.BuyHunters(hunterPrices[selectedCharacterIndex]);
+
         SaveManager.instance.huntersUnlocked[selectedCharacterIndex] = true;
 
         SaveManager.instance.owned += 1;

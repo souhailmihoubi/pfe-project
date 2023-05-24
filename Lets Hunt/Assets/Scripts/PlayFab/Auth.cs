@@ -51,7 +51,7 @@ public class Auth : MonoBehaviour
             {
                 TitleId = PlayFabSettings.TitleId,
                 CustomId = RememberMeId,
-                CreateAccount = true,
+                CreateAccount = false,
 
                 InfoRequestParameters = new PlayFab.ClientModels.GetPlayerCombinedInfoRequestParams
                 {
@@ -118,35 +118,35 @@ public class Auth : MonoBehaviour
     {
         loadingPanel.SetActive(true);
 
-        GetPlayerData(OnPlayerDataResult);
-
-        if (accountStatus == PlayFab.ClientModels.EmailVerificationStatus.Confirmed)
+        CheckMailConfirmed(isConfirmed =>
         {
-            loadingPanel.SetActive(false);
-
-            playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
-
-            PlayerPrefs.SetString("PlayFabId", result.InfoResultPayload.PlayerProfile.PlayerId);
-
-            if (RememberMe)
+            if (isConfirmed)
             {
-                RememberMeId = Guid.NewGuid().ToString();
+                playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
 
-                PlayFabClientAPI.LinkCustomID(new LinkCustomIDRequest
+                PlayerPrefs.SetString("PlayFabId", result.InfoResultPayload.PlayerProfile.PlayerId);
+
+                if (RememberMe)
                 {
-                    CustomId = RememberMeId,
+                    RememberMeId = Guid.NewGuid().ToString();
 
-                }, null, null);
+                    PlayFabClientAPI.LinkCustomID(new LinkCustomIDRequest
+                    {
+                        CustomId = RememberMeId,
+
+                    }, null, null);
+                }
+
+                SceneManager.LoadSceneAsync("MainMenu");
+            }
+            else
+            {
+                loadingPanel.SetActive(false);
+
+                mailVerifPanel.SetActive(true);
             }
 
-            SceneManager.LoadSceneAsync("MainMenu");
-        }
-        else
-        {
-            loadingPanel.SetActive(false);
-
-            mailVerifPanel.SetActive(true);
-        }
+        });
 
 
     }
@@ -155,9 +155,6 @@ public class Auth : MonoBehaviour
     {
         var dataDictionary = new Dictionary<string, string>
          {
-             {"Coins", "50" },
-             {"Gems", "0" },
-             {"Thunders", "10" },
              {"currentHunter", "1" },
              {"matchPlayed", "0" },
              {"ranked", "0" },
@@ -206,6 +203,10 @@ public class Auth : MonoBehaviour
         mailVerifPanel.SetActive(true);
 
         playFabID = result.PlayFabId;
+
+        playerName = nameInput.text ;
+
+
 
         var emailAddress = emailRegisterInput.text;
 
@@ -339,6 +340,7 @@ public class Auth : MonoBehaviour
         PlayFabClientAPI.GetPlayerProfile(request, result => callback?.Invoke(result), OnError);
     }
 
+
     void OnPlayerDataResult(PlayFab.ClientModels.GetPlayerProfileResult result)
     {
         var myList = result.PlayerProfile.ContactEmailAddresses;
@@ -346,24 +348,45 @@ public class Auth : MonoBehaviour
         Debug.Log("Verification status: " + myList[0].VerificationStatus);
     }
 
+    void CheckMailConfirmed(Action<bool> callback)
+    {
+        GetPlayerData(result =>
+        {
+            var myList = result.PlayerProfile.ContactEmailAddresses;
+            accountStatus = myList[0].VerificationStatus;
+            Debug.Log("Verification status: " + myList[0].VerificationStatus);
+
+            bool isConfirmed = accountStatus == PlayFab.ClientModels.EmailVerificationStatus.Confirmed;
+            callback?.Invoke(isConfirmed);
+        });
+    }
+
+
 
     public void CheckifVerified()
     {
-        GetPlayerData(OnPlayerDataResult);
 
-        if (accountStatus == PlayFab.ClientModels.EmailVerificationStatus.Confirmed)
+        CheckMailConfirmed(isConfirmed => 
         {
-            loadingPanel.SetActive(true);
+            if(isConfirmed)
+            {
+                    loadingPanel.SetActive(true);
 
-            SaveInitialAppearance();
+                    SaveInitialAppearance();
+                    
 
-            Invoke("LoadScene", 3f);
-        }
-        else
-        {
-            mailMessage.text = "Email still not verified!";
-        }
+                Invoke("LoadScene", 3f);
+            }
+            else
+            {
+                mailMessage.text = "Email still not verified!";
+            }
+
+        });
+       
     }
 
+
+  
 
 }

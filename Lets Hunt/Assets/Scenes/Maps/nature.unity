@@ -12709,7 +12709,7 @@ PrefabInstance:
       objectReference: {fileID: 931130618}
     - target: {fileID: 6515959164676396100, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
       propertyPath: duration
-      value: 180
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6515959164676396100, guid: bce17c4564e09874da33cf73a80a75a0, type: 3}
       propertyPath: movement

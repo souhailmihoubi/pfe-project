@@ -35,8 +35,11 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         if (request.isNetworkError || request.isHttpError)
         {
             Debug.Log("Device is not connected to the internet.");
-
-            panel.SetActive(true);
+            
+            if(panel != null)
+            {
+                panel.SetActive(true);
+            }
             canConnect = false;
         }
         else

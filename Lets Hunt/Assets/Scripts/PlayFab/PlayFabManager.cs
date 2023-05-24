@@ -7,15 +7,14 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Photon.Pun;
-using Unity.VisualScripting;
+
 
 public class PlayFabManager : MonoBehaviour
 {
+    public static PlayFabManager instance { get; private set; }
 
     public TextMeshProUGUI playerName;
     public TextMeshProUGUI playerNameInput;
-
-    SaveManager saveManager;
 
     Auth auth;
 
@@ -26,15 +25,22 @@ public class PlayFabManager : MonoBehaviour
     public TMP_InputField searchInputField;
     public Button searchButton;
 
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+            Destroy(gameObject);
+        else
+            instance = this;
+    }
+
     private void Start()
     {
-        DontDestroyOnLoad(this);
-
-        saveManager = GetComponent<SaveManager>();
 
         auth = GameObject.FindGameObjectWithTag("Authentification").GetComponent<Auth>();
 
         GetAppearance();
+
+        Debug.Log(auth.playerName);
 
         SaveManager.instance.displayName = auth.playerName;
 
@@ -42,10 +48,7 @@ public class PlayFabManager : MonoBehaviour
 
         SaveManager.instance.Save();
 
-        playerName.text = SaveManager.instance.displayName;
-
-
-        SendLeaderboard(SaveManager.instance.thunders);
+        playerName.text = PhotonNetwork.NickName;
 
         searchInputField.onValueChanged.AddListener(OnSearchInputValueChanged);
 
@@ -53,10 +56,12 @@ public class PlayFabManager : MonoBehaviour
 
     private void Update()
     {
-        if(saveManager.changed)
+
+
+        if (SaveManager.instance.changed)
         {
             SaveAppearance();
-            saveManager.changed = false;
+            SaveManager.instance.changed = false;
         }
     }
 
@@ -68,11 +73,8 @@ public class PlayFabManager : MonoBehaviour
      }
      void OnDataRecieved(GetUserDataResult result)
      {
-         if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Gems") && result.Data.ContainsKey("Thunders") && result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
+         if (result.Data != null & result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
          {
-             SaveManager.instance.coins = Int32.Parse(result.Data["Coins"].Value);
-             SaveManager.instance.gems = Int32.Parse(result.Data["Gems"].Value);
-             SaveManager.instance.thunders = Int32.Parse(result.Data["Thunders"].Value);
              SaveManager.instance.currentHunter = Int32.Parse(result.Data["currentHunter"].Value);
              SaveManager.instance.matchPlayed = Int32.Parse(result.Data["matchPlayed"].Value);
              SaveManager.instance.ranked = Int32.Parse(result.Data["ranked"].Value);
@@ -103,13 +105,10 @@ public class PlayFabManager : MonoBehaviour
      }
      public void SaveAppearance()
      {
-         bool[] huntersUnlocked = SaveManager.instance.huntersUnlocked;
+        bool[] huntersUnlocked = SaveManager.instance.huntersUnlocked;
 
          var dataDictionary = new Dictionary<string, string>
          {
-             {"Coins", SaveManager.instance.coins.ToString() },
-             {"Gems", SaveManager.instance.gems.ToString() },
-             {"Thunders", SaveManager.instance.thunders.ToString() },
              {"currentHunter", SaveManager.instance.currentHunter.ToString() },
              {"matchPlayed", SaveManager.instance.matchPlayed.ToString() },
              {"ranked", SaveManager.instance.ranked.ToString() },
@@ -129,10 +128,13 @@ public class PlayFabManager : MonoBehaviour
 
          PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
      }
-     void OnDataSend(UpdateUserDataResult result)
-     {
-         Debug.Log("User data sent successfully!");
-     }
+    void OnDataSend(UpdateUserDataResult result)
+    {
+        Debug.Log("User data sent successfully!");
+
+        SendLeaderboard(BalenceManager.instance.thundersBalance);
+
+    }
 
     //Leaderboard
     public void SendLeaderboard(int thunders)
@@ -144,7 +146,10 @@ public class PlayFabManager : MonoBehaviour
                 new StatisticUpdate()
                 {
                     StatisticName = "Thunders Score",
-                    Value = thunders
+                    Value = thunders,
+                    Version = 1
+
+                    
                 }
             }
         };
@@ -257,6 +262,8 @@ public class PlayFabManager : MonoBehaviour
         Debug.Log(error.GenerateErrorReport());
     }
 
+
+
     //Title Data
     /*   void GetTitleData()
        {
@@ -275,4 +282,8 @@ public class PlayFabManager : MonoBehaviour
        }
        */
 
+
+    //Currecry
+
+  
 }

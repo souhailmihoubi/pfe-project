@@ -10,6 +10,9 @@ public class Logout : MonoBehaviour
     {
         PlayFabClientAPI.ForgetAllCredentials();
 
+        Destroy(GameObject.FindWithTag("PlayFabManger"));
+        Destroy(GameObject.FindWithTag("Authentification"));
+
         PlayerPrefs.DeleteKey("playerName");
         PlayerPrefs.DeleteKey("RememberMe");
         PlayerPrefs.DeleteKey("SessionTicket");
