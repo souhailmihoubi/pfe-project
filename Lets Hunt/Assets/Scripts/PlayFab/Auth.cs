@@ -18,6 +18,9 @@ public class Auth : MonoBehaviour
 
     public GameObject mailVerifPanel;
 
+    public string authToken;
+
+
     [Header("Login")]
     public TextMeshProUGUI emailLoginInput;
     public TextMeshProUGUI pwdLoginInput;
@@ -116,6 +119,7 @@ public class Auth : MonoBehaviour
 
     void OnLoginSuccess(LoginResult result)
     {
+
         loadingPanel.SetActive(true);
 
         CheckMailConfirmed(isConfirmed =>
@@ -123,6 +127,8 @@ public class Auth : MonoBehaviour
             if (isConfirmed)
             {
                 playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
+
+                authToken = result.EntityToken.EntityToken;
 
                 PlayerPrefs.SetString("PlayFabId", result.InfoResultPayload.PlayerProfile.PlayerId);
 
@@ -256,26 +262,7 @@ public class Auth : MonoBehaviour
 
     }
 
-    void ResetPassword(string newPassword, string token)
-    {
-        var request = new ResetPasswordRequest
-        {
-            Password = newPassword,
-            Token = token
-        };
 
-        PlayFabAdminAPI.ResetPassword(request, result =>
-        {
-            Debug.Log("The player's password has been resetl");
-        }, ResetFailureCallback);
-
-    }
-
-    void ResetFailureCallback(PlayFabError error)
-    {
-        Debug.LogWarning("Something went wrong with your API call. Here's some debug information:");
-        Debug.LogError(error.GenerateErrorReport());
-    }
 
     void OnError(PlayFabError error)
     {

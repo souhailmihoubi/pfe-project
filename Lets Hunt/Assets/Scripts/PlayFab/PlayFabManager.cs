@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Photon.Pun;
-
+using PlayFab.AdminModels;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -15,6 +15,7 @@ public class PlayFabManager : MonoBehaviour
 
     public TextMeshProUGUI playerName;
     public TextMeshProUGUI playerNameInput;
+    public TextMeshProUGUI newPwdInput;
 
     Auth auth;
 
@@ -24,6 +25,10 @@ public class PlayFabManager : MonoBehaviour
     public Transform rowsParent;
     public TMP_InputField searchInputField;
     public Button searchButton;
+
+    [Header("News")]
+    public TextMeshProUGUI newsTitle;
+    public TextMeshProUGUI newsBody;
 
     private void Awake()
     {
@@ -69,9 +74,9 @@ public class PlayFabManager : MonoBehaviour
     //Player data
     public void GetAppearance()
      {
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
+        PlayFabClientAPI.GetUserData(new PlayFab.ClientModels.GetUserDataRequest(), OnDataRecieved, OnError);
      }
-     void OnDataRecieved(GetUserDataResult result)
+     void OnDataRecieved(PlayFab.ClientModels.GetUserDataResult result)
      {
          if (result.Data != null & result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
          {
@@ -121,14 +126,14 @@ public class PlayFabManager : MonoBehaviour
              dataDictionary[key] = value;
          }
 
-         var request = new UpdateUserDataRequest
+         var request = new PlayFab.ClientModels.UpdateUserDataRequest
          {
              Data = dataDictionary
          };
 
          PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
      }
-    void OnDataSend(UpdateUserDataResult result)
+    void OnDataSend(PlayFab.ClientModels.UpdateUserDataResult result)
     {
         Debug.Log("User data sent successfully!");
 
@@ -256,6 +261,31 @@ public class PlayFabManager : MonoBehaviour
 
     }
 
+    public void OnClickChangePassword()
+    {
+        ChangePassword(newPwdInput.text, auth.authToken);
+    }
+
+    void ChangePassword(string newPassword, string token)
+    {
+        var request = new ResetPasswordRequest
+        {
+            Password = newPassword,
+            Token = token
+        };
+
+        PlayFabAdminAPI.ResetPassword(request, result =>
+        {
+            Debug.Log("The player's password has been resetl");
+        }, ResetFailureCallback);
+
+    }
+
+    void ResetFailureCallback(PlayFabError error)
+    {
+        Debug.LogWarning("Something went wrong with your API call. Here's some debug information:");
+        Debug.LogError(error.GenerateErrorReport());
+    }
     void OnError(PlayFabError error)
     {
         Debug.Log("Error : " + error.ErrorMessage);
@@ -283,7 +313,26 @@ public class PlayFabManager : MonoBehaviour
        */
 
 
+    //Title News
+    public void GetTitleNew()
+    {
+        var request = new PlayFab.ClientModels.GetTitleNewsRequest();
+
+        //request.Count = 1;
+
+        PlayFabClientAPI.GetTitleNews(request, OnTitleNewsRecieved, OnError);
+    }
+
+    void OnTitleNewsRecieved(GetTitleNewsResult result)
+    {
+        newsTitle.text = result.News[result.News.Count - 1].Title;
+
+        newsBody.text = result.News[result.News.Count - 1].Body;
+    }
+       
+
+
     //Currecry
 
-  
+
 }
