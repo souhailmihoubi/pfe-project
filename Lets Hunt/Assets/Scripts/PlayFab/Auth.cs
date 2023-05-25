@@ -164,6 +164,7 @@ public class Auth : MonoBehaviour
              {"currentHunter", "1" },
              {"matchPlayed", "0" },
              {"ranked", "0" },
+             {"owned", "1" },
              {"HunterUnlocked_0","false" },
              {"HunterUnlocked_1","true" },
              {"HunterUnlocked_2","false" }

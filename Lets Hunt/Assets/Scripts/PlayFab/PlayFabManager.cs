@@ -78,11 +78,12 @@ public class PlayFabManager : MonoBehaviour
      }
      void OnDataRecieved(PlayFab.ClientModels.GetUserDataResult result)
      {
-         if (result.Data != null & result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
+         if (result.Data != null & result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("owned"))
          {
              SaveManager.instance.currentHunter = Int32.Parse(result.Data["currentHunter"].Value);
              SaveManager.instance.matchPlayed = Int32.Parse(result.Data["matchPlayed"].Value);
              SaveManager.instance.ranked = Int32.Parse(result.Data["ranked"].Value);
+             SaveManager.instance.owned = Int32.Parse(result.Data["owned"].Value);
 
              bool[] huntersUnlocked = new bool[3];
 
@@ -117,6 +118,7 @@ public class PlayFabManager : MonoBehaviour
              {"currentHunter", SaveManager.instance.currentHunter.ToString() },
              {"matchPlayed", SaveManager.instance.matchPlayed.ToString() },
              {"ranked", SaveManager.instance.ranked.ToString() },
+             {"owned", SaveManager.instance.owned.ToString() },
          };
 
          for (int i = 0; i < huntersUnlocked.Length; i++)
@@ -317,8 +319,6 @@ public class PlayFabManager : MonoBehaviour
     public void GetTitleNew()
     {
         var request = new PlayFab.ClientModels.GetTitleNewsRequest();
-
-        //request.Count = 1;
 
         PlayFabClientAPI.GetTitleNews(request, OnTitleNewsRecieved, OnError);
     }
