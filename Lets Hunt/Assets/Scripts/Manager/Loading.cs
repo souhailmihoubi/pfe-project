@@ -1,19 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Loading : MonoBehaviour
 {
-    public GameObject loadingPanel;
+    [Header("Loading")]
+    public float delay = 3f;
+
 
     private void Start()
     {
-        StartCoroutine(close());
+        DontDestroyOnLoad(gameObject);
+
+        StartCoroutine(LoadingPanel());
+
     }
 
-    IEnumerator close()
+    IEnumerator LoadingPanel()
     {
-        yield return new WaitForSeconds(3f);
-        loadingPanel.SetActive(false);
+        gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(delay);
+
+        gameObject.SetActive(false);
+
     }
 }

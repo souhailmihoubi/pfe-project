@@ -65,9 +65,7 @@ public class Coin : MonoBehaviourPunCallbacks
 
             coins.text = coinsCollected.ToString();
 
-            SaveManager.instance.coins += value;
-
-            SaveManager.instance.Save();
+            PlayerPrefs.SetInt("coinsCollected", coinsCollected);
 
             hash["coinsCollected"] = coinsCollected;
 

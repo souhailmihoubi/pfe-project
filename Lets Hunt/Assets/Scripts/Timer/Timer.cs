@@ -29,7 +29,7 @@ public class Timer : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-
+        Destroy(GameObject.FindWithTag("PlayFabManger"));
 
         photonView = GetComponent<PhotonView>();
         

@@ -15,7 +15,7 @@ MonoBehaviour:
   TitleId: AF633
   DeveloperSecretKey: ZG8FQC3A5UOIMQ7YGJS3C6NDWPSS1T1DTMCHO1AU7MS87K1DS5
   ProductionEnvironmentUrl: 
-  RequestType: 2
+  RequestType: 0
   DisableDeviceInfo: 0
   DisableFocusTimeCollection: 0
   RequestTimeout: 2000

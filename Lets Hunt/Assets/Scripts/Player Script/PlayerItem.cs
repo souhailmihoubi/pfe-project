@@ -38,6 +38,7 @@ public class PlayerItem : MonoBehaviour
     public void GetKill()
     {
         kills++;
+
         if (photonView.IsMine)
         {
             killsCount.text = kills.ToString();
@@ -51,8 +52,6 @@ public class PlayerItem : MonoBehaviour
     {
        
         hash["kills"] = kills;
-
-      //  print(hash["kills"]);
 
         photonView.Owner.SetCustomProperties(hash);
     }

@@ -7,15 +7,15 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Photon.Pun;
-using Unity.VisualScripting;
+using PlayFab.AdminModels;
 
 public class PlayFabManager : MonoBehaviour
 {
+    public static PlayFabManager instance { get; private set; }
 
     public TextMeshProUGUI playerName;
     public TextMeshProUGUI playerNameInput;
-
-    SaveManager saveManager;
+    public TextMeshProUGUI newPwdInput;
 
     Auth auth;
 
@@ -26,39 +26,47 @@ public class PlayFabManager : MonoBehaviour
     public TMP_InputField searchInputField;
     public Button searchButton;
 
+    [Header("News")]
+    public TextMeshProUGUI newsTitle;
+    public TextMeshProUGUI newsBody;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+            Destroy(gameObject);
+        else
+            instance = this;
+    }
+
     private void Start()
     {
-        DontDestroyOnLoad(this);
-
-        saveManager = GetComponent<SaveManager>();
 
         auth = GameObject.FindGameObjectWithTag("Authentification").GetComponent<Auth>();
+
+        GetAppearance();
+
+        Debug.Log(auth.playerName);
 
         SaveManager.instance.displayName = auth.playerName;
 
         PhotonNetwork.NickName = SaveManager.instance.displayName;
 
-        Debug.Log(SaveManager.instance.displayName);
-
         SaveManager.instance.Save();
 
-        GetAppearance();
-
-        SendLeaderboard(SaveManager.instance.thunders);
+        playerName.text = PhotonNetwork.NickName;
 
         searchInputField.onValueChanged.AddListener(OnSearchInputValueChanged);
 
-        playerName.text = SaveManager.instance.displayName;
-
-        Debug.Log(playerName.text);
     }
 
     private void Update()
     {
-        if(saveManager.changed)
+
+
+        if (SaveManager.instance.changed)
         {
             SaveAppearance();
-            saveManager.changed = false;
+            SaveManager.instance.changed = false;
         }
     }
 
@@ -66,18 +74,16 @@ public class PlayFabManager : MonoBehaviour
     //Player data
     public void GetAppearance()
      {
-        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
+        PlayFabClientAPI.GetUserData(new PlayFab.ClientModels.GetUserDataRequest(), OnDataRecieved, OnError);
      }
-     void OnDataRecieved(GetUserDataResult result)
+     void OnDataRecieved(PlayFab.ClientModels.GetUserDataResult result)
      {
-         if (result.Data != null && result.Data.ContainsKey("Coins") && result.Data.ContainsKey("Gems") && result.Data.ContainsKey("Thunders") && result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("ranked"))
+         if (result.Data != null & result.Data.ContainsKey("currentHunter") && result.Data.ContainsKey("matchPlayed") && result.Data.ContainsKey("owned"))
          {
-             SaveManager.instance.coins = Int32.Parse(result.Data["Coins"].Value);
-             SaveManager.instance.gems = Int32.Parse(result.Data["Gems"].Value);
-             SaveManager.instance.thunders = Int32.Parse(result.Data["Thunders"].Value);
              SaveManager.instance.currentHunter = Int32.Parse(result.Data["currentHunter"].Value);
              SaveManager.instance.matchPlayed = Int32.Parse(result.Data["matchPlayed"].Value);
              SaveManager.instance.ranked = Int32.Parse(result.Data["ranked"].Value);
+             SaveManager.instance.owned = Int32.Parse(result.Data["owned"].Value);
 
              bool[] huntersUnlocked = new bool[3];
 
@@ -105,16 +111,14 @@ public class PlayFabManager : MonoBehaviour
      }
      public void SaveAppearance()
      {
-         bool[] huntersUnlocked = SaveManager.instance.huntersUnlocked;
+        bool[] huntersUnlocked = SaveManager.instance.huntersUnlocked;
 
          var dataDictionary = new Dictionary<string, string>
          {
-             {"Coins", SaveManager.instance.coins.ToString() },
-             {"Gems", SaveManager.instance.gems.ToString() },
-             {"Thunders", SaveManager.instance.thunders.ToString() },
              {"currentHunter", SaveManager.instance.currentHunter.ToString() },
              {"matchPlayed", SaveManager.instance.matchPlayed.ToString() },
              {"ranked", SaveManager.instance.ranked.ToString() },
+             {"owned", SaveManager.instance.owned.ToString() },
          };
 
          for (int i = 0; i < huntersUnlocked.Length; i++)
@@ -124,17 +128,20 @@ public class PlayFabManager : MonoBehaviour
              dataDictionary[key] = value;
          }
 
-         var request = new UpdateUserDataRequest
+         var request = new PlayFab.ClientModels.UpdateUserDataRequest
          {
              Data = dataDictionary
          };
 
          PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
      }
-     void OnDataSend(UpdateUserDataResult result)
-     {
-         Debug.Log("User data sent successfully!");
-     }
+    void OnDataSend(PlayFab.ClientModels.UpdateUserDataResult result)
+    {
+        Debug.Log("User data sent successfully!");
+
+        SendLeaderboard(BalenceManager.instance.thundersBalance);
+
+    }
 
     //Leaderboard
     public void SendLeaderboard(int thunders)
@@ -146,7 +153,10 @@ public class PlayFabManager : MonoBehaviour
                 new StatisticUpdate()
                 {
                     StatisticName = "Thunders Score",
-                    Value = thunders
+                    Value = thunders,
+                    Version = 1
+
+                    
                 }
             }
         };
@@ -253,11 +263,38 @@ public class PlayFabManager : MonoBehaviour
 
     }
 
+    public void OnClickChangePassword()
+    {
+        ChangePassword(newPwdInput.text, auth.authToken);
+    }
+
+    void ChangePassword(string newPassword, string token)
+    {
+        var request = new ResetPasswordRequest
+        {
+            Password = newPassword,
+            Token = token
+        };
+
+        PlayFabAdminAPI.ResetPassword(request, result =>
+        {
+            Debug.Log("The player's password has been resetl");
+        }, ResetFailureCallback);
+
+    }
+
+    void ResetFailureCallback(PlayFabError error)
+    {
+        Debug.LogWarning("Something went wrong with your API call. Here's some debug information:");
+        Debug.LogError(error.GenerateErrorReport());
+    }
     void OnError(PlayFabError error)
     {
         Debug.Log("Error : " + error.ErrorMessage);
         Debug.Log(error.GenerateErrorReport());
     }
+
+
 
     //Title Data
     /*   void GetTitleData()
@@ -276,5 +313,26 @@ public class PlayFabManager : MonoBehaviour
            message.text = result.Data["Message"].ToString();
        }
        */
+
+
+    //Title News
+    public void GetTitleNew()
+    {
+        var request = new PlayFab.ClientModels.GetTitleNewsRequest();
+
+        PlayFabClientAPI.GetTitleNews(request, OnTitleNewsRecieved, OnError);
+    }
+
+    void OnTitleNewsRecieved(GetTitleNewsResult result)
+    {
+        newsTitle.text = result.News[result.News.Count - 1].Title;
+
+        newsBody.text = result.News[result.News.Count - 1].Body;
+    }
+       
+
+
+    //Currecry
+
 
 }

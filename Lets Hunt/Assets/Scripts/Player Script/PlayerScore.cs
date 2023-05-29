@@ -19,8 +19,6 @@ public class PlayerScore : MonoBehaviour
 
     public int playerRank = 0;
 
-    PlayFabManager playFabManager;
-
     private void Start()
     {
         playerHealth = GetComponent<PlayerHealth>();
@@ -28,8 +26,6 @@ public class PlayerScore : MonoBehaviour
 
         pos = new Vector3(113.5f, 236.45f, -4.5f);
         pos2 = new Vector3(36.5f, 99.95f, -4.5f);
-
-       playFabManager = GameObject.FindGameObjectWithTag("PlayFabManger").GetComponent<PlayFabManager>();
 
     }
 
@@ -50,23 +46,23 @@ public class PlayerScore : MonoBehaviour
             case 1:
                 endGamePanel.rank.text = "Rank : 1";
                 endGamePanel.thunders.text = " +10 ";
-                SaveManager.instance.thunders += 10;
+                BalenceManager.instance.AddThunder(10);
                 SaveManager.instance.ranked += 1;
                 break;
             case 2:
                 endGamePanel.rank.text = "Rank : 2";
                 endGamePanel.thunders.text = " +7 ";
-                SaveManager.instance.thunders += 7;
+                BalenceManager.instance.AddThunder(7);
                 break;
             case 3:
                 endGamePanel.rank.text = "Rank : 3";
                 endGamePanel.thunders.text = " +4 ";
-                SaveManager.instance.thunders += 4;
+                BalenceManager.instance.AddThunder(4);
                 break;
             case 4:
                 endGamePanel.rank.text = "Rank : 4";
                 endGamePanel.thunders.text = " -5 ";
-                SaveManager.instance.thunders -= 5;
+                BalenceManager.instance.LoseThunders(5);
                 break;
         }
 
@@ -89,9 +85,9 @@ public class PlayerScore : MonoBehaviour
 
         endGamePanel.adsPanel.gameObject.SetActive(true);
 
-        SaveManager.instance.Save();
+        BalenceManager.instance.AddCoins(playerCoinsCollected);
 
-        playFabManager.SendLeaderboard(SaveManager.instance.thunders);
+        //playFabManager.SendLeaderboard(BalenceManager.instance.thundersBalance);
 
         PhotonNetwork.Destroy(gameObject);
 
@@ -108,11 +104,9 @@ public class PlayerScore : MonoBehaviour
 
         endGamePanel.thunders.text = " -5 ";
 
-        SaveManager.instance.thunders -= 5;
+        BalenceManager.instance.LoseThunders(5);
 
-        SaveManager.instance.Save();
-
-        playFabManager.SendLeaderboard(SaveManager.instance.thunders);
+        //playFabManager.SendLeaderboard(BalenceManager.instance.thundersBalance);
 
 
         //---- Kills ----
@@ -140,6 +134,8 @@ public class PlayerScore : MonoBehaviour
         }
 
         endGamePanel.coins.text = "+" + playerCoinsCollected.ToString();
+
+        BalenceManager.instance.AddCoins(playerCoinsCollected);
 
     }
 

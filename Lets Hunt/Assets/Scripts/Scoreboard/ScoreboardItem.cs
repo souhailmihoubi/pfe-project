@@ -27,7 +27,7 @@ public class ScoreboardItem : MonoBehaviourPunCallbacks
     {
         this.player = player;
         
-        playerNameText.text = player.NickName;
+        playerNameText.text = PhotonNetwork.NickName;
 
         UpdateStats();
         

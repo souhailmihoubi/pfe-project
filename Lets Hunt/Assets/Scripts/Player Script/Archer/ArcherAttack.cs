@@ -135,22 +135,24 @@
             preformArrowAttack = true;
         }
 
-        void SpawnRangedProj(string typeOfEnemy, EnemyHealth targetedEnemyObj)
+    void SpawnRangedProj(string typeOfEnemy, EnemyHealth targetedEnemyObj)
+    {
+
+        if (typeOfEnemy == "Enemy" && targetedEnemyObj != null)
         {
+            ArrowLauncher arrowLauncher = arrowPrefab.GetComponent<ArrowLauncher>();
 
-            if ( typeOfEnemy == "Enemy" && targetedEnemyObj != null )
-            {
-                arrowPrefab.GetComponent<ArrowLauncher>().damage = attackDamage;
+            arrowLauncher.damage = attackDamage;
 
-                arrowPrefab.GetComponent<ArrowLauncher>().targetType = typeOfEnemy;
+            arrowLauncher.targetType = typeOfEnemy;
 
-                arrowPrefab.GetComponent<ArrowLauncher>().target = targetedEnemyObj;
+            arrowLauncher.target = targetedEnemyObj;
 
-                arrowPrefab.GetComponent<ArrowLauncher>().targetSet = true;
+            arrowLauncher.targetSet = true;
 
-                Instantiate(arrowPrefab, arrowSpawnPoint.transform.position, Quaternion.identity);
-            }
+            Instantiate(arrowPrefab, arrowSpawnPoint.transform.position, Quaternion.identity);
         }
+    }
         public void StartRotating()
         {
             if (LookCoroutine != null)
