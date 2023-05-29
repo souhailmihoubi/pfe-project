@@ -15,12 +15,20 @@ public class Timer : MonoBehaviourPunCallbacks
     [SerializeField] private TextMeshProUGUI uiText;
 
     public GameObject movement, timer, lvl,score;
+    private FixedJoystick joyStick;
     public int duration = 60;
     private float startTime;
 
     public GameObject timeOver;
 
     [SerializeField] AudioSource endGameAudioSource;
+
+    [Header("Countdown start")]
+
+    private int startTimer = 3;
+    [SerializeField] TextMeshProUGUI countdownText;
+    [SerializeField] AudioSource startGameAudioSource;
+    [SerializeField] AudioSource bgGameAudioSource;
 
 
 
@@ -29,10 +37,43 @@ public class Timer : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        joyStick = movement.GetComponent<FixedJoystick>();
+
+        joyStick.enabled = false;
+        
         Destroy(GameObject.FindWithTag("PlayFabManger"));
 
         photonView = GetComponent<PhotonView>();
+
+        StartCoroutine(CountdownStart());
         
+
+    }
+
+    private IEnumerator CountdownStart()
+    {
+        startGameAudioSource.Play();
+
+        while (startTimer>0)
+        {
+            countdownText.text = startTimer.ToString();
+
+            yield return new WaitForSeconds(1f);
+
+            startTimer--;
+        }
+
+        countdownText.text = "Let's Hunt!";
+
+        yield return new WaitForSeconds(1f);
+
+        countdownText.gameObject.SetActive(false);
+
+        bgGameAudioSource.Play();
+
+        joyStick.enabled = true;
+
+
         if (PhotonNetwork.IsMasterClient)
         {
             startTime = (float)PhotonNetwork.Time;
@@ -68,9 +109,10 @@ public class Timer : MonoBehaviourPunCallbacks
 
     private void OnEnd()
     {
+        bgGameAudioSource.Stop();
         endGameAudioSource.Play();
 
-        movement.gameObject.SetActive(false);
+        joyStick.enabled=false;
         lvl.gameObject.SetActive(false);
         timer.gameObject.SetActive(false);
         score.gameObject.SetActive(false);
