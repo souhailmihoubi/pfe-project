@@ -46,7 +46,7 @@ public class Auth : MonoBehaviour
 
         rememberMeToggle.onValueChanged.AddListener(OnRememberMeToggleChanged);
 
-        if(RememberMe && !string.IsNullOrEmpty(RememberMeId))
+        if (RememberMe && !string.IsNullOrEmpty(RememberMeId))
         {
             loadingPanel.SetActive(true);
 
@@ -87,7 +87,7 @@ public class Auth : MonoBehaviour
     {
         get
         {
-            return PlayerPrefs.GetString("PlayFabIdPassGuid","");
+            return PlayerPrefs.GetString("PlayFabIdPassGuid", "");
         }
         set
         {
@@ -211,7 +211,7 @@ public class Auth : MonoBehaviour
 
         playFabID = result.PlayFabId;
 
-        playerName = nameInput.text ;
+        playerName = nameInput.text;
 
 
 
@@ -247,17 +247,17 @@ public class Auth : MonoBehaviour
     // Reset password
     public void ResetPasswordButton()
     {
-        var request = new PlayFab.ClientModels.SendAccountRecoveryEmailRequest
+        var request = new SendCustomAccountRecoveryEmailRequest
         {
             Email = emailResetInput.text,
             EmailTemplateId = "BD6EBC6AE010AB5",
-            TitleId = PlayFabSettings.TitleId,
+            //TitleId = PlayFabSettings.TitleId,
         };
 
-        PlayFabClientAPI.SendAccountRecoveryEmail(request, OnPasswordReset, OnError);
+        PlayFabServerAPI.SendCustomAccountRecoveryEmail(request, OnPasswordReset, OnError);
     }
 
-    void OnPasswordReset(PlayFab.ClientModels.SendAccountRecoveryEmailResult result)
+    void OnPasswordReset(SendCustomAccountRecoveryEmailResult result)
     {
         message.text = "Mail sent! Check your Email!";
 
@@ -294,7 +294,7 @@ public class Auth : MonoBehaviour
 
     private void OnUpdateDisplayNameSuccess(PlayFab.ClientModels.UpdateUserTitleDisplayNameResult result)
     {
-        Debug.Log("Display name updated successfully: " + result. DisplayName);
+        Debug.Log("Display name updated successfully: " + result.DisplayName);
 
         this.playerName = result.DisplayName;
     }
@@ -354,14 +354,14 @@ public class Auth : MonoBehaviour
     public void CheckifVerified()
     {
 
-        CheckMailConfirmed(isConfirmed => 
+        CheckMailConfirmed(isConfirmed =>
         {
-            if(isConfirmed)
+            if (isConfirmed)
             {
-                    loadingPanel.SetActive(true);
+                loadingPanel.SetActive(true);
 
-                    SaveInitialAppearance();
-                    
+                SaveInitialAppearance();
+
 
                 Invoke("LoadScene", 3f);
             }
@@ -371,10 +371,10 @@ public class Auth : MonoBehaviour
             }
 
         });
-       
+
     }
 
 
-  
+
 
 }
