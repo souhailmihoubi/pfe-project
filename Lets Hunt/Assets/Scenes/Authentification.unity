@@ -926,7 +926,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8e15315c320194cabc67624060e671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingPanel: {fileID: 115906914}
   delay: 3
 --- !u!114 &115906916
 MonoBehaviour:
@@ -7433,6 +7432,7 @@ MonoBehaviour:
   mailMessage: {fileID: 1757146545}
   loadingPanel: {fileID: 115906914}
   mailVerifPanel: {fileID: 771223095}
+  authToken: 
   emailLoginInput: {fileID: 392318397}
   pwdLoginInput: {fileID: 1028298771}
   rememberMeToggle: {fileID: 606135825}

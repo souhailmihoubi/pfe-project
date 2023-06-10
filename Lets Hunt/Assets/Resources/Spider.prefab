@@ -645,15 +645,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 45
-  currentHealth: 0
   healthText: {fileID: 6715996160904149717}
   healthFill: {fileID: 1627773425231636184}
   updateSpeedSeconds: 0.5
-  coinAnimator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
-  xpAnimator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   coinPrefab: {fileID: 5262009865782563152, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   xpPrefab: {fileID: 1194177653417973902, guid: edff57fa1d4abb340b4f50d87246d543, type: 3}
+  currentHealth: 0
   enemyDead: 0
+  onEnemyKilled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5017174142328038746
 MonoBehaviour:
   m_ObjectHideFlags: 0

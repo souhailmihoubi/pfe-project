@@ -2,12 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
+using PlayFab.ServerModels;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using PlayFab.ServerModels;
 using System;
 using PlayFab.AdminModels;
+using PlayFab.AuthenticationModels;
+using ExecuteCloudScriptResult = PlayFab.ClientModels.ExecuteCloudScriptResult;
+using SendAccountRecoveryEmailRequest = PlayFab.ClientModels.SendAccountRecoveryEmailRequest;
+using SendAccountRecoveryEmailResult = PlayFab.ClientModels.SendAccountRecoveryEmailResult;
 
 public class Auth : MonoBehaviour
 {
@@ -126,6 +130,7 @@ public class Auth : MonoBehaviour
         {
             if (isConfirmed)
             {
+                
                 playerName = result.InfoResultPayload.PlayerProfile.DisplayName;
 
                 authToken = result.EntityToken.EntityToken;
@@ -142,6 +147,7 @@ public class Auth : MonoBehaviour
 
                     }, null, null);
                 }
+
 
                 SceneManager.LoadSceneAsync("MainMenu");
             }
@@ -247,21 +253,25 @@ public class Auth : MonoBehaviour
     // Reset password
     public void ResetPasswordButton()
     {
-        var request = new SendCustomAccountRecoveryEmailRequest
+        var tokenRequest = new GetEntityTokenRequest();
+        
+        var request = new SendAccountRecoveryEmailRequest
         {
             Email = emailResetInput.text,
             EmailTemplateId = "BD6EBC6AE010AB5",
-            //TitleId = PlayFabSettings.TitleId,
+            TitleId = "AF633",
         };
 
-        PlayFabServerAPI.SendCustomAccountRecoveryEmail(request, OnPasswordReset, OnError);
+        PlayFabClientAPI.SendAccountRecoveryEmail(request, OnPasswordReset, OnError);
     }
 
-    void OnPasswordReset(SendCustomAccountRecoveryEmailResult result)
+    void OnPasswordReset(SendAccountRecoveryEmailResult result)
     {
         message.text = "Mail sent! Check your Email!";
 
     }
+    
+   
 
 
 

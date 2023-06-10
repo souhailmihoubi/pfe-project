@@ -46,8 +46,13 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         {
             Debug.Log("Device is connected to the internet.");
 
-            panel.SetActive(false);
+            if(panel != null)
+            {
+                panel.SetActive(false);
+            }
+
             canConnect = true;
+
             StartConnection();
         }
     }
@@ -61,7 +66,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     {
         if (canConnect)
         {
-            PhotonNetwork.OfflineMode = false;
+            PhotonNetwork.OfflineMode = true;
             PhotonNetwork.ConnectUsingSettings();
 
             StartCoroutine(LoadSceneAsync());

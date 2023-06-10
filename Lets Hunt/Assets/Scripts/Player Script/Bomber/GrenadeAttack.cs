@@ -80,7 +80,7 @@ public class GrenadeAttack : MonoBehaviour
             // Attack the closest enemy
             if (closestEnemy != null)
             {
-                closestEnemy.TakeDamage(attackDamage);
+                //closestEnemy.TakeDamage(attackDamage);
                 _animatorController.PlayAttack();
                 isAttacking = true;
 

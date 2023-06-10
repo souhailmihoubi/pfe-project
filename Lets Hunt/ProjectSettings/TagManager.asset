@@ -18,6 +18,8 @@ TagManager:
   - resultPanel
   - whenPlayerDies
   - Authentification
+  - PlayFabManger
+  - ConnectToServer
   layers:
   - Default
   - TransparentFX

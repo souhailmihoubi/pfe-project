@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 public class ArrowLauncher : MonoBehaviourPunCallbacks
 {
@@ -13,10 +14,22 @@ public class ArrowLauncher : MonoBehaviourPunCallbacks
 
     public bool stopProjectile;
 
+    PlayerItem playerItem;
+
+    public PlayerItem shooter;
+
+
+
+
     //---------- SFX
 
     [SerializeField] AudioSource bomberAudioSource;
     [SerializeField] AudioSource archerAudioSource;
+
+    private void Start()
+    {
+        playerItem = GetComponent<PlayerItem>();
+    }
 
     private void Update()
     {
@@ -36,9 +49,13 @@ public class ArrowLauncher : MonoBehaviourPunCallbacks
 
                     if(targetType == "Enemy")
                     {
-                        target.GetComponent<EnemyHealth>().TakeDamage(damage);
+                        if (target != null)
+                        {
+                            target.TakeDamage(damage, playerItem);
 
-                        if(archerAudioSource != null)
+                        }
+
+                        if (archerAudioSource != null)
                         {
                             archerAudioSource.Play();
                         }

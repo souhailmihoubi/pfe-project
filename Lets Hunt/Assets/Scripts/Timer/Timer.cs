@@ -117,6 +117,9 @@ public class Timer : MonoBehaviourPunCallbacks
         timer.gameObject.SetActive(false);
         score.gameObject.SetActive(false);
 
+        SaveManager.instance.matchPlayed++;
+        SaveManager.instance.Save();
+
         StartCoroutine(ShowResult());   
     }
 
@@ -150,10 +153,7 @@ public class Timer : MonoBehaviourPunCallbacks
 
                 if (playerScore != null)
                 {
-                    playerScore.SetScore();
-
-                    SaveManager.instance.matchPlayed += 1;
-                    SaveManager.instance.Save();
+                    playerScore.SetScore();                  
 
                 }
             }

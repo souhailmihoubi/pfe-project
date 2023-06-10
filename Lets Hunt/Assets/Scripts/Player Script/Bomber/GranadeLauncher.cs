@@ -31,7 +31,7 @@ public class GranadeLauncher : MonoBehaviourPunCallbacks
 
                     if(targetType == "Enemy")
                     {
-                        target.GetComponent<EnemyHealth>().TakeDamage(damage);
+                        //target.GetComponent<EnemyHealth>().TakeDamage(damage);
 
                         stopProjectile = true;
                     }

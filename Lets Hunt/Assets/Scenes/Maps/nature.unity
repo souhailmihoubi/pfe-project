@@ -4277,6 +4277,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 931130618}
     - target: {fileID: 8048203859557167495, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
+      propertyPath: duration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048203859557167495, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
       propertyPath: movement
       value: 
       objectReference: {fileID: 1739805924}

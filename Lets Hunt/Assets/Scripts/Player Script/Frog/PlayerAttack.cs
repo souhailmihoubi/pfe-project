@@ -107,7 +107,7 @@ public class PlayerAttack : MonoBehaviour
         {
             attackAudioSource.Play();
 
-            closestEnemy.TakeDamage(attackDamage);
+            closestEnemy.TakeDamage(attackDamage,playerItem);
         }
 
         if (closestEnemy.enemyDead)

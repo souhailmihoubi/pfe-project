@@ -246,7 +246,10 @@ public class EnemyControl : MonoBehaviour
 
     EnemyState SetEnemyState(EnemyState curState, float enemyToPlayerDis)
     {
-        enemyToPlayerDis = Vector3.Distance(transform.position, playerTarget.position);
+        if(playerTarget != null)
+        {
+            enemyToPlayerDis = Vector3.Distance(transform.position, playerTarget.position);
+        }
         if (enemyToPlayerDis <= attackDistance)
         {
             return EnemyState.ATTACK;
@@ -263,6 +266,11 @@ public class EnemyControl : MonoBehaviour
 
     void GetStateControl(EnemyState curState)
     {
+        if(playerTarget == null)
+        {
+            return;
+        }
+
         switch (curState)
         {
             case EnemyState.IDLE:

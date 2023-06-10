@@ -12,7 +12,7 @@ using TMPro;
 public class PlayerItem : MonoBehaviour
 {
 
-    PhotonView photonView;
+    public PhotonView photonView;
 
     public int kills;
 
@@ -38,6 +38,8 @@ public class PlayerItem : MonoBehaviour
     public void GetKill()
     {
         kills++;
+
+        Debug.Log("kills : " + kills);
 
         if (photonView.IsMine)
         {
