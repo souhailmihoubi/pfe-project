@@ -652,9 +652,6 @@ MonoBehaviour:
   xpPrefab: {fileID: 1194177653417973902, guid: edff57fa1d4abb340b4f50d87246d543, type: 3}
   currentHealth: 0
   enemyDead: 0
-  onEnemyKilled:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &5017174142328038746
 MonoBehaviour:
   m_ObjectHideFlags: 0
