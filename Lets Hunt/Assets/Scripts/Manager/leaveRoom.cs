@@ -9,7 +9,7 @@ public class leaveRoom : MonoBehaviourPunCallbacks
 
     public void OnClickLeaveRoom()
     {
-        //StartCoroutine(LeaveRoomCoroutine());
+        PhotonNetwork.LeaveRoom(true);
 
         SceneManager.LoadScene("MainMenu");
 

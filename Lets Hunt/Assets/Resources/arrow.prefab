@@ -121,6 +121,7 @@ MonoBehaviour:
   targetType: Enemy
   velocity: 10
   stopProjectile: 0
+  shooter: {fileID: 0}
   bomberAudioSource: {fileID: 0}
   archerAudioSource: {fileID: -2250307494343594877}
 --- !u!82 &-2250307494343594877

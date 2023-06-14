@@ -83,7 +83,7 @@ public class PlayerScore : MonoBehaviour
 
         endGamePanel.coins.text = "+" + playerCoinsCollected.ToString();
 
-        endGamePanel.adsPanel.gameObject.SetActive(true);
+        //endGamePanel.adsPanel.gameObject.SetActive(true);
 
         BalenceManager.instance.AddCoins(playerCoinsCollected);
 

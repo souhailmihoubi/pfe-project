@@ -21680,26 +21680,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1347639321}
     m_Modifications:
-    - target: {fileID: 79301133687257428, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.694752
-      objectReference: {fileID: 0}
-    - target: {fileID: 79301133687257428, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.694752
-      objectReference: {fileID: 0}
-    - target: {fileID: 79301133687257428, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.694752
-      objectReference: {fileID: 0}
-    - target: {fileID: 79301133687257428, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 57.000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 79301133687257428, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -311.00006
-      objectReference: {fileID: 0}
     - target: {fileID: 708775667181952153, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -21787,26 +21767,6 @@ PrefabInstance:
     - target: {fileID: 708775667181952157, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_Name
       value: Lvl Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6340612326324939169, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.694752
-      objectReference: {fileID: 0}
-    - target: {fileID: 6340612326324939169, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.694752
-      objectReference: {fileID: 0}
-    - target: {fileID: 6340612326324939169, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.694752
-      objectReference: {fileID: 0}
-    - target: {fileID: 6340612326324939169, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -92
-      objectReference: {fileID: 0}
-    - target: {fileID: 6340612326324939169, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -309
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
@@ -21914,10 +21874,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Timer Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 3378511793614671601, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
-      propertyPath: m_Volume
-      value: 0.612
-      objectReference: {fileID: 0}
     - target: {fileID: 8048203859557167495, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
       propertyPath: lvl
       value: 
@@ -21927,17 +21883,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1368759211809244395}
     - target: {fileID: 8048203859557167495, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
-      propertyPath: duration
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 8048203859557167495, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
       propertyPath: movement
       value: 
       objectReference: {fileID: 258113335}
-    - target: {fileID: 8829964320931950981, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
-      propertyPath: m_Volume
-      value: 0.655
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
 --- !u!224 &1634426166 stripped

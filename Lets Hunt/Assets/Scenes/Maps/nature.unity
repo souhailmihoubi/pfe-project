@@ -731,10 +731,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1497723672}
     m_Modifications:
-    - target: {fileID: 708775666857222881, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 708775667181952153, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -822,286 +818,6 @@ PrefabInstance:
     - target: {fileID: 708775667181952157, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
       propertyPath: m_Name
       value: Lvl Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 708775667181952157, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617983537993849745, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617983537993849745, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617983537993849745, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: -945684506829328364, guid: 6d2d442cc664393439a3ab867cd0ea14, type: 3}
-    - target: {fileID: 1617983537993849745, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617983537993849745, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnRangeButtonClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617983537993849745, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelUpScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1617983537993849745, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2062992848334844008, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 2062992848334844008, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 2458179408313675347, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2458179408313675347, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2458179408313675347, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: -945684506829328364, guid: 6d2d442cc664393439a3ab867cd0ea14, type: 3}
-    - target: {fileID: 2458179408313675347, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2458179408313675347, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnXPButtonClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 2458179408313675347, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelUpScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 2458179408313675347, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2555719320621784141, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 2555719320621784141, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 3595586128771688624, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 3595586128771688624, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 4102061504801375500, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 4102061504801375500, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 4387545324593492150, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4387545324593492150, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_TagString
-      value: LevelUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4431864633406603147, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4431864633406603147, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4431864633406603147, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: -945684506829328364, guid: 6d2d442cc664393439a3ab867cd0ea14, type: 3}
-    - target: {fileID: 4431864633406603147, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4431864633406603147, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnDamageButtonClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 4431864633406603147, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelUpScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4431864633406603147, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4656382242459845488, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4656382242459845488, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4656382242459845488, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: -945684506829328364, guid: 6d2d442cc664393439a3ab867cd0ea14, type: 3}
-    - target: {fileID: 4656382242459845488, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4656382242459845488, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnAtkSpeedButtonClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 4656382242459845488, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelUpScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 4656382242459845488, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4943851006290484878, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4943851006290484878, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_TagString
-      value: LevelUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6163309706212111655, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_Name
-      value: healthh
-      objectReference: {fileID: 0}
-    - target: {fileID: 6163309706212111655, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6163309706212111655, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_TagString
-      value: LevelUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6341686768817199748, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 6341686768817199748, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728703133391257860, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728703133391257860, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728703133391257860, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: -945684506829328364, guid: 6d2d442cc664393439a3ab867cd0ea14, type: 3}
-    - target: {fileID: 6728703133391257860, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728703133391257860, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnSpeedButtonClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728703133391257860, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelUpScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6728703133391257860, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 6986264824988460986, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 6986264824988460986, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 175
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012297431919474965, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012297431919474965, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012297431919474965, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: -945684506829328364, guid: 6d2d442cc664393439a3ab867cd0ea14, type: 3}
-    - target: {fileID: 7012297431919474965, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012297431919474965, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnHealthButtonClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012297431919474965, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: LevelUpScript, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012297431919474965, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7149304254090414957, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7149304254090414957, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_TagString
-      value: LevelUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7298623796011960778, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8186007467932440548, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8475968046422031334, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8475968046422031334, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_TagString
-      value: LevelUp
-      objectReference: {fileID: 0}
-    - target: {fileID: 9055265192956950846, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9055265192956950846, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
-      propertyPath: m_TagString
-      value: LevelUp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 328af8546c666d74b9de98cb0ec3b414, type: 3}
@@ -4176,6 +3892,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1634426169, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 99b484ea0782b51408eb8d20054555ce, type: 2}
     - target: {fileID: 329575224988870366, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4264,6 +3984,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Timer Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2970482565512550189, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 99b484ea0782b51408eb8d20054555ce, type: 2}
     - target: {fileID: 3378511793614671601, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
       propertyPath: m_Volume
       value: 0.612
@@ -4278,7 +4002,7 @@ PrefabInstance:
       objectReference: {fileID: 931130618}
     - target: {fileID: 8048203859557167495, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
       propertyPath: duration
-      value: 15
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8048203859557167495, guid: 3a4da2094e2ab234db05f26d62151270, type: 3}
       propertyPath: movement

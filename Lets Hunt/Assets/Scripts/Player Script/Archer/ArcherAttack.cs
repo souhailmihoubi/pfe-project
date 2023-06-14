@@ -29,9 +29,6 @@ public class ArcherAttack : MonoBehaviour
 
     private Coroutine lookCoroutine;
 
-    private PlayerItem lastAttacker;
-
-
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -81,7 +78,7 @@ public class ArcherAttack : MonoBehaviour
                 if (performArrowAttack)
                 {
 
-                    StartCoroutine(RangedAttackInterval());
+                   StartCoroutine(RangedAttackInterval());
                 }
             }
 
@@ -99,11 +96,6 @@ public class ArcherAttack : MonoBehaviour
             _animatorController.PlayAttack();
 
             yield return new WaitForSeconds(attackCooldown / ((100 + attackCooldown) * 0.01f));
-
-            if (closestEnemy.enemyDead)
-            {
-                playerItem.GetKill();
-            }
         }
 
         _animatorController.StopAttack();
@@ -121,15 +113,6 @@ public class ArcherAttack : MonoBehaviour
         performArrowAttack = true;
     }
 
-    public void OnEnemyKilled(PlayerItem attacker)
-    {
-        lastAttacker = attacker;
-        if (lastAttacker != null)
-        {
-            lastAttacker.GetKill();
-        }
-    }
-
     private void SpawnRangedProj(string typeOfEnemy, EnemyHealth targetedEnemyObj)
     {
         if (typeOfEnemy == "Enemy" && targetedEnemyObj != null)
@@ -141,7 +124,7 @@ public class ArcherAttack : MonoBehaviour
             arrowLauncher.target = targetedEnemyObj;
             arrowLauncher.targetSet = true;
 
-            arrowLauncher.shooter = lastAttacker; // Pass the shooter reference to the arrow launcher
+            arrowLauncher.shooter = playerItem;
 
             Instantiate(arrowPrefab, arrowSpawnPoint.transform.position, Quaternion.identity);
         }

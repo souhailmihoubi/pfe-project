@@ -66,7 +66,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     {
         if (canConnect)
         {
-            PhotonNetwork.OfflineMode = true;
             PhotonNetwork.ConnectUsingSettings();
 
             StartCoroutine(LoadSceneAsync());

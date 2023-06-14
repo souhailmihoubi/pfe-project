@@ -49,9 +49,6 @@ public class EnemyHealth : MonoBehaviourPunCallbacks, IPunObservable
 
             photonView.RPC("DestroyEnemy", RpcTarget.AllBuffered);
             photonView.RPC("SpawnCoinsXP", RpcTarget.MasterClient);
-
-            
-
         }
 
         photonView.RPC("UpdateHealth", RpcTarget.AllBuffered, currentHealth);

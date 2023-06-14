@@ -416,7 +416,7 @@ MonoBehaviour:
   timer: {fileID: 5260910273566421761}
   lvl: {fileID: 0}
   score: {fileID: 0}
-  duration: 30
+  duration: 60
   timeOver: {fileID: 1022437428}
   endGameAudioSource: {fileID: 8829964320931950981}
   countdownText: {fileID: 153329755}
@@ -453,10 +453,10 @@ AudioSource:
   m_GameObject: {fileID: 329575224988870434}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 8c49ad23c1d6f564e9dd7857d33f3fee, type: 2}
   m_audioClip: {fileID: 8300000, guid: ca5a3798253d47043807df1f014501af, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.655
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -549,10 +549,10 @@ AudioSource:
   m_GameObject: {fileID: 329575224988870434}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 8c49ad23c1d6f564e9dd7857d33f3fee, type: 2}
   m_audioClip: {fileID: 8300000, guid: 120f0e9578cfb234aa9b6b3af4442c3d, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.612
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -645,7 +645,7 @@ AudioSource:
   m_GameObject: {fileID: 329575224988870434}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 99b484ea0782b51408eb8d20054555ce, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4929be33f31421247957a620dda7435a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.501
@@ -1004,6 +1004,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2970482566129616153, guid: 171cea4a3523b5240b364b091e55c980, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970482566129616153, guid: 171cea4a3523b5240b364b091e55c980, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6905888186351793984}
+    - target: {fileID: 2970482566129616153, guid: 171cea4a3523b5240b364b091e55c980, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970482566129616153, guid: 171cea4a3523b5240b364b091e55c980, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetVolumeSfx
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970482566129616153, guid: 171cea4a3523b5240b364b091e55c980, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: optionsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970482566129616153, guid: 171cea4a3523b5240b364b091e55c980, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2970482566650120056, guid: 171cea4a3523b5240b364b091e55c980, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1018,6 +1042,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 171cea4a3523b5240b364b091e55c980, type: 3}
+--- !u!1 &2970482565851652692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2970482566129616151, guid: 171cea4a3523b5240b364b091e55c980, type: 3}
+  m_PrefabInstance: {fileID: 280078147}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6905888186351793984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2970482565851652692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96636cc0c2b3241468e8e6cb4665faf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: 8c49ad23c1d6f564e9dd7857d33f3fee, type: 2}
 --- !u!1 &2970482566212924366 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2970482565937173645, guid: 171cea4a3523b5240b364b091e55c980, type: 3}

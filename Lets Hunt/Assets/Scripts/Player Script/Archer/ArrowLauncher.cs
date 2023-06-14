@@ -18,9 +18,6 @@ public class ArrowLauncher : MonoBehaviourPunCallbacks
 
     public PlayerItem shooter;
 
-
-
-
     //---------- SFX
 
     [SerializeField] AudioSource bomberAudioSource;
@@ -51,7 +48,13 @@ public class ArrowLauncher : MonoBehaviourPunCallbacks
                     {
                         if (target != null)
                         {
-                            target.TakeDamage(damage, playerItem);
+                            target.TakeDamage(damage, shooter);
+
+                            if(target.enemyDead)
+                            {
+                                print("met!");
+                                shooter.GetKill();
+                            }
 
                         }
 
@@ -67,8 +70,6 @@ public class ArrowLauncher : MonoBehaviourPunCallbacks
 
 
                         stopProjectile = true;
-
-
 
                     }
 

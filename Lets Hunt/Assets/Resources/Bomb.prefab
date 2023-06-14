@@ -151,13 +151,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f801e4d88442964b9826ae3017f0670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 12
   range: 0
   target: {fileID: 0}
   targetSet: 1
   targetType: Enemy
   velocity: 5
   stopProjectile: 0
+  shooter: {fileID: 6020368525560973957, guid: c96e73c404ececc40a452ecb179a0a87, type: 3}
   bomberAudioSource: {fileID: -2379213119919388864}
   archerAudioSource: {fileID: 0}
 --- !u!82 &-2379213119919388864
