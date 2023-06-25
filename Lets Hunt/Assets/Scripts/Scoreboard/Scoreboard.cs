@@ -68,7 +68,7 @@ public class Scoreboard : MonoBehaviourPunCallbacks
 
         playerDies.SetActive(true);
 
-        deadPlayerName.text = PhotonNetwork.NickName;
+        deadPlayerName.text = player.NickName;
 
         StartCoroutine(ClosePanel());
 

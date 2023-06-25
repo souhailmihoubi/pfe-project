@@ -880,6 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0d3cb0bd96e56e47b55c5bfa3ebfa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
   kills: 0
 --- !u!114 &8785375554520618924
 MonoBehaviour:
@@ -985,7 +986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 1.13
-  attackDamage: 17
+  attackDamage: 25
   enemyLayer:
     serializedVersion: 2
     m_Bits: 8

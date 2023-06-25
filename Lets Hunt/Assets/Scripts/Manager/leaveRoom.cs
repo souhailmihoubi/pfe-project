@@ -9,31 +9,18 @@ public class leaveRoom : MonoBehaviourPunCallbacks
 
     public void OnClickLeaveRoom()
     {
-        PhotonNetwork.LeaveRoom(true);
-
         SceneManager.LoadScene("MainMenu");
-
-        PlayFabManager.instance.GetAppearance();
-        PlayFabManager.instance.SaveAppearance();
     }
 
-    private IEnumerator LeaveRoomCoroutine()
+    public void OnClickLeaveRoom0()
     {
-        PhotonNetwork.Disconnect();
 
-        bool disconnected = false;
-        while (!disconnected)
-        {
-            yield return null;
+        FindObjectOfType<ConnectToServer>().LeaveRoom();
 
-            if (!PhotonNetwork.IsConnected)
-            {
-                disconnected = true;
-            }
-        }
-
-        
     }
+
+
+
 
 
 }

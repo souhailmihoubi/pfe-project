@@ -19,11 +19,13 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
-
         StartCoroutine(CheckInternetConnection());
     }
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+   
     private IEnumerator CheckInternetConnection()
     {
         UnityWebRequest request = new UnityWebRequest(PlayFabUrl);
@@ -61,6 +63,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     {
         StartCoroutine(CheckInternetConnection());
     }
+
 
     private void StartConnection()
     {
@@ -105,10 +108,24 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         Debug.Log("player left the room");
+        SceneManager.LoadScene("MainMenu");
 
         if (!PhotonNetwork.IsConnectedAndReady)
         {
             StartCoroutine(CheckInternetConnection());
         }
     }
+
+
+    public void LeaveRoom()
+    {
+        Debug.Log("Called");
+        if (PhotonNetwork.InRoom)
+        {
+            Debug.Log("fi room");
+            PhotonNetwork.LeaveRoom(true);
+            Debug.Log("Leaving");
+        }
+    }
+
 }

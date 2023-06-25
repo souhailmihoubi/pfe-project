@@ -52,7 +52,6 @@ public class ArrowLauncher : MonoBehaviourPunCallbacks
 
                             if(target.enemyDead)
                             {
-                                print("met!");
                                 shooter.GetKill();
                             }
 

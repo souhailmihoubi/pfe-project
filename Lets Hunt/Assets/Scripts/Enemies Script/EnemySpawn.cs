@@ -37,7 +37,7 @@ public class EnemySpawn : MonoBehaviour
 
         batchTimer += Time.deltaTime;
 
-        if (spawnTimer >= 60f)
+        if (spawnTimer >= 30f)
         {
             currentEnemyLevel++;
 
@@ -46,7 +46,7 @@ public class EnemySpawn : MonoBehaviour
             if (currentEnemyLevel > 3)
                 currentEnemyLevel = 1;
         }
-        if (batchTimer >= 20f)
+        if (batchTimer >= 10f)
         {
             SpawnEnemies();
         }
@@ -65,7 +65,7 @@ public class EnemySpawn : MonoBehaviour
                 {
 
                     case 1:
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
 
@@ -76,7 +76,7 @@ public class EnemySpawn : MonoBehaviour
                     }
                     break;
                 case 2:
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
 
@@ -86,7 +86,7 @@ public class EnemySpawn : MonoBehaviour
                     }
                     break;
                     case 3:
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 2; i++)
                     {
                         Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), 0, Random.Range(minZ, maxZ));
 

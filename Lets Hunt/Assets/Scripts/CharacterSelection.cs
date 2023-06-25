@@ -20,9 +20,26 @@ public class CharacterSelection : MonoBehaviour
 
     private void Start()
     {
-        UpdateUI();
+        for (int i = 0; i < 3; i++)
+        {
+            if (SaveManager.instance.huntersUnlocked[i])
+            {
+                select.gameObject.SetActive(true);
+                buy.gameObject.SetActive(false);
+                locks[i].SetActive(false);
+                charLocks.SetActive(false);
+            }
+            else
+            {
+                select.gameObject.SetActive(false);
+                buy.gameObject.SetActive(true);
+                price.text = hunterPrices[i].ToString();
+                locks[i].SetActive(true);
+                charLocks.SetActive(true);
 
-        selectedCharacterIndex = SaveManager.instance.currentHunter;
+            }
+        }
+            selectedCharacterIndex = SaveManager.instance.currentHunter;
 
         SelectCharacter(selectedCharacterIndex);
 

@@ -325,14 +325,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 125
-  currentHealth: 0
   healthText: {fileID: 3346885344784732771}
   healthFill: {fileID: 5379726824475237994}
   updateSpeedSeconds: 0.5
-  coinAnimator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
-  xpAnimator: {fileID: 983150055397800365, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   coinPrefab: {fileID: 5262009865782563152, guid: f742613421c3964468a64a2af9a0c175, type: 3}
   xpPrefab: {fileID: 1194177653417973902, guid: edff57fa1d4abb340b4f50d87246d543, type: 3}
+  currentHealth: 0
   enemyDead: 0
 --- !u!114 &4341194753114058278
 MonoBehaviour:
@@ -346,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922cc37ac7cf7544bb6bb12581212757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 15
+  damageAmount: 6
   attackDistance: 2
   alertAttackDistance: 8
   followDistance: 15
@@ -371,7 +369,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3011761122491522205}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

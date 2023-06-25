@@ -15,15 +15,15 @@ public class MabileNotifications : MonoBehaviour
             Id = "reminderNotif",
             Name = "LetsHunt Notification Channel",
             Importance = Importance.Default,
-            Description = "Reminder notification",
+            Description = "Reminder Notification",
         };
         AndroidNotificationCenter.RegisterNotificationChannel(reminderChannel);
 
         //Create the Notification
         var notification = new AndroidNotification();
-        notification.Title = "";
+        notification.Title = "Lets Hunt Reminder";
         notification.Text = "Enemies are waiting!";
-        notification.FireTime = System.DateTime.Now.AddHours(48);
+        notification.FireTime = System.DateTime.Now.AddSeconds(10);
 
         //Send it
         var idReminder = AndroidNotificationCenter.SendNotification(notification, "reminderNotif");

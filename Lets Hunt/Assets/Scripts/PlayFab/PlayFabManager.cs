@@ -40,7 +40,15 @@ public class PlayFabManager : MonoBehaviour
 
     private void Start()
     {
-
+        if (PhotonNetwork.InRoom)
+        {
+            Debug.Log("Mawjoud");
+            PhotonNetwork.LeaveRoom();
+        }
+        else
+        {
+            Debug.Log("mouch Mawjoud");
+        }
         auth = GameObject.FindGameObjectWithTag("Authentification").GetComponent<Auth>();
 
         GetAppearance();

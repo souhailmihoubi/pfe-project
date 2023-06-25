@@ -634,7 +634,7 @@ MonoBehaviour:
   damageMesh: {fileID: 1466348282}
   healthText: 140
   rangeText: Short
-  damageText: 17
+  damageText: 20
 --- !u!82 &29371347
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6554,7 +6554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -190.99994, y: -546.265}
+  m_AnchoredPosition: {x: -190.99997, y: -546.265}
   m_SizeDelta: {x: 394, y: 123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &631780772
@@ -9658,6 +9658,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1078708493}
     m_Modifications:
+    - target: {fileID: 2529229239733597905, guid: 21c3806efbd25b149943c2559c626742, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d8b3608c06351da4f8e09a879c0ddc66, type: 2}
+    - target: {fileID: 3279256662529013844, guid: 21c3806efbd25b149943c2559c626742, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b064f99cf70b44e47a02b3c08c5bafb5, type: 2}
     - target: {fileID: 3517448735150398485, guid: 21c3806efbd25b149943c2559c626742, type: 3}
       propertyPath: m_Name
       value: bomber
@@ -9734,6 +9742,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6003658077186357821, guid: 21c3806efbd25b149943c2559c626742, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d8b3608c06351da4f8e09a879c0ddc66, type: 2}
     - target: {fileID: 8546834282329185816, guid: 21c3806efbd25b149943c2559c626742, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.00000010300592
@@ -9742,6 +9754,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0.0020925242
       objectReference: {fileID: 0}
+    - target: {fileID: 8608574113105250280, guid: 21c3806efbd25b149943c2559c626742, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 66c05709e04ed42a3a537ad26aca9cb8, type: 2}
     - target: {fileID: 8839556727732857350, guid: 21c3806efbd25b149943c2559c626742, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0.0000005672238
@@ -10720,7 +10736,7 @@ MonoBehaviour:
   damageMesh: {fileID: 1466348282}
   healthText: 113
   rangeText: Long
-  damageText: 10
+  damageText: 25
 --- !u!82 &1080612680
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13775,7 +13791,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -97.000015, y: -457}
+  m_AnchoredPosition: {x: -96.99999, y: -457}
   m_SizeDelta: {x: 424, y: 115}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1513942873
@@ -14724,7 +14740,7 @@ MonoBehaviour:
   damageMesh: {fileID: 1466348282}
   healthText: 123
   rangeText: Medium
-  damageText: 12
+  damageText: 17
 --- !u!82 &1580170519
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17975,7 +17991,7 @@ MonoBehaviour:
   select: {fileID: 1051138582}
   buy: {fileID: 1585378618}
   price: {fileID: 1984251073}
-  hunterPrices: 3200000064000000c8000000
+  hunterPrices: 32000000640000000a000000
   locks:
   - {fileID: 1453800308}
   - {fileID: 1104487982}
@@ -20481,6 +20497,14 @@ PrefabInstance:
     - target: {fileID: 7077740864498241016, guid: 9128ac164ca61ec46b8868610615aa46, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077740864729699045, guid: 9128ac164ca61ec46b8868610615aa46, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -21.520325
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077740864729699045, guid: 9128ac164ca61ec46b8868610615aa46, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -87.923096
       objectReference: {fileID: 0}
     - target: {fileID: 7077740864791992324, guid: 9128ac164ca61ec46b8868610615aa46, type: 3}
       propertyPath: m_text
